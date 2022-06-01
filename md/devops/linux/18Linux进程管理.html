@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Linux进程管理 | Java 全栈知识体系</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 大数据, 机器学习...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.633991d7.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.98d32d61.js" as="script"><link rel="preload" href="/matheusblog/assets/js/2.34da62ad.js" as="script"><link rel="preload" href="/matheusblog/assets/js/25.0134b188.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.f75180e8.js"><link rel="prefetch" href="/matheusblog/assets/js/100.3d5ca5a0.js"><link rel="prefetch" href="/matheusblog/assets/js/101.f6854eb6.js"><link rel="prefetch" href="/matheusblog/assets/js/102.ca49a8b6.js"><link rel="prefetch" href="/matheusblog/assets/js/103.cca70b63.js"><link rel="prefetch" href="/matheusblog/assets/js/104.a595cff9.js"><link rel="prefetch" href="/matheusblog/assets/js/105.db4b4b05.js"><link rel="prefetch" href="/matheusblog/assets/js/106.5f758be1.js"><link rel="prefetch" href="/matheusblog/assets/js/107.7da45dc8.js"><link rel="prefetch" href="/matheusblog/assets/js/108.8fa7a262.js"><link rel="prefetch" href="/matheusblog/assets/js/109.ba8701b1.js"><link rel="prefetch" href="/matheusblog/assets/js/11.4a30505f.js"><link rel="prefetch" href="/matheusblog/assets/js/110.453838e0.js"><link rel="prefetch" href="/matheusblog/assets/js/111.ac57f4b2.js"><link rel="prefetch" href="/matheusblog/assets/js/112.82e638b0.js"><link rel="prefetch" href="/matheusblog/assets/js/113.1ce5b63f.js"><link rel="prefetch" href="/matheusblog/assets/js/114.66fdb77c.js"><link rel="prefetch" href="/matheusblog/assets/js/115.e1117448.js"><link rel="prefetch" href="/matheusblog/assets/js/116.e10770a9.js"><link rel="prefetch" href="/matheusblog/assets/js/117.2c1f55c5.js"><link rel="prefetch" href="/matheusblog/assets/js/118.4c89ef98.js"><link rel="prefetch" href="/matheusblog/assets/js/119.4c819e7f.js"><link rel="prefetch" href="/matheusblog/assets/js/12.793e0ec0.js"><link rel="prefetch" href="/matheusblog/assets/js/120.06f737df.js"><link rel="prefetch" href="/matheusblog/assets/js/121.bbd8d065.js"><link rel="prefetch" href="/matheusblog/assets/js/122.c73b3422.js"><link rel="prefetch" href="/matheusblog/assets/js/123.9bedb19d.js"><link rel="prefetch" href="/matheusblog/assets/js/124.9c34bd89.js"><link rel="prefetch" href="/matheusblog/assets/js/125.753284bf.js"><link rel="prefetch" href="/matheusblog/assets/js/126.5ec35180.js"><link rel="prefetch" href="/matheusblog/assets/js/127.b1a67c51.js"><link rel="prefetch" href="/matheusblog/assets/js/128.0f85f83b.js"><link rel="prefetch" href="/matheusblog/assets/js/129.9754ca0d.js"><link rel="prefetch" href="/matheusblog/assets/js/13.95235336.js"><link rel="prefetch" href="/matheusblog/assets/js/130.0800b514.js"><link rel="prefetch" href="/matheusblog/assets/js/131.306af433.js"><link rel="prefetch" href="/matheusblog/assets/js/132.53acc92c.js"><link rel="prefetch" href="/matheusblog/assets/js/133.d61293a3.js"><link rel="prefetch" href="/matheusblog/assets/js/134.aadfc68d.js"><link rel="prefetch" href="/matheusblog/assets/js/135.f0f4f57e.js"><link rel="prefetch" href="/matheusblog/assets/js/136.edaa4cd0.js"><link rel="prefetch" href="/matheusblog/assets/js/137.34ef0d92.js"><link rel="prefetch" href="/matheusblog/assets/js/138.cb4cbaad.js"><link rel="prefetch" href="/matheusblog/assets/js/139.1225c28e.js"><link rel="prefetch" href="/matheusblog/assets/js/14.4af1e2de.js"><link rel="prefetch" href="/matheusblog/assets/js/140.ec773abf.js"><link rel="prefetch" href="/matheusblog/assets/js/141.ff8b4cad.js"><link rel="prefetch" href="/matheusblog/assets/js/142.e921849c.js"><link rel="prefetch" href="/matheusblog/assets/js/143.8bb224bc.js"><link rel="prefetch" href="/matheusblog/assets/js/144.a7d83462.js"><link rel="prefetch" href="/matheusblog/assets/js/145.45b8a227.js"><link rel="prefetch" href="/matheusblog/assets/js/146.7cf6ce58.js"><link rel="prefetch" href="/matheusblog/assets/js/147.089c834c.js"><link rel="prefetch" href="/matheusblog/assets/js/148.6ee41415.js"><link rel="prefetch" href="/matheusblog/assets/js/149.77fc6065.js"><link rel="prefetch" href="/matheusblog/assets/js/15.528e7431.js"><link rel="prefetch" href="/matheusblog/assets/js/150.084e2ce0.js"><link rel="prefetch" href="/matheusblog/assets/js/151.c252c8f4.js"><link rel="prefetch" href="/matheusblog/assets/js/152.33b572b8.js"><link rel="prefetch" href="/matheusblog/assets/js/153.570b665f.js"><link rel="prefetch" href="/matheusblog/assets/js/154.9a57835a.js"><link rel="prefetch" href="/matheusblog/assets/js/155.378ea095.js"><link rel="prefetch" href="/matheusblog/assets/js/156.e31769cc.js"><link rel="prefetch" href="/matheusblog/assets/js/157.2583dbbe.js"><link rel="prefetch" href="/matheusblog/assets/js/158.f73e2e8f.js"><link rel="prefetch" href="/matheusblog/assets/js/159.18062130.js"><link rel="prefetch" href="/matheusblog/assets/js/16.5f251fb5.js"><link rel="prefetch" href="/matheusblog/assets/js/160.38ec7e3b.js"><link rel="prefetch" href="/matheusblog/assets/js/161.71036bc2.js"><link rel="prefetch" href="/matheusblog/assets/js/162.6ac3d695.js"><link rel="prefetch" href="/matheusblog/assets/js/163.4a46abf7.js"><link rel="prefetch" href="/matheusblog/assets/js/164.5584f565.js"><link rel="prefetch" href="/matheusblog/assets/js/165.413a07d8.js"><link rel="prefetch" href="/matheusblog/assets/js/166.a8922048.js"><link rel="prefetch" href="/matheusblog/assets/js/167.60cc7908.js"><link rel="prefetch" href="/matheusblog/assets/js/168.4254c123.js"><link rel="prefetch" href="/matheusblog/assets/js/169.cbc70b26.js"><link rel="prefetch" href="/matheusblog/assets/js/17.355d31d9.js"><link rel="prefetch" href="/matheusblog/assets/js/170.916a1019.js"><link rel="prefetch" href="/matheusblog/assets/js/171.07b53d73.js"><link rel="prefetch" href="/matheusblog/assets/js/172.1b33958a.js"><link rel="prefetch" href="/matheusblog/assets/js/173.31f5fa1a.js"><link rel="prefetch" href="/matheusblog/assets/js/174.9a39a5ac.js"><link rel="prefetch" href="/matheusblog/assets/js/175.c6bfd4ac.js"><link rel="prefetch" href="/matheusblog/assets/js/176.f65aa694.js"><link rel="prefetch" href="/matheusblog/assets/js/177.3b68b40b.js"><link rel="prefetch" href="/matheusblog/assets/js/178.6df30b74.js"><link rel="prefetch" href="/matheusblog/assets/js/179.861ac0bf.js"><link rel="prefetch" href="/matheusblog/assets/js/18.7f72dc01.js"><link rel="prefetch" href="/matheusblog/assets/js/180.9546e52a.js"><link rel="prefetch" href="/matheusblog/assets/js/181.bd834059.js"><link rel="prefetch" href="/matheusblog/assets/js/182.af4de693.js"><link rel="prefetch" href="/matheusblog/assets/js/183.1dc2e9c4.js"><link rel="prefetch" href="/matheusblog/assets/js/184.6a2a9374.js"><link rel="prefetch" href="/matheusblog/assets/js/185.59ad729c.js"><link rel="prefetch" href="/matheusblog/assets/js/186.7fe4fd1e.js"><link rel="prefetch" href="/matheusblog/assets/js/187.70003b09.js"><link rel="prefetch" href="/matheusblog/assets/js/188.8573a984.js"><link rel="prefetch" href="/matheusblog/assets/js/189.ec69892a.js"><link rel="prefetch" href="/matheusblog/assets/js/19.47699359.js"><link rel="prefetch" href="/matheusblog/assets/js/190.bed9ec84.js"><link rel="prefetch" href="/matheusblog/assets/js/191.543ed3aa.js"><link rel="prefetch" href="/matheusblog/assets/js/192.bc65c506.js"><link rel="prefetch" href="/matheusblog/assets/js/193.fcf26f62.js"><link rel="prefetch" href="/matheusblog/assets/js/194.c2ef52d4.js"><link rel="prefetch" href="/matheusblog/assets/js/195.686f093a.js"><link rel="prefetch" href="/matheusblog/assets/js/196.fd9d0a4e.js"><link rel="prefetch" href="/matheusblog/assets/js/197.f4534abe.js"><link rel="prefetch" href="/matheusblog/assets/js/198.e89e6439.js"><link rel="prefetch" href="/matheusblog/assets/js/199.0bc681f6.js"><link rel="prefetch" href="/matheusblog/assets/js/20.e5882ee9.js"><link rel="prefetch" href="/matheusblog/assets/js/200.5d1411b9.js"><link rel="prefetch" href="/matheusblog/assets/js/201.1b53caf7.js"><link rel="prefetch" href="/matheusblog/assets/js/202.3eb921e9.js"><link rel="prefetch" href="/matheusblog/assets/js/203.56e48204.js"><link rel="prefetch" href="/matheusblog/assets/js/204.0ee3bbf8.js"><link rel="prefetch" href="/matheusblog/assets/js/205.4b5d9136.js"><link rel="prefetch" href="/matheusblog/assets/js/206.3e6da766.js"><link rel="prefetch" href="/matheusblog/assets/js/207.4b3ddaae.js"><link rel="prefetch" href="/matheusblog/assets/js/208.4ed4f9f6.js"><link rel="prefetch" href="/matheusblog/assets/js/209.adbc8922.js"><link rel="prefetch" href="/matheusblog/assets/js/21.900a8ec7.js"><link rel="prefetch" href="/matheusblog/assets/js/210.518d0b2b.js"><link rel="prefetch" href="/matheusblog/assets/js/211.592c7ccb.js"><link rel="prefetch" href="/matheusblog/assets/js/212.54001ac2.js"><link rel="prefetch" href="/matheusblog/assets/js/213.80a72da6.js"><link rel="prefetch" href="/matheusblog/assets/js/214.e1a549d7.js"><link rel="prefetch" href="/matheusblog/assets/js/215.11e81270.js"><link rel="prefetch" href="/matheusblog/assets/js/216.ac929e20.js"><link rel="prefetch" href="/matheusblog/assets/js/217.fd0af17b.js"><link rel="prefetch" href="/matheusblog/assets/js/218.a65bbeaa.js"><link rel="prefetch" href="/matheusblog/assets/js/219.fbe13534.js"><link rel="prefetch" href="/matheusblog/assets/js/22.ff332d51.js"><link rel="prefetch" href="/matheusblog/assets/js/220.6dea16c6.js"><link rel="prefetch" href="/matheusblog/assets/js/221.bf7499ec.js"><link rel="prefetch" href="/matheusblog/assets/js/23.7c24c528.js"><link rel="prefetch" href="/matheusblog/assets/js/24.221c5e98.js"><link rel="prefetch" href="/matheusblog/assets/js/26.ce908b7f.js"><link rel="prefetch" href="/matheusblog/assets/js/27.8790623d.js"><link rel="prefetch" href="/matheusblog/assets/js/28.b434aff5.js"><link rel="prefetch" href="/matheusblog/assets/js/29.098b8057.js"><link rel="prefetch" href="/matheusblog/assets/js/3.ce636248.js"><link rel="prefetch" href="/matheusblog/assets/js/30.52b0a576.js"><link rel="prefetch" href="/matheusblog/assets/js/31.1b25634d.js"><link rel="prefetch" href="/matheusblog/assets/js/32.f193a825.js"><link rel="prefetch" href="/matheusblog/assets/js/33.9ead944f.js"><link rel="prefetch" href="/matheusblog/assets/js/34.903e67f5.js"><link rel="prefetch" href="/matheusblog/assets/js/35.75904d44.js"><link rel="prefetch" href="/matheusblog/assets/js/36.1d55859f.js"><link rel="prefetch" href="/matheusblog/assets/js/37.70c7b1d8.js"><link rel="prefetch" href="/matheusblog/assets/js/38.15714070.js"><link rel="prefetch" href="/matheusblog/assets/js/39.68b93333.js"><link rel="prefetch" href="/matheusblog/assets/js/4.f99ce43b.js"><link rel="prefetch" href="/matheusblog/assets/js/40.1f15bc23.js"><link rel="prefetch" href="/matheusblog/assets/js/41.46d77c1a.js"><link rel="prefetch" href="/matheusblog/assets/js/42.a117ae6e.js"><link rel="prefetch" href="/matheusblog/assets/js/43.cbe38645.js"><link rel="prefetch" href="/matheusblog/assets/js/44.8222aed3.js"><link rel="prefetch" href="/matheusblog/assets/js/45.57722d0e.js"><link rel="prefetch" href="/matheusblog/assets/js/46.aafad694.js"><link rel="prefetch" href="/matheusblog/assets/js/47.ca0b1fe0.js"><link rel="prefetch" href="/matheusblog/assets/js/48.349b35d1.js"><link rel="prefetch" href="/matheusblog/assets/js/49.b9c08c0e.js"><link rel="prefetch" href="/matheusblog/assets/js/5.64180031.js"><link rel="prefetch" href="/matheusblog/assets/js/50.93e3d25c.js"><link rel="prefetch" href="/matheusblog/assets/js/51.e69e635d.js"><link rel="prefetch" href="/matheusblog/assets/js/52.37cb98bd.js"><link rel="prefetch" href="/matheusblog/assets/js/53.65a89bdb.js"><link rel="prefetch" href="/matheusblog/assets/js/54.65553c35.js"><link rel="prefetch" href="/matheusblog/assets/js/55.71dac7ad.js"><link rel="prefetch" href="/matheusblog/assets/js/56.33907187.js"><link rel="prefetch" href="/matheusblog/assets/js/57.181e26c4.js"><link rel="prefetch" href="/matheusblog/assets/js/58.795923e6.js"><link rel="prefetch" href="/matheusblog/assets/js/59.423ca6bd.js"><link rel="prefetch" href="/matheusblog/assets/js/6.390e3f0b.js"><link rel="prefetch" href="/matheusblog/assets/js/60.ee96cd1f.js"><link rel="prefetch" href="/matheusblog/assets/js/61.66f98f24.js"><link rel="prefetch" href="/matheusblog/assets/js/62.865f6944.js"><link rel="prefetch" href="/matheusblog/assets/js/63.7d692af1.js"><link rel="prefetch" href="/matheusblog/assets/js/64.84055070.js"><link rel="prefetch" href="/matheusblog/assets/js/65.40a56349.js"><link rel="prefetch" href="/matheusblog/assets/js/66.2fa72ab3.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b7531b45.js"><link rel="prefetch" href="/matheusblog/assets/js/68.b4af8ca3.js"><link rel="prefetch" href="/matheusblog/assets/js/69.b9dbb4bd.js"><link rel="prefetch" href="/matheusblog/assets/js/7.f2df787d.js"><link rel="prefetch" href="/matheusblog/assets/js/70.ff97ef74.js"><link rel="prefetch" href="/matheusblog/assets/js/71.5e965fbe.js"><link rel="prefetch" href="/matheusblog/assets/js/72.a54bc571.js"><link rel="prefetch" href="/matheusblog/assets/js/73.bbf446cc.js"><link rel="prefetch" href="/matheusblog/assets/js/74.83522c0f.js"><link rel="prefetch" href="/matheusblog/assets/js/75.4067083f.js"><link rel="prefetch" href="/matheusblog/assets/js/76.29b8408c.js"><link rel="prefetch" href="/matheusblog/assets/js/77.2f78c8a7.js"><link rel="prefetch" href="/matheusblog/assets/js/78.aa9c5da5.js"><link rel="prefetch" href="/matheusblog/assets/js/79.e27eae87.js"><link rel="prefetch" href="/matheusblog/assets/js/8.5abb2418.js"><link rel="prefetch" href="/matheusblog/assets/js/80.487f48d2.js"><link rel="prefetch" href="/matheusblog/assets/js/81.a148f0d5.js"><link rel="prefetch" href="/matheusblog/assets/js/82.ff6ff828.js"><link rel="prefetch" href="/matheusblog/assets/js/83.06905ba2.js"><link rel="prefetch" href="/matheusblog/assets/js/84.540e52ce.js"><link rel="prefetch" href="/matheusblog/assets/js/85.ea9f1eeb.js"><link rel="prefetch" href="/matheusblog/assets/js/86.08473beb.js"><link rel="prefetch" href="/matheusblog/assets/js/87.f29163d2.js"><link rel="prefetch" href="/matheusblog/assets/js/88.b13f950d.js"><link rel="prefetch" href="/matheusblog/assets/js/89.b4a3f121.js"><link rel="prefetch" href="/matheusblog/assets/js/9.5cecb6da.js"><link rel="prefetch" href="/matheusblog/assets/js/90.2982c28f.js"><link rel="prefetch" href="/matheusblog/assets/js/91.7952f324.js"><link rel="prefetch" href="/matheusblog/assets/js/92.a7d9d05a.js"><link rel="prefetch" href="/matheusblog/assets/js/93.622a0e9f.js"><link rel="prefetch" href="/matheusblog/assets/js/94.f7c65dc0.js"><link rel="prefetch" href="/matheusblog/assets/js/95.bf11ade2.js"><link rel="prefetch" href="/matheusblog/assets/js/96.c85a5970.js"><link rel="prefetch" href="/matheusblog/assets/js/97.4b82379b.js"><link rel="prefetch" href="/matheusblog/assets/js/98.52b620df.js"><link rel="prefetch" href="/matheusblog/assets/js/99.55cade5d.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.633991d7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">Java 全栈知识体系</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/01SpringMVC简介.html" class="nav-link">
+  SpringMVC简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/01SpringMVC简介.html" class="nav-link">
+  SpringMVC简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>工具</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="sidebar-link">VScode使用</a></li><li><a href="/matheusblog/md/devops/tools/Notebook.html" class="sidebar-link">Notebook环境使用指南</a></li><li><a href="/matheusblog/md/devops/tools/HBuilderX.html" class="sidebar-link">HBuilderX</a></li><li><a href="/matheusblog/md/devops/tools/硬件设置.html" class="sidebar-link">硬件设置</a></li><li><a href="/matheusblog/md/devops/tools/IDEA使用.html" class="sidebar-link">IDEA</a></li><li><a href="/matheusblog/md/devops/tools/IDEA快捷键与JavaDoc.html" class="sidebar-link">IDEA快捷键与JavaDoc</a></li><li><a href="/matheusblog/md/devops/tools/网页扒手.html" class="sidebar-link">网页扒手</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Git</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/git/01 基本用法.html" class="sidebar-link">Git安装</a></li><li><a href="/matheusblog/md/devops/tools/git/02 Github快速上手.html" class="sidebar-link">GitHub快速上手</a></li><li><a href="/matheusblog/md/devops/tools/git/03 Git分支操作.html" class="sidebar-link">Git分支操作</a></li><li><a href="/matheusblog/md/devops/tools/git/04 多人协作GitHub部分.html" class="sidebar-link">多人协作GitHub部分</a></li><li><a href="/matheusblog/md/devops/tools/git/05 多人协作Git部分.html" class="sidebar-link">多人协作Git部分</a></li><li><a href="/matheusblog/md/devops/tools/git/06 Git tag和GitHub releases.html" class="sidebar-link">Git tag和GitHub releases</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vim</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/vim/01 Vim快速入门.html" class="sidebar-link">Vim快速入门</a></li><li><a href="/matheusblog/md/devops/tools/vim/02Vim文档编辑.html" class="sidebar-link">Vim文档编辑</a></li><li><a href="/matheusblog/md/devops/tools/vim/03Vim查找替换.html" class="sidebar-link">Vim查找替换</a></li><li><a href="/matheusblog/md/devops/tools/vim/04Vim高级功能.html" class="sidebar-link">Vim高级功能</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/linux/00 Centos.html" class="sidebar-link">Centos</a></li><li><a href="/matheusblog/md/devops/linux/01 编辑c.html" class="sidebar-link">编辑c</a></li><li><a href="/matheusblog/md/devops/linux/03 TCP_IP命令.html" class="sidebar-link">TCP/IP命令</a></li><li><a href="/matheusblog/md/devops/linux/04 基本概念及操作.html" class="sidebar-link">基本概念及操作</a></li><li><a href="/matheusblog/md/devops/linux/05 用户及文件权限管理.html" class="sidebar-link">用户及文件权限管理</a></li><li><a href="/matheusblog/md/devops/linux/06 Linux 目录结构及文件基本操作.html" class="sidebar-link">Linux 目录结构及文件基本操作</a></li><li><a href="/matheusblog/md/devops/linux/07 环境变量与文件查找.html" class="sidebar-link">环境变量与文件查找</a></li><li><a href="/matheusblog/md/devops/linux/08  文件打包与解压缩.html" class="sidebar-link">文件打包与解压缩</a></li><li><a href="/matheusblog/md/devops/linux/09 文件系统操作与磁盘管理.html" class="sidebar-link">文件系统操作与磁盘管理</a></li><li><a href="/matheusblog/md/devops/linux/10 Linux下的帮助命令.html" class="sidebar-link">Linux下的帮助命令</a></li><li><a href="/matheusblog/md/devops/linux/11 Linux任务计划crontab.html" class="sidebar-link">Linux任务计划crontab</a></li><li><a href="/matheusblog/md/devops/linux/12 命令执行顺序控制与管道.html" class="sidebar-link">命令执行顺序控制与管道</a></li><li><a href="/matheusblog/md/devops/linux/13简单的文本处理.html" class="sidebar-link">文本处理命令</a></li><li><a href="/matheusblog/md/devops/linux/14数据流重定向.html" class="sidebar-link">数据流重定向</a></li><li><a href="/matheusblog/md/devops/linux/15正则表达式基础.html" class="sidebar-link">正则表达式</a></li><li><a href="/matheusblog/md/devops/linux/16Linux下软件安装.html" class="sidebar-link">LInux下软件安装</a></li><li><a href="/matheusblog/md/devops/linux/17Linux进程概念.html" class="sidebar-link">Linux进程概念</a></li><li><a href="/matheusblog/md/devops/linux/18Linux进程管理.html" class="active sidebar-link">Linux进程管理</a></li><li><a href="/matheusblog/md/devops/linux/19Linux日志系统.html" class="sidebar-link">Linux日志系统</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Bash</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/docker/bash/01bash介绍与入门.html" class="sidebar-link">Bash介绍与入门</a></li><li><a href="/matheusblog/md/devops/docker/bash/02bash特殊字符.html" class="sidebar-link">Bash特殊字符</a></li><li><a href="/matheusblog/md/devops/docker/bash/03变量与参数.html" class="sidebar-link">变量与参数</a></li><li><a href="/matheusblog/md/devops/docker/bash/04基本运算符.html" class="sidebar-link">基本运算符</a></li><li><a href="/matheusblog/md/devops/docker/bash/05流程控制.html" class="sidebar-link">流程控制</a></li><li><a href="/matheusblog/md/devops/docker/bash/06函数.html" class="sidebar-link">函数</a></li><li><a href="/matheusblog/md/devops/docker/bash/07Shell脚本实现Linux系统监控.html" class="sidebar-link">Shell脚本实现Linux系统监控</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="linux进程管理"><a href="#linux进程管理" class="header-anchor">#</a> Linux进程管理</h1> <p></p><div class="table-of-contents"><ul><li><a href="#进程的查看">进程的查看</a><ul><li><a href="#top-工具的使用">top 工具的使用</a></li><li><a href="#ps-工具的使用">ps 工具的使用</a></li><li><a href="#pstree-工具的使用">pstree 工具的使用</a></li></ul></li><li><a href="#进程的管理">进程的管理</a><ul><li><a href="#kill-命令的掌握">kill 命令的掌握</a></li><li><a href="#进程的执行顺序">进程的执行顺序</a></li></ul></li></ul></div><p></p> <h2 id="进程的查看"><a href="#进程的查看" class="header-anchor">#</a> 进程的查看</h2> <p>不管在测试的时候、在实际的生产环境中，还是自己的使用过程中，难免会遇到一些进程异常的情况，所以 Linux 为我们提供了一些工具来查看进程的状态信息。我们可以通过 <code>top</code> 实时的查看进程的状态，以及系统的一些信息（如 CPU、内存信息等），我们还可以通过 <code>ps</code> 来静态查看当前的进程信息，同时我们还可以使用 <code>pstree</code> 来查看当前活跃进程的树形结构。</p> <h3 id="top-工具的使用"><a href="#top-工具的使用" class="header-anchor">#</a> top 工具的使用</h3> <p><code>top</code> 工具是我们常用的一个查看工具，能实时的查看我们系统的一些关键信息的变化:</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">top</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531200321807.3f8e157f.png" alt="image-20220531200321807"></p> <p>top 是一个在前台执行的程序，所以执行后便进入到这样的一个交互界面，正是因为交互界面我们才可以实时的获取到系统与进程的信息。在交互界面中我们可以通过一些指令来操作和筛选。在此之前我们先来了解显示了哪些信息。</p> <p>我们看到 top 显示的第一排，</p> <table><thead><tr><th>内容</th> <th>解释</th></tr></thead> <tbody><tr><td>top</td> <td>表示当前程序的名称</td></tr> <tr><td>11:05:18</td> <td>表示当前的系统的时间</td></tr> <tr><td>up 8 days,17:12</td> <td>表示该机器已经启动了多长时间</td></tr> <tr><td>1 user</td> <td>表示当前系统中只有一个用户</td></tr> <tr><td>load average: 0.29,0.20,0.25</td> <td>分别对应 1、5、15 分钟内 cpu 的平均负载</td></tr></tbody></table> <p>load average 在 wikipedia 中的解释是 the system load is a measure of the amount of work that a computer system is doing 也就是对当前 CPU 工作量的度量，具体来说也就是指运行队列的平均长度，也就是等待 CPU 的平均进程数相关的一个计算值。</p> <p>我们该如何看待这个 load average 数据呢？</p> <p>假设我们的系统是单 CPU、单内核的，把它比喻成是一条单向的桥，把 CPU 任务比作汽车。</p> <ul><li>load = 0 的时候意味着这个桥上并没有车，cpu 没有任何任务；</li> <li>load &lt; 1 的时候意味着桥上的车并不多，一切都还是很流畅的，cpu 的任务并不多，资源还很充足；</li> <li>load = 1 的时候就意味着桥已经被车给占满了，没有一点空隙，cpu 已经在全力工作了，所有的资源都被用完了，当然还好，这还在能力范围之内，只是有点慢而已；</li> <li>load &gt; 1 的时候就意味着不仅仅是桥上已经被车占满了，就连桥外都被占满了，cpu 已经在全力工作，系统资源的用完了，但是还是有大量的进程在请求，在等待。若是这个值大于 2 表示进程请求超过 CPU 工作能力的 2 倍。而若是这个值大于 5 说明系统已经在超负荷运作了。</li></ul> <p>这是单个 CPU 单核的情况，而实际生活中我们需要将得到的这个值除以我们的核数来看。我们可以通过以下的命令来查看 CPU 的个数与核心数：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment">#查看物理 CPU 的个数</span>
+<span class="token function">cat</span> /proc/cpuinfo <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&quot;physical id&quot;</span> <span class="token operator">|</span> <span class="token function">sort</span> <span class="token operator">|</span> <span class="token function">uniq</span> <span class="token operator">|</span><span class="token function">wc</span> -l
+
+<span class="token comment">#每个 cpu 的核心数</span>
+<span class="token function">cat</span> /proc/cpuinfo <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&quot;physical id&quot;</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&quot;0&quot;</span> <span class="token operator">|</span> <span class="token function">wc</span> -l
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>通过上面的指数我们可以得知 load 的临界值为 1 ，但是在实际生活中，比较有经验的运维或者系统管理员会将临界值定为 0.7。这里的指数都是除以核心数以后的值，不要混淆了</p> <ul><li>若是 load &lt; 0.7 并不会去关注他；</li> <li>若是 0.7&lt; load &lt; 1 的时候我们就需要稍微关注一下了，虽然还可以应付但是这个值已经离临界不远了；</li> <li>若是 load = 1 的时候我们就需要警惕了，因为这个时候已经没有更多的资源的了，已经在全力以赴了；</li> <li>若是 load &gt; 5 的时候系统已经快不行了，这个时候你需要加班解决问题了</li></ul> <p>通常我们都会先看 15 分钟的值来看这个大体的趋势，然后再看 5 分钟的值对比来看是否有下降的趋势。</p> <p>查看 busybox 的代码可以知道，数据是每 5 秒钟就检查一次活跃的进程数，然后计算出该值，然后 load 从 <code>/proc/loadavg</code> 中读取的。而这个 load 的值是如何计算的呢，这是 load 的计算的源码</p> <div class="language-c line-numbers-mode"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">FSHIFT</span>      <span class="token expression"><span class="token number">11</span>          </span><span class="token comment">/* nr of bits of precision */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">FIXED_1</span>     <span class="token expression"><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>FSHIFT<span class="token punctuation">)</span> </span><span class="token comment">/* 1.0 as fixed-point(定点) */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">LOAD_FREQ</span>   <span class="token expression"><span class="token punctuation">(</span><span class="token number">5</span><span class="token operator">*</span>HZ<span class="token punctuation">)</span>      </span><span class="token comment">/* 5 sec intervals，每隔5秒计算一次平均负载值 */</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">CALC_LOAD</span><span class="token expression"><span class="token punctuation">(</span>load<span class="token punctuation">,</span> exp<span class="token punctuation">,</span> n<span class="token punctuation">)</span>     </span><span class="token punctuation">\</span>
+         <span class="token expression">load <span class="token operator">*=</span> exp<span class="token punctuation">;</span>               </span><span class="token punctuation">\</span>
+         <span class="token expression">load <span class="token operator">+=</span> n<span class="token operator">*</span><span class="token punctuation">(</span>FIXED_1 <span class="token operator">-</span> exp<span class="token punctuation">)</span><span class="token punctuation">;</span> </span><span class="token punctuation">\</span>
+         <span class="token expression">load <span class="token operator">&gt;&gt;=</span> FSHIFT<span class="token punctuation">;</span></span></span>
+
+<span class="token keyword">unsigned</span> <span class="token keyword">long</span> avenrun<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token function">EXPORT_SYMBOL</span><span class="token punctuation">(</span>avenrun<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+* calc_load - given tick count, update the avenrun load estimates.
+* This is called while holding a write_lock on xtime_lock.
+*/</span>
+<span class="token keyword">static</span> <span class="token keyword">inline</span> <span class="token keyword">void</span> <span class="token function">calc_load</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">long</span> ticks<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+        <span class="token keyword">unsigned</span> <span class="token keyword">long</span> active_tasks<span class="token punctuation">;</span> <span class="token comment">/* fixed-point */</span>
+        <span class="token keyword">static</span> <span class="token keyword">int</span> count <span class="token operator">=</span> LOAD_FREQ<span class="token punctuation">;</span>
+        count <span class="token operator">-=</span> ticks<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>count <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                count <span class="token operator">+=</span> LOAD_FREQ<span class="token punctuation">;</span>
+                active_tasks <span class="token operator">=</span> <span class="token function">count_active_tasks</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">CALC_LOAD</span><span class="token punctuation">(</span>avenrun<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> EXP_1<span class="token punctuation">,</span> active_tasks<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">CALC_LOAD</span><span class="token punctuation">(</span>avenrun<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> EXP_5<span class="token punctuation">,</span> active_tasks<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">CALC_LOAD</span><span class="token punctuation">(</span>avenrun<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> EXP_15<span class="token punctuation">,</span> active_tasks<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><blockquote><p>有兴趣的朋友可以研究一下，是如何计算的。代码中的后面这部分相当于它的计算公式。</p></blockquote> <p>我们回归正题，来看 top 的第二行数据，基本上第二行是进程的一个情况统计：</p> <table><thead><tr><th>内容</th> <th>解释</th></tr></thead> <tbody><tr><td>Tasks: 26 total</td> <td>进程总数</td></tr> <tr><td>1 running</td> <td>1 个正在运行的进程数</td></tr> <tr><td>25 sleeping</td> <td>25 个睡眠的进程数</td></tr> <tr><td>0 stopped</td> <td>没有停止的进程数</td></tr> <tr><td>0 zombie</td> <td>没有僵尸进程数</td></tr></tbody></table> <p>来看 top 的第三行数据，这一行基本上是 CPU 的一个使用情况的统计了：</p> <table><thead><tr><th>内容</th> <th>解释</th></tr></thead> <tbody><tr><td><code>Cpu(s): 1.0%us</code></td> <td>用户空间进程占用 CPU 百分比</td></tr> <tr><td><code>1.0% sy</code></td> <td>内核空间运行占用 CPU 百分比</td></tr> <tr><td><code>0.0%ni</code></td> <td>用户进程空间内改变过优先级的进程占用 CPU 百分比</td></tr> <tr><td><code>97.9%id</code></td> <td>空闲 CPU 百分比</td></tr> <tr><td><code>0.0%wa</code></td> <td>等待输入输出的 CPU 时间百分比</td></tr> <tr><td><code>0.1%hi</code></td> <td>硬中断(Hardware IRQ)占用 CPU 的百分比</td></tr> <tr><td><code>0.0%si</code></td> <td>软中断(Software IRQ)占用 CPU 的百分比</td></tr> <tr><td><code>0.0%st</code></td> <td>(Steal time) 是 hypervisor 等虚拟服务中，虚拟 CPU 等待实际 CPU 的时间的百分比</td></tr></tbody></table> <p>CPU 利用率是对一个时间段内 CPU 使用状况的统计，通过这个指标可以看出在某一个时间段内 CPU 被占用的情况，而 Load Average 是 CPU 的 Load，它所包含的信息不是 CPU 的使用率状况，而是在一段时间内 CPU 正在处理以及等待 CPU 处理的进程数情况统计信息，这两个指标并不一样。</p> <p>来看 top 的第四行数据，这一行基本上是内存的一个使用情况的统计了：</p> <table><thead><tr><th>内容</th> <th>解释</th></tr></thead> <tbody><tr><td>8176740 total</td> <td>物理内存总量</td></tr> <tr><td>8032104 used</td> <td>使用的物理内存总量</td></tr> <tr><td>144636 free</td> <td>空闲内存总量</td></tr> <tr><td>313088 buffers</td> <td>用作内核缓存的内存量</td></tr></tbody></table> <p><strong>注意：</strong></p> <blockquote><p>系统中可用的物理内存最大值并不是 free 这个单一的值，而是 free + buffers + swap 中的 cached 的和。</p></blockquote> <p>来看 top 的第五行数据，这一行基本上是交换区的一个使用情况的统计了：</p> <table><thead><tr><th>内容</th> <th>解释</th></tr></thead> <tbody><tr><td>total</td> <td>交换区总量</td></tr> <tr><td>used</td> <td>使用的交换区总量</td></tr> <tr><td>free</td> <td>空闲交换区总量</td></tr> <tr><td>cached</td> <td>缓冲的交换区总量，内存中的内容被换出到交换区，而后又被换入到内存，但使用过的交换区尚未被覆盖</td></tr></tbody></table> <p>再下面就是进程的一个情况了</p> <table><thead><tr><th>列名</th> <th>解释</th></tr></thead> <tbody><tr><td>PID</td> <td>进程 id</td></tr> <tr><td>USER</td> <td>该进程的所属用户</td></tr> <tr><td>PR</td> <td>该进程执行的优先级 priority 值</td></tr> <tr><td>NI</td> <td>该进程的 nice 值</td></tr> <tr><td>VIRT</td> <td>该进程任务所使用的虚拟内存的总数</td></tr> <tr><td>RES</td> <td>该进程所使用的物理内存数，也称之为驻留内存数</td></tr> <tr><td>SHR</td> <td>该进程共享内存的大小</td></tr> <tr><td>S</td> <td>该进程进程的状态: S=sleep R=running Z=zombie</td></tr> <tr><td>%CPU</td> <td>该进程 CPU 的利用率</td></tr> <tr><td>%MEM</td> <td>该进程内存的利用率</td></tr> <tr><td>TIME+</td> <td>该进程活跃的总时间</td></tr> <tr><td>COMMAND</td> <td>该进程运行的名字</td></tr></tbody></table> <p><strong>注意:</strong></p> <p><strong>NICE 值</strong>叫做静态优先级，是用户空间的一个优先级值，其取值范围是 -20 至 19。这个值越小，表示进程”优先级”越高，而值越大“优先级”越低。nice 值中的 -20 到 19，中 -20 优先级最高， 0 是默认的值，而 19 优先级最低。</p> <p><strong>PR 值</strong>表示 Priority 值叫动态优先级，是进程在内核中实际的优先级值，进程优先级的取值范围是通过一个宏定义的，这个宏的名称是 <code>MAX_PRIO</code>，它的值为 140。Linux 实际上实现了 140 个优先级范围，取值范围是从 <code>0-139</code>，这个值越小，优先级越高。而这其中的 <code>0-99</code> 是实时进程的值，而 <code>100-139</code> 是给用户的。</p> <p>其中 PR 中的 <code>100 to 139</code> 值部分有这么一个对应 <code>PR = 20 + (-20 to +19)</code>，这里的 <code>-20 to +19</code> 便是 nice 值，所以说两个虽然都是优先级，而且有千丝万缕的关系，但是他们的值，他们的作用范围并不相同。</p> <p><strong>VIRT</strong> 任务所使用的虚拟内存的总数，其中包含所有的代码，数据，共享库和被换出 swap 空间的页面等所占据空间的总数。</p> <p>在上文我们曾经说过 top 是一个前台程序，所以是一个可以交互的：</p> <table><thead><tr><th>常用交互命令</th> <th>解释</th></tr></thead> <tbody><tr><td>q</td> <td>退出程序</td></tr> <tr><td>I</td> <td>切换显示平均负载和启动时间的信息</td></tr> <tr><td>P</td> <td>根据 CPU 使用百分比大小进行排序</td></tr> <tr><td>M</td> <td>根据驻留内存大小进行排序</td></tr> <tr><td>i</td> <td>忽略闲置和僵死的进程，这是一个开关式命令</td></tr> <tr><td>k</td> <td>终止一个进程，系统提示输入 PID 及发送的信号值。一般终止进程用 15 信号，不能正常结束则使用 9 信号。安全模式下该命令被屏蔽。</td></tr></tbody></table> <p>好好的利用 top 能够很有效的帮助我们观察到系统的瓶颈所在，或者是系统的问题所在。</p> <h3 id="ps-工具的使用"><a href="#ps-工具的使用" class="header-anchor">#</a> ps 工具的使用</h3> <p>ps 也是我们最常用的查看进程的工具之一，我们通过这样的一个命令来了解一下，它能给我们带来哪些信息：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">ps</span> aux
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531200330511.06067700.png" alt="image-20220531200330511"></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">ps</span> axjf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531200335953.531a474b.png" alt="image-20220531200335953"></p> <p>我们来总体了解下会出现哪些信息给我们，这些信息又代表着什么（更多的 keywords 大家可以通过 <code>man ps</code> 了解）。</p> <table><thead><tr><th>内容</th> <th>解释</th></tr></thead> <tbody><tr><td><code>F</code></td> <td>进程的标志（process flags），当 flags 值为 1 则表示此子程序只是 fork 但没有执行 exec，为 4 表示此程序使用超级管理员 root 权限</td></tr> <tr><td><code>USER</code></td> <td>进程的拥有用户</td></tr> <tr><td><code>PID</code></td> <td>进程的 ID</td></tr> <tr><td><code>PPID</code></td> <td>其父进程的 PID</td></tr> <tr><td><code>SID</code></td> <td>session 的 ID</td></tr> <tr><td><code>TPGID</code></td> <td>前台进程组的 ID</td></tr> <tr><td><code>%CPU</code></td> <td>进程占用的 CPU 百分比</td></tr> <tr><td><code>%MEM</code></td> <td>占用内存的百分比</td></tr> <tr><td><code>NI</code></td> <td>进程的 NICE 值</td></tr> <tr><td><code>VSZ</code></td> <td>进程使用虚拟内存大小</td></tr> <tr><td><code>RSS</code></td> <td>驻留内存中页的大小</td></tr> <tr><td><code>TTY</code></td> <td>终端 ID</td></tr> <tr><td><code>S or STAT</code></td> <td>进程状态</td></tr> <tr><td><code>WCHAN</code></td> <td>正在等待的进程资源</td></tr> <tr><td><code>START</code></td> <td>启动进程的时间</td></tr> <tr><td><code>TIME</code></td> <td>进程消耗 CPU 的时间</td></tr> <tr><td><code>COMMAND</code></td> <td>命令的名称和参数</td></tr></tbody></table> <blockquote><p><strong>TPGID</strong>栏写着-1 的都是没有控制终端的进程，也就是守护进程</p></blockquote> <blockquote><p><strong>STAT</strong>表示进程的状态，而进程的状态有很多，如下表所示</p></blockquote> <table><thead><tr><th>状态</th> <th>解释</th></tr></thead> <tbody><tr><td><code>R</code></td> <td>Running.运行中</td></tr> <tr><td><code>S</code></td> <td>Interruptible Sleep.等待调用</td></tr> <tr><td><code>D</code></td> <td>Uninterruptible Sleep.不可中断睡眠</td></tr> <tr><td><code>T</code></td> <td>Stoped.暂停或者跟踪状态</td></tr> <tr><td><code>X</code></td> <td>Dead.即将被撤销</td></tr> <tr><td><code>Z</code></td> <td>Zombie.僵尸进程</td></tr> <tr><td><code>W</code></td> <td>Paging.内存交换</td></tr> <tr><td><code>N</code></td> <td>优先级低的进程</td></tr> <tr><td><code>&lt;</code></td> <td>优先级高的进程</td></tr> <tr><td><code>s</code></td> <td>进程的领导者</td></tr> <tr><td><code>L</code></td> <td>锁定状态</td></tr> <tr><td><code>l</code></td> <td>多线程状态</td></tr> <tr><td><code>+</code></td> <td>前台进程</td></tr></tbody></table> <blockquote><p>其中的 D 是不能被中断睡眠的状态，处在这种状态的进程不接受外来的任何 signal，所以无法使用 kill 命令杀掉处于 D 状态的进程，无论是 <code>kill</code>，<code>kill -9</code> 还是 <code>kill -15</code>，一般处于这种状态可能是进程 I/O 的时候出问题了。</p></blockquote> <p>ps 工具有许多的参数，下面给大家解释部分常用的参数。</p> <p>使用 <code>-l</code> 参数可以显示自己这次登录的 bash 相关的进程信息罗列出来：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">ps</span> -l
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531200341761.09e2bb96.png" alt="image-20220531200341761"></p> <p>相对来说我们更加常用下面这个命令，他将会罗列出所有的进程信息：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">ps</span> aux
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531200346670.5cc2c0e1.png" alt="image-20220531200346670"></p> <p>若是查找其中的某个进程的话，我们还可以配合着 <code>grep</code> 和正则表达式一起使用：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> <span class="token function">zsh</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531200351513.838a9e6f.png" alt="image-20220531200351513"></p> <p>此外我们还可以查看时，将连同部分的进程呈树状显示出来：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">ps</span> axjf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531200356038.d013febf.png" alt="image-20220531200356038"></p> <p>当然如果你觉得使用这样的此时没有把你想要的信息放在一起，我们也可以是用这样的命令，来自定义我们所需要的参数显示：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">ps</span> -afxo user,ppid,pid,pgid,command
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531200400443.c4b43c1d.png" alt="image-20220531200400443"></p> <p>这是一个简单而又实用的工具，想要更灵活的使用，想要知道更多的参数我们可以使用 man 来获取更多相关的信息。</p> <h3 id="pstree-工具的使用"><a href="#pstree-工具的使用" class="header-anchor">#</a> pstree 工具的使用</h3> <p>通过 <code>pstree</code> 可以很直接的看到相同的进程数量，最主要的还是我们可以看到所有进程之间的相关性。</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>pstree
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531200405376.7c9f604f.png" alt="image-20220531200405376"></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>pstree -up
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><table><thead><tr><th>参数选择</th> <th>解释</th></tr></thead> <tbody><tr><td>-A</td> <td>程序树之间以 ASCII 字符连接</td></tr> <tr><td>-p</td> <td>同时列出每个 process 的 PID</td></tr> <tr><td>-u</td> <td>同时列出每个 process 的所属账户名称</td></tr></tbody></table> <p><img src="/matheusblog/assets/img/image-20220531200410583.a653f9fe.png" alt="image-20220531200410583"></p> <h2 id="进程的管理"><a href="#进程的管理" class="header-anchor">#</a> 进程的管理</h2> <h3 id="kill-命令的掌握"><a href="#kill-命令的掌握" class="header-anchor">#</a> kill 命令的掌握</h3> <p>上个实验中我们讲诉了进程之间是如何衍生，之间又有什么相关性，我们来回顾一下，当一个进程结束的时候或者要异常结束的时候，会向其父进程返回一个或者接收一个 SIGHUP 信号而做出的结束进程或者其他的操作，这个 SIGHUP 信号不仅可以由系统发送，我们可以使用 <code>kill</code> 来发送这个信号来操作进程的结束或者重启等等。</p> <p>上节课程我们使用 <code>kill</code> 命令来管理我们的一些 job，这节课我们将尝试用 <code>kill</code> 来操作下一些不属于 job 范畴的进程，直接对 pid 下手。</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 首先我们使用图形界面打开了 gedit、gvim，用 ps 可以查看到</span>
+<span class="token function">ps</span> aux
+
+<span class="token comment"># 使用 9 这个信号强制结束 gedit 进程</span>
+<span class="token function">kill</span> -9 <span class="token number">1608</span>
+
+<span class="token comment"># 我们再查找这个进程的时候就找不到了</span>
+<span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> gedit
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531200417017.c73121c1.png" alt="image-20220531200417017"></p> <p><img src="/matheusblog/assets/img/image-20220531200421617.a237fcbe.png" alt="image-20220531200421617"></p> <h3 id="进程的执行顺序"><a href="#进程的执行顺序" class="header-anchor">#</a> 进程的执行顺序</h3> <p>我们在使用 ps 命令的时候可以看到大部分的进程都是处于休眠的状态，如果这些进程都被唤醒，那么该谁最先享受 CPU 的服务，后面的进程又该是一个什么样的顺序呢？进程调度的队列又该如何去排列呢？</p> <p>当然就是靠该进程的优先级值来判定进程调度的优先级，而优先级的值就是上文所提到的 PR 与 nice 来控制与体现了</p> <p>而 nice 的值我们是可以通过 nice 命令来修改的，而需要注意的是 nice 值可以调整的范围是 <code>-20 ~ 19</code>，其中 root 有着至高无上的权力，既可以调整自己的进程也可以调整其他用户的程序，并且是所有的值都可以用，而普通用户只可以调制属于自己的进程，并且其使用的范围只能是 <code>0 ~ 19</code>，因为系统为了避免一般用户抢占系统资源而设置的一个限制</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 这个实验在环境中无法做，因为权限不够，可以自己在本地尝试</span>
+
+<span class="token comment"># 打开一个程序放在后台，或者用图形界面打开</span>
+<span class="token function">nice</span> -n -5 <span class="token function">vim</span> <span class="token operator">&amp;</span>
+
+<span class="token comment"># 用 ps 查看其优先级</span>
+<span class="token function">ps</span> -afxo user,ppid,pid,stat,pri,ni,time,command <span class="token operator">|</span> <span class="token function">grep</span> <span class="token function">vim</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>我们还可以用 renice 来修改已经存在的进程的优先级，同样因为权限的原因在实验环境中无法尝试。</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">renice</span> -5 pid
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matheusblog/md/devops/linux/17Linux进程概念.html" class="prev">
+        Linux进程概念
+      </a></span> <span class="next"><a href="/matheusblog/md/devops/linux/19Linux日志系统.html">
+        Linux日志系统
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.98d32d61.js" defer></script><script src="/matheusblog/assets/js/2.34da62ad.js" defer></script><script src="/matheusblog/assets/js/25.0134b188.js" defer></script>
+  </body>
+</html>

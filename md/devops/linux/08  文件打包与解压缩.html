@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>文件打包与解压缩 | Java 全栈知识体系</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 大数据, 机器学习...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.633991d7.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.98d32d61.js" as="script"><link rel="preload" href="/matheusblog/assets/js/2.34da62ad.js" as="script"><link rel="preload" href="/matheusblog/assets/js/92.a7d9d05a.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.f75180e8.js"><link rel="prefetch" href="/matheusblog/assets/js/100.3d5ca5a0.js"><link rel="prefetch" href="/matheusblog/assets/js/101.f6854eb6.js"><link rel="prefetch" href="/matheusblog/assets/js/102.ca49a8b6.js"><link rel="prefetch" href="/matheusblog/assets/js/103.cca70b63.js"><link rel="prefetch" href="/matheusblog/assets/js/104.a595cff9.js"><link rel="prefetch" href="/matheusblog/assets/js/105.db4b4b05.js"><link rel="prefetch" href="/matheusblog/assets/js/106.5f758be1.js"><link rel="prefetch" href="/matheusblog/assets/js/107.7da45dc8.js"><link rel="prefetch" href="/matheusblog/assets/js/108.8fa7a262.js"><link rel="prefetch" href="/matheusblog/assets/js/109.ba8701b1.js"><link rel="prefetch" href="/matheusblog/assets/js/11.4a30505f.js"><link rel="prefetch" href="/matheusblog/assets/js/110.453838e0.js"><link rel="prefetch" href="/matheusblog/assets/js/111.ac57f4b2.js"><link rel="prefetch" href="/matheusblog/assets/js/112.82e638b0.js"><link rel="prefetch" href="/matheusblog/assets/js/113.1ce5b63f.js"><link rel="prefetch" href="/matheusblog/assets/js/114.66fdb77c.js"><link rel="prefetch" href="/matheusblog/assets/js/115.e1117448.js"><link rel="prefetch" href="/matheusblog/assets/js/116.e10770a9.js"><link rel="prefetch" href="/matheusblog/assets/js/117.2c1f55c5.js"><link rel="prefetch" href="/matheusblog/assets/js/118.4c89ef98.js"><link rel="prefetch" href="/matheusblog/assets/js/119.4c819e7f.js"><link rel="prefetch" href="/matheusblog/assets/js/12.793e0ec0.js"><link rel="prefetch" href="/matheusblog/assets/js/120.06f737df.js"><link rel="prefetch" href="/matheusblog/assets/js/121.bbd8d065.js"><link rel="prefetch" href="/matheusblog/assets/js/122.c73b3422.js"><link rel="prefetch" href="/matheusblog/assets/js/123.9bedb19d.js"><link rel="prefetch" href="/matheusblog/assets/js/124.9c34bd89.js"><link rel="prefetch" href="/matheusblog/assets/js/125.753284bf.js"><link rel="prefetch" href="/matheusblog/assets/js/126.5ec35180.js"><link rel="prefetch" href="/matheusblog/assets/js/127.b1a67c51.js"><link rel="prefetch" href="/matheusblog/assets/js/128.0f85f83b.js"><link rel="prefetch" href="/matheusblog/assets/js/129.9754ca0d.js"><link rel="prefetch" href="/matheusblog/assets/js/13.95235336.js"><link rel="prefetch" href="/matheusblog/assets/js/130.0800b514.js"><link rel="prefetch" href="/matheusblog/assets/js/131.306af433.js"><link rel="prefetch" href="/matheusblog/assets/js/132.53acc92c.js"><link rel="prefetch" href="/matheusblog/assets/js/133.d61293a3.js"><link rel="prefetch" href="/matheusblog/assets/js/134.aadfc68d.js"><link rel="prefetch" href="/matheusblog/assets/js/135.f0f4f57e.js"><link rel="prefetch" href="/matheusblog/assets/js/136.edaa4cd0.js"><link rel="prefetch" href="/matheusblog/assets/js/137.34ef0d92.js"><link rel="prefetch" href="/matheusblog/assets/js/138.cb4cbaad.js"><link rel="prefetch" href="/matheusblog/assets/js/139.1225c28e.js"><link rel="prefetch" href="/matheusblog/assets/js/14.4af1e2de.js"><link rel="prefetch" href="/matheusblog/assets/js/140.ec773abf.js"><link rel="prefetch" href="/matheusblog/assets/js/141.ff8b4cad.js"><link rel="prefetch" href="/matheusblog/assets/js/142.e921849c.js"><link rel="prefetch" href="/matheusblog/assets/js/143.8bb224bc.js"><link rel="prefetch" href="/matheusblog/assets/js/144.a7d83462.js"><link rel="prefetch" href="/matheusblog/assets/js/145.45b8a227.js"><link rel="prefetch" href="/matheusblog/assets/js/146.7cf6ce58.js"><link rel="prefetch" href="/matheusblog/assets/js/147.089c834c.js"><link rel="prefetch" href="/matheusblog/assets/js/148.6ee41415.js"><link rel="prefetch" href="/matheusblog/assets/js/149.77fc6065.js"><link rel="prefetch" href="/matheusblog/assets/js/15.528e7431.js"><link rel="prefetch" href="/matheusblog/assets/js/150.084e2ce0.js"><link rel="prefetch" href="/matheusblog/assets/js/151.c252c8f4.js"><link rel="prefetch" href="/matheusblog/assets/js/152.33b572b8.js"><link rel="prefetch" href="/matheusblog/assets/js/153.570b665f.js"><link rel="prefetch" href="/matheusblog/assets/js/154.9a57835a.js"><link rel="prefetch" href="/matheusblog/assets/js/155.378ea095.js"><link rel="prefetch" href="/matheusblog/assets/js/156.e31769cc.js"><link rel="prefetch" href="/matheusblog/assets/js/157.2583dbbe.js"><link rel="prefetch" href="/matheusblog/assets/js/158.f73e2e8f.js"><link rel="prefetch" href="/matheusblog/assets/js/159.18062130.js"><link rel="prefetch" href="/matheusblog/assets/js/16.5f251fb5.js"><link rel="prefetch" href="/matheusblog/assets/js/160.38ec7e3b.js"><link rel="prefetch" href="/matheusblog/assets/js/161.71036bc2.js"><link rel="prefetch" href="/matheusblog/assets/js/162.6ac3d695.js"><link rel="prefetch" href="/matheusblog/assets/js/163.4a46abf7.js"><link rel="prefetch" href="/matheusblog/assets/js/164.5584f565.js"><link rel="prefetch" href="/matheusblog/assets/js/165.413a07d8.js"><link rel="prefetch" href="/matheusblog/assets/js/166.a8922048.js"><link rel="prefetch" href="/matheusblog/assets/js/167.60cc7908.js"><link rel="prefetch" href="/matheusblog/assets/js/168.4254c123.js"><link rel="prefetch" href="/matheusblog/assets/js/169.cbc70b26.js"><link rel="prefetch" href="/matheusblog/assets/js/17.355d31d9.js"><link rel="prefetch" href="/matheusblog/assets/js/170.916a1019.js"><link rel="prefetch" href="/matheusblog/assets/js/171.07b53d73.js"><link rel="prefetch" href="/matheusblog/assets/js/172.1b33958a.js"><link rel="prefetch" href="/matheusblog/assets/js/173.31f5fa1a.js"><link rel="prefetch" href="/matheusblog/assets/js/174.9a39a5ac.js"><link rel="prefetch" href="/matheusblog/assets/js/175.c6bfd4ac.js"><link rel="prefetch" href="/matheusblog/assets/js/176.f65aa694.js"><link rel="prefetch" href="/matheusblog/assets/js/177.3b68b40b.js"><link rel="prefetch" href="/matheusblog/assets/js/178.6df30b74.js"><link rel="prefetch" href="/matheusblog/assets/js/179.861ac0bf.js"><link rel="prefetch" href="/matheusblog/assets/js/18.7f72dc01.js"><link rel="prefetch" href="/matheusblog/assets/js/180.9546e52a.js"><link rel="prefetch" href="/matheusblog/assets/js/181.bd834059.js"><link rel="prefetch" href="/matheusblog/assets/js/182.af4de693.js"><link rel="prefetch" href="/matheusblog/assets/js/183.1dc2e9c4.js"><link rel="prefetch" href="/matheusblog/assets/js/184.6a2a9374.js"><link rel="prefetch" href="/matheusblog/assets/js/185.59ad729c.js"><link rel="prefetch" href="/matheusblog/assets/js/186.7fe4fd1e.js"><link rel="prefetch" href="/matheusblog/assets/js/187.70003b09.js"><link rel="prefetch" href="/matheusblog/assets/js/188.8573a984.js"><link rel="prefetch" href="/matheusblog/assets/js/189.ec69892a.js"><link rel="prefetch" href="/matheusblog/assets/js/19.47699359.js"><link rel="prefetch" href="/matheusblog/assets/js/190.bed9ec84.js"><link rel="prefetch" href="/matheusblog/assets/js/191.543ed3aa.js"><link rel="prefetch" href="/matheusblog/assets/js/192.bc65c506.js"><link rel="prefetch" href="/matheusblog/assets/js/193.fcf26f62.js"><link rel="prefetch" href="/matheusblog/assets/js/194.c2ef52d4.js"><link rel="prefetch" href="/matheusblog/assets/js/195.686f093a.js"><link rel="prefetch" href="/matheusblog/assets/js/196.fd9d0a4e.js"><link rel="prefetch" href="/matheusblog/assets/js/197.f4534abe.js"><link rel="prefetch" href="/matheusblog/assets/js/198.e89e6439.js"><link rel="prefetch" href="/matheusblog/assets/js/199.0bc681f6.js"><link rel="prefetch" href="/matheusblog/assets/js/20.e5882ee9.js"><link rel="prefetch" href="/matheusblog/assets/js/200.5d1411b9.js"><link rel="prefetch" href="/matheusblog/assets/js/201.1b53caf7.js"><link rel="prefetch" href="/matheusblog/assets/js/202.3eb921e9.js"><link rel="prefetch" href="/matheusblog/assets/js/203.56e48204.js"><link rel="prefetch" href="/matheusblog/assets/js/204.0ee3bbf8.js"><link rel="prefetch" href="/matheusblog/assets/js/205.4b5d9136.js"><link rel="prefetch" href="/matheusblog/assets/js/206.3e6da766.js"><link rel="prefetch" href="/matheusblog/assets/js/207.4b3ddaae.js"><link rel="prefetch" href="/matheusblog/assets/js/208.4ed4f9f6.js"><link rel="prefetch" href="/matheusblog/assets/js/209.adbc8922.js"><link rel="prefetch" href="/matheusblog/assets/js/21.900a8ec7.js"><link rel="prefetch" href="/matheusblog/assets/js/210.518d0b2b.js"><link rel="prefetch" href="/matheusblog/assets/js/211.592c7ccb.js"><link rel="prefetch" href="/matheusblog/assets/js/212.54001ac2.js"><link rel="prefetch" href="/matheusblog/assets/js/213.80a72da6.js"><link rel="prefetch" href="/matheusblog/assets/js/214.e1a549d7.js"><link rel="prefetch" href="/matheusblog/assets/js/215.11e81270.js"><link rel="prefetch" href="/matheusblog/assets/js/216.ac929e20.js"><link rel="prefetch" href="/matheusblog/assets/js/217.fd0af17b.js"><link rel="prefetch" href="/matheusblog/assets/js/218.a65bbeaa.js"><link rel="prefetch" href="/matheusblog/assets/js/219.fbe13534.js"><link rel="prefetch" href="/matheusblog/assets/js/22.ff332d51.js"><link rel="prefetch" href="/matheusblog/assets/js/220.6dea16c6.js"><link rel="prefetch" href="/matheusblog/assets/js/221.bf7499ec.js"><link rel="prefetch" href="/matheusblog/assets/js/23.7c24c528.js"><link rel="prefetch" href="/matheusblog/assets/js/24.221c5e98.js"><link rel="prefetch" href="/matheusblog/assets/js/25.0134b188.js"><link rel="prefetch" href="/matheusblog/assets/js/26.ce908b7f.js"><link rel="prefetch" href="/matheusblog/assets/js/27.8790623d.js"><link rel="prefetch" href="/matheusblog/assets/js/28.b434aff5.js"><link rel="prefetch" href="/matheusblog/assets/js/29.098b8057.js"><link rel="prefetch" href="/matheusblog/assets/js/3.ce636248.js"><link rel="prefetch" href="/matheusblog/assets/js/30.52b0a576.js"><link rel="prefetch" href="/matheusblog/assets/js/31.1b25634d.js"><link rel="prefetch" href="/matheusblog/assets/js/32.f193a825.js"><link rel="prefetch" href="/matheusblog/assets/js/33.9ead944f.js"><link rel="prefetch" href="/matheusblog/assets/js/34.903e67f5.js"><link rel="prefetch" href="/matheusblog/assets/js/35.75904d44.js"><link rel="prefetch" href="/matheusblog/assets/js/36.1d55859f.js"><link rel="prefetch" href="/matheusblog/assets/js/37.70c7b1d8.js"><link rel="prefetch" href="/matheusblog/assets/js/38.15714070.js"><link rel="prefetch" href="/matheusblog/assets/js/39.68b93333.js"><link rel="prefetch" href="/matheusblog/assets/js/4.f99ce43b.js"><link rel="prefetch" href="/matheusblog/assets/js/40.1f15bc23.js"><link rel="prefetch" href="/matheusblog/assets/js/41.46d77c1a.js"><link rel="prefetch" href="/matheusblog/assets/js/42.a117ae6e.js"><link rel="prefetch" href="/matheusblog/assets/js/43.cbe38645.js"><link rel="prefetch" href="/matheusblog/assets/js/44.8222aed3.js"><link rel="prefetch" href="/matheusblog/assets/js/45.57722d0e.js"><link rel="prefetch" href="/matheusblog/assets/js/46.aafad694.js"><link rel="prefetch" href="/matheusblog/assets/js/47.ca0b1fe0.js"><link rel="prefetch" href="/matheusblog/assets/js/48.349b35d1.js"><link rel="prefetch" href="/matheusblog/assets/js/49.b9c08c0e.js"><link rel="prefetch" href="/matheusblog/assets/js/5.64180031.js"><link rel="prefetch" href="/matheusblog/assets/js/50.93e3d25c.js"><link rel="prefetch" href="/matheusblog/assets/js/51.e69e635d.js"><link rel="prefetch" href="/matheusblog/assets/js/52.37cb98bd.js"><link rel="prefetch" href="/matheusblog/assets/js/53.65a89bdb.js"><link rel="prefetch" href="/matheusblog/assets/js/54.65553c35.js"><link rel="prefetch" href="/matheusblog/assets/js/55.71dac7ad.js"><link rel="prefetch" href="/matheusblog/assets/js/56.33907187.js"><link rel="prefetch" href="/matheusblog/assets/js/57.181e26c4.js"><link rel="prefetch" href="/matheusblog/assets/js/58.795923e6.js"><link rel="prefetch" href="/matheusblog/assets/js/59.423ca6bd.js"><link rel="prefetch" href="/matheusblog/assets/js/6.390e3f0b.js"><link rel="prefetch" href="/matheusblog/assets/js/60.ee96cd1f.js"><link rel="prefetch" href="/matheusblog/assets/js/61.66f98f24.js"><link rel="prefetch" href="/matheusblog/assets/js/62.865f6944.js"><link rel="prefetch" href="/matheusblog/assets/js/63.7d692af1.js"><link rel="prefetch" href="/matheusblog/assets/js/64.84055070.js"><link rel="prefetch" href="/matheusblog/assets/js/65.40a56349.js"><link rel="prefetch" href="/matheusblog/assets/js/66.2fa72ab3.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b7531b45.js"><link rel="prefetch" href="/matheusblog/assets/js/68.b4af8ca3.js"><link rel="prefetch" href="/matheusblog/assets/js/69.b9dbb4bd.js"><link rel="prefetch" href="/matheusblog/assets/js/7.f2df787d.js"><link rel="prefetch" href="/matheusblog/assets/js/70.ff97ef74.js"><link rel="prefetch" href="/matheusblog/assets/js/71.5e965fbe.js"><link rel="prefetch" href="/matheusblog/assets/js/72.a54bc571.js"><link rel="prefetch" href="/matheusblog/assets/js/73.bbf446cc.js"><link rel="prefetch" href="/matheusblog/assets/js/74.83522c0f.js"><link rel="prefetch" href="/matheusblog/assets/js/75.4067083f.js"><link rel="prefetch" href="/matheusblog/assets/js/76.29b8408c.js"><link rel="prefetch" href="/matheusblog/assets/js/77.2f78c8a7.js"><link rel="prefetch" href="/matheusblog/assets/js/78.aa9c5da5.js"><link rel="prefetch" href="/matheusblog/assets/js/79.e27eae87.js"><link rel="prefetch" href="/matheusblog/assets/js/8.5abb2418.js"><link rel="prefetch" href="/matheusblog/assets/js/80.487f48d2.js"><link rel="prefetch" href="/matheusblog/assets/js/81.a148f0d5.js"><link rel="prefetch" href="/matheusblog/assets/js/82.ff6ff828.js"><link rel="prefetch" href="/matheusblog/assets/js/83.06905ba2.js"><link rel="prefetch" href="/matheusblog/assets/js/84.540e52ce.js"><link rel="prefetch" href="/matheusblog/assets/js/85.ea9f1eeb.js"><link rel="prefetch" href="/matheusblog/assets/js/86.08473beb.js"><link rel="prefetch" href="/matheusblog/assets/js/87.f29163d2.js"><link rel="prefetch" href="/matheusblog/assets/js/88.b13f950d.js"><link rel="prefetch" href="/matheusblog/assets/js/89.b4a3f121.js"><link rel="prefetch" href="/matheusblog/assets/js/9.5cecb6da.js"><link rel="prefetch" href="/matheusblog/assets/js/90.2982c28f.js"><link rel="prefetch" href="/matheusblog/assets/js/91.7952f324.js"><link rel="prefetch" href="/matheusblog/assets/js/93.622a0e9f.js"><link rel="prefetch" href="/matheusblog/assets/js/94.f7c65dc0.js"><link rel="prefetch" href="/matheusblog/assets/js/95.bf11ade2.js"><link rel="prefetch" href="/matheusblog/assets/js/96.c85a5970.js"><link rel="prefetch" href="/matheusblog/assets/js/97.4b82379b.js"><link rel="prefetch" href="/matheusblog/assets/js/98.52b620df.js"><link rel="prefetch" href="/matheusblog/assets/js/99.55cade5d.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.633991d7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">Java 全栈知识体系</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/01SpringMVC简介.html" class="nav-link">
+  SpringMVC简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/01SpringMVC简介.html" class="nav-link">
+  SpringMVC简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>工具</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="sidebar-link">VScode使用</a></li><li><a href="/matheusblog/md/devops/tools/Notebook.html" class="sidebar-link">Notebook环境使用指南</a></li><li><a href="/matheusblog/md/devops/tools/HBuilderX.html" class="sidebar-link">HBuilderX</a></li><li><a href="/matheusblog/md/devops/tools/硬件设置.html" class="sidebar-link">硬件设置</a></li><li><a href="/matheusblog/md/devops/tools/IDEA使用.html" class="sidebar-link">IDEA</a></li><li><a href="/matheusblog/md/devops/tools/IDEA快捷键与JavaDoc.html" class="sidebar-link">IDEA快捷键与JavaDoc</a></li><li><a href="/matheusblog/md/devops/tools/网页扒手.html" class="sidebar-link">网页扒手</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Git</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/git/01 基本用法.html" class="sidebar-link">Git安装</a></li><li><a href="/matheusblog/md/devops/tools/git/02 Github快速上手.html" class="sidebar-link">GitHub快速上手</a></li><li><a href="/matheusblog/md/devops/tools/git/03 Git分支操作.html" class="sidebar-link">Git分支操作</a></li><li><a href="/matheusblog/md/devops/tools/git/04 多人协作GitHub部分.html" class="sidebar-link">多人协作GitHub部分</a></li><li><a href="/matheusblog/md/devops/tools/git/05 多人协作Git部分.html" class="sidebar-link">多人协作Git部分</a></li><li><a href="/matheusblog/md/devops/tools/git/06 Git tag和GitHub releases.html" class="sidebar-link">Git tag和GitHub releases</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vim</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/vim/01 Vim快速入门.html" class="sidebar-link">Vim快速入门</a></li><li><a href="/matheusblog/md/devops/tools/vim/02Vim文档编辑.html" class="sidebar-link">Vim文档编辑</a></li><li><a href="/matheusblog/md/devops/tools/vim/03Vim查找替换.html" class="sidebar-link">Vim查找替换</a></li><li><a href="/matheusblog/md/devops/tools/vim/04Vim高级功能.html" class="sidebar-link">Vim高级功能</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/linux/00 Centos.html" class="sidebar-link">Centos</a></li><li><a href="/matheusblog/md/devops/linux/01 编辑c.html" class="sidebar-link">编辑c</a></li><li><a href="/matheusblog/md/devops/linux/03 TCP_IP命令.html" class="sidebar-link">TCP/IP命令</a></li><li><a href="/matheusblog/md/devops/linux/04 基本概念及操作.html" class="sidebar-link">基本概念及操作</a></li><li><a href="/matheusblog/md/devops/linux/05 用户及文件权限管理.html" class="sidebar-link">用户及文件权限管理</a></li><li><a href="/matheusblog/md/devops/linux/06 Linux 目录结构及文件基本操作.html" class="sidebar-link">Linux 目录结构及文件基本操作</a></li><li><a href="/matheusblog/md/devops/linux/07 环境变量与文件查找.html" class="sidebar-link">环境变量与文件查找</a></li><li><a href="/matheusblog/md/devops/linux/08  文件打包与解压缩.html" class="active sidebar-link">文件打包与解压缩</a></li><li><a href="/matheusblog/md/devops/linux/09 文件系统操作与磁盘管理.html" class="sidebar-link">文件系统操作与磁盘管理</a></li><li><a href="/matheusblog/md/devops/linux/10 Linux下的帮助命令.html" class="sidebar-link">Linux下的帮助命令</a></li><li><a href="/matheusblog/md/devops/linux/11 Linux任务计划crontab.html" class="sidebar-link">Linux任务计划crontab</a></li><li><a href="/matheusblog/md/devops/linux/12 命令执行顺序控制与管道.html" class="sidebar-link">命令执行顺序控制与管道</a></li><li><a href="/matheusblog/md/devops/linux/13简单的文本处理.html" class="sidebar-link">文本处理命令</a></li><li><a href="/matheusblog/md/devops/linux/14数据流重定向.html" class="sidebar-link">数据流重定向</a></li><li><a href="/matheusblog/md/devops/linux/15正则表达式基础.html" class="sidebar-link">正则表达式</a></li><li><a href="/matheusblog/md/devops/linux/16Linux下软件安装.html" class="sidebar-link">LInux下软件安装</a></li><li><a href="/matheusblog/md/devops/linux/17Linux进程概念.html" class="sidebar-link">Linux进程概念</a></li><li><a href="/matheusblog/md/devops/linux/18Linux进程管理.html" class="sidebar-link">Linux进程管理</a></li><li><a href="/matheusblog/md/devops/linux/19Linux日志系统.html" class="sidebar-link">Linux日志系统</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Bash</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/docker/bash/01bash介绍与入门.html" class="sidebar-link">Bash介绍与入门</a></li><li><a href="/matheusblog/md/devops/docker/bash/02bash特殊字符.html" class="sidebar-link">Bash特殊字符</a></li><li><a href="/matheusblog/md/devops/docker/bash/03变量与参数.html" class="sidebar-link">变量与参数</a></li><li><a href="/matheusblog/md/devops/docker/bash/04基本运算符.html" class="sidebar-link">基本运算符</a></li><li><a href="/matheusblog/md/devops/docker/bash/05流程控制.html" class="sidebar-link">流程控制</a></li><li><a href="/matheusblog/md/devops/docker/bash/06函数.html" class="sidebar-link">函数</a></li><li><a href="/matheusblog/md/devops/docker/bash/07Shell脚本实现Linux系统监控.html" class="sidebar-link">Shell脚本实现Linux系统监控</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="文件打包与解压缩"><a href="#文件打包与解压缩" class="header-anchor">#</a> 文件打包与解压缩</h1> <p></p><div class="table-of-contents"><ul><li><a href="#概念讲解">概念讲解</a></li><li><a href="#实战">实战</a><ul><li><a href="#zip-压缩打包程序">zip 压缩打包程序</a></li><li><a href="#使用-unzip-命令解压缩-zip-文件">使用 unzip 命令解压缩 zip 文件</a></li><li><a href="#rar-打包压缩命令">rar 打包压缩命令</a></li><li><a href="#tar-打包工具">tar 打包工具</a></li></ul></li><li><a href="#总结">总结</a></li></ul></div><p></p> <h2 id="概念讲解"><a href="#概念讲解" class="header-anchor">#</a> 概念讲解</h2> <p>在讲 Linux 上的压缩工具之前，有必要先了解一下常见常用的压缩包文件格式。在 Windows 上最常见的不外乎这两种 <code>*.zip</code>，<code>*.7z</code> 后缀的压缩文件。而在 Linux 上面常见的格式除了以上两种外，还有 <code>.rar</code>，<code>*.gz</code>，<code>*.xz</code>，<code>*.bz2</code>，<code>*.tar</code>，<code>*.tar.gz</code>，<code>*.tar.xz</code>，<code>*.tar.bz2</code>，简单介绍如下：</p> <table><thead><tr><th>文件后缀名</th> <th>说明</th></tr></thead> <tbody><tr><td><code>*.zip</code></td> <td>zip 程序打包压缩的文件</td></tr> <tr><td><code>*.rar</code></td> <td>rar 程序压缩的文件</td></tr> <tr><td><code>*.7z</code></td> <td>7zip 程序压缩的文件</td></tr> <tr><td><code>*.tar</code></td> <td>tar 程序打包，未压缩的文件</td></tr> <tr><td><code>*.gz</code></td> <td>gzip 程序（GNU zip）压缩的文件</td></tr> <tr><td><code>*.xz</code></td> <td>xz 程序压缩的文件</td></tr> <tr><td><code>*.bz2</code></td> <td>bzip2 程序压缩的文件</td></tr> <tr><td><code>*.tar.gz</code></td> <td>tar 打包，gzip 程序压缩的文件</td></tr> <tr><td><code>*.tar.xz</code></td> <td>tar 打包，xz 程序压缩的文件</td></tr> <tr><td><code>*tar.bz2</code></td> <td>tar 打包，bzip2 程序压缩的文件</td></tr> <tr><td><code>*.tar.7z</code></td> <td>tar 打包，7z 程序压缩的文件</td></tr></tbody></table> <p>讲了这么多种压缩文件，这么多个命令，不过我们一般只需要掌握几个命令即可，包括 <code>zip</code>，<code>tar</code>。下面会依次介绍这几个命令及对应的解压命令。</p> <h2 id="实战"><a href="#实战" class="header-anchor">#</a> 实战</h2> <h3 id="zip-压缩打包程序"><a href="#zip-压缩打包程序" class="header-anchor">#</a> zip 压缩打包程序</h3> <ul><li>使用 zip 打包文件夹，注意输入完整的参数和路径：</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> /home/shiyanlou
+<span class="token function">zip</span> -r -q -o shiyanlou.zip /home/shiyanlou/Desktop
+<span class="token function">du</span> -h shiyanlou.zip
+<span class="token function">file</span> shiyanlou.zip
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>上面命令将目录 <code>/home/shiyanlou/Desktop</code> 打包成一个文件，并查看了打包后文件的大小和类型。第一行命令中，<code>-r</code> 参数表示递归打包包含子目录的全部内容，<code>-q</code> 参数表示为安静模式，即不向屏幕输出信息，<code>-o</code>，表示输出文件，需在其后紧跟打包输出文件名。后面使用 <code>du</code> 命令查看打包后文件的大小（后面会具体说明该命令）。</p> <ul><li>设置压缩级别为 9 和 1（9 最大，1 最小），重新打包：</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">zip</span> -r -9 -q -o shiyanlou_9.zip /home/shiyanlou/Desktop -x ~/*.zip
+<span class="token function">zip</span> -r -1 -q -o shiyanlou_1.zip /home/shiyanlou/Desktop -x ~/*.zip
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>这里添加了一个参数用于设置压缩级别 <code>-[1-9]</code>，1 表示最快压缩但体积大，9 表示体积最小但耗时最久。最后那个 <code>-x</code> 是为了排除我们上一次创建的 zip 文件，否则又会被打包进这一次的压缩文件中，<strong>注意：这里只能使用绝对路径，否则不起作用</strong>。</p> <p>我们再用 <code>du</code> 命令分别查看默认压缩级别、最低、最高压缩级别及未压缩的文件的大小：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">du</span> -h -d <span class="token number">0</span> *.zip ~ <span class="token operator">|</span> <span class="token function">sort</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>通过 man 手册可知：</p> <ul><li><code>-h</code>， --human-readable（顾名思义，你可以试试不加的情况）</li> <li><code>-d</code>， --max-depth（所查看文件的深度）</li></ul> <p><img src="/matheusblog/assets/img/image-20220531195129380.fde07301.png" alt="image-20220531195129380"></p> <p>这样一目了然，理论上来说默认压缩级别应该是最高的，但是由于文件不大，这里的差异不明显（几乎看不出差别），不过你在环境中操作之后看到的压缩文件大小可能跟图上的有些不同，因为系统在使用过程中，会随时生成一些缓存文件在当前用户的家目录中，这对于我们学习命令使用来说，是无关紧要的，可以忽略这些不同。</p> <ul><li>创建加密 zip 包</li></ul> <p>使用 <code>-e</code> 参数可以创建加密压缩包：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">zip</span> -r -e -o shiyanlou_encryption.zip /home/shiyanlou/Desktop
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><strong>注意：</strong> 关于 <code>zip</code> 命令，因为 Windows 系统与 Linux/Unix 在文本文件格式上的一些兼容问题，比如换行符（为不可见字符），在 Windows 为 CR+LF（Carriage-Return+Line-Feed：回车加换行），而在 Linux/Unix 上为 LF（换行），所以如果在不加处理的情况下，在 Linux 上编辑的文本，在 Windows 系统上打开可能看起来是没有换行的。如果你想让你在 Linux 创建的 zip 压缩文件在 Windows 上解压后没有任何问题，那么你还需要对命令做一些修改：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">zip</span> -r -l -o shiyanlou.zip /home/shiyanlou/Desktop
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>需要加上 <code>-l</code> 参数将 <code>LF</code> 转换为 <code>CR+LF</code> 来达到以上目的。</p> <h3 id="使用-unzip-命令解压缩-zip-文件"><a href="#使用-unzip-命令解压缩-zip-文件" class="header-anchor">#</a> 使用 unzip 命令解压缩 zip 文件</h3> <p>将 <code>shiyanlou.zip</code> 解压到当前目录：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">unzip</span> shiyanlou.zip
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>使用安静模式，将文件解压到指定目录：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">unzip</span> -q shiyanlou.zip -d ziptest
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>上述指定目录不存在，将会自动创建。如果你不想解压只想查看压缩包的内容你可以使用 <code>-l</code> 参数：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">unzip</span> -l shiyanlou.zip
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><strong>注意：</strong> 使用 unzip 解压文件时我们同样应该注意兼容问题，不过这里我们关心的不再是上面的问题，而是中文编码的问题，通常 Windows 系统上面创建的压缩文件，如果有有包含中文的文档或以中文作为文件名的文件时默认会采用 GBK 或其它编码，而 Linux 上面默认使用的是 UTF-8 编码，如果不加任何处理，直接解压的话可能会出现中文乱码的问题（有时候它会自动帮你处理），为了解决这个问题，我们可以在解压时指定编码类型。</p> <p>使用 <code>-O</code>（英文字母，大写 o）参数指定编码类型：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">unzip</span> -O GBK 中文压缩文件.zip
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="rar-打包压缩命令"><a href="#rar-打包压缩命令" class="header-anchor">#</a> <code>rar</code> 打包压缩命令</h3> <p><code>rar</code> 也是 Windows 上常用的一种压缩文件格式，在 Linux 上可以使用 <code>rar</code>和 <code>unrar</code> 工具分别创建和解压 <code>rar</code> 压缩包。</p> <ul><li>安装<code>rar</code>和 <code>unrar</code> 工具：</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ sudo apt-get update
+$ sudo apt-get install rar unrar
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>从指定文件或目录创建压缩包或添加文件到压缩包：</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ rm *.zip
+$ rar a shiyanlou.rar .
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>上面的命令使用<code>a</code> 参数添加一个目录 <code>～</code> 到一个归档文件中，如果该文件不存在就会自动创建。</p> <p><strong>注意：<code>rar</code> 的命令参数没有 <code>-</code>，如果加上会报错。</strong></p> <ul><li>从指定压缩包文件中删除某个文件：</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ rar d shiyanlou.rar .zshrc
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ul><li>查看不解压文件：</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ rar l shiyanlou.rar
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ul><li>使用 <code>unrar</code> 解压 <code>rar</code> 文件</li></ul> <p>全路径解压：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ unrar x shiyanlou.rar
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>去掉路径解压：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ mkdir tmp
+$ unrar e shiyanlou.rar tmp/
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong><code>rar</code> 命令参数非常多，上面只涉及了一些基本操作。</strong></p> <h3 id="tar-打包工具"><a href="#tar-打包工具" class="header-anchor">#</a> <code>tar</code> 打包工具</h3> <p>在 Linux 上面更常用的是 <code>tar</code> 工具，tar 原本只是一个打包工具，只是同时还是实现了对 7z、gzip、xz、bzip2 等工具的支持，这些压缩工具本身只能实现对文件或目录（单独压缩目录中的文件）的压缩，没有实现对文件的打包压缩，所以我们也无需再单独去学习其他几个工具，tar 的解压和压缩都是同一个命令，只需参数不同，使用比较方便。</p> <p>下面先掌握 <code>tar</code> 命令一些基本的使用方式，即不进行压缩只是进行打包（创建归档文件）和解包的操作。</p> <ul><li>创建一个 tar 包：</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> /home/shiyanlou
+<span class="token function">tar</span> -P -cf shiyanlou.tar /home/shiyanlou/Desktop
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>上面命令中，<code>-P</code> 保留绝对路径符，<code>-c</code> 表示创建一个 tar 包文件，<code>-f</code> 用于指定创建的文件名，注意文件名必须紧跟在 <code>-f</code> 参数之后，比如不能写成 <code>tar -fc shiyanlou.tar</code>，可以写成 <code>tar -f shiyanlou.tar -c ~</code>。你还可以加上 <code>-v</code> 参数以可视的的方式输出打包的文件。</p> <ul><li>解包一个文件（<code>-x</code> 参数）到指定路径的<strong>已存在</strong>目录（<code>-C</code> 参数）：</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">mkdir</span> tardir
+<span class="token function">tar</span> -xf shiyanlou.tar -C tardir
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>只查看不解包文件 <code>-t</code> 参数：</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">tar</span> -tf shiyanlou.tar
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ul><li>保留文件属性和跟随链接（符号链接或软链接），有时候我们使用 tar 备份文件当你在其他主机还原时希望保留文件的属性（<code>-p</code> 参数）和备份链接指向的源文件而不是链接本身（<code>-h</code> 参数）：</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">tar</span> -cphf etc.tar /etc
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>对于创建不同的压缩格式的文件，对于 tar 来说是相当简单的，需要的只是换一个参数，这里我们就以使用 <code>gzip</code> 工具创建 <code>*.tar.gz</code> 文件为例来说明。</p> <ul><li>我们只需要在创建 tar 文件的基础上添加 <code>-z</code> 参数，使用 <code>gzip</code> 来压缩文件：</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">tar</span> -czf shiyanlou.tar.gz /home/shiyanlou/Desktop
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ul><li>解压 <code>*.tar.gz</code> 文件：</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">tar</span> -xzf shiyanlou.tar.gz
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/matheusblog/assets/img/image-20220531195147638.6bd2f9bf.png" alt="image-20220531195147638"></p> <p>现在我们要使用其它的压缩工具创建或解压相应文件只需要更改一个参数即可：</p> <table><thead><tr><th>压缩文件格式</th> <th>参数</th></tr></thead> <tbody><tr><td><code>*.tar.gz</code></td> <td><code>-z</code></td></tr> <tr><td><code>*.tar.xz</code></td> <td><code>-J</code></td></tr> <tr><td><code>*tar.bz2</code></td> <td><code>-j</code></td></tr></tbody></table> <blockquote><p>tar 命令的参数很多，不过常用的就是上述这些，需要了解更多你可以查看 man 手册获取帮助。</p></blockquote> <h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <p>说了这么多，其实平常使用的参数并没有那么复杂，只需要记住常用的组合就可以了。</p> <p>常用命令：</p> <ul><li>zip：</li> <li>打包 ：zip something.zip something （目录请加 -r 参数）</li> <li>解包：unzip something</li> <li>指定路径：-d 参数</li> <li>tar：</li> <li>打包：tar -zcvf something.tar something</li> <li>解包：tar -zxvf something.tar</li> <li>指定路径：-C 参数</li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matheusblog/md/devops/linux/07 环境变量与文件查找.html" class="prev">
+        环境变量与文件查找
+      </a></span> <span class="next"><a href="/matheusblog/md/devops/linux/09 文件系统操作与磁盘管理.html">
+        文件系统操作与磁盘管理
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.98d32d61.js" defer></script><script src="/matheusblog/assets/js/2.34da62ad.js" defer></script><script src="/matheusblog/assets/js/92.a7d9d05a.js" defer></script>
+  </body>
+</html>

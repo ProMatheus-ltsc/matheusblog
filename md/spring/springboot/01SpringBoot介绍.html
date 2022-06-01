@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>1 SpringBoot介绍 | Java 全栈知识体系</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 大数据, 机器学习...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.633991d7.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.98d32d61.js" as="script"><link rel="preload" href="/matheusblog/assets/js/2.34da62ad.js" as="script"><link rel="preload" href="/matheusblog/assets/js/170.916a1019.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.f75180e8.js"><link rel="prefetch" href="/matheusblog/assets/js/100.3d5ca5a0.js"><link rel="prefetch" href="/matheusblog/assets/js/101.f6854eb6.js"><link rel="prefetch" href="/matheusblog/assets/js/102.ca49a8b6.js"><link rel="prefetch" href="/matheusblog/assets/js/103.cca70b63.js"><link rel="prefetch" href="/matheusblog/assets/js/104.a595cff9.js"><link rel="prefetch" href="/matheusblog/assets/js/105.db4b4b05.js"><link rel="prefetch" href="/matheusblog/assets/js/106.5f758be1.js"><link rel="prefetch" href="/matheusblog/assets/js/107.7da45dc8.js"><link rel="prefetch" href="/matheusblog/assets/js/108.8fa7a262.js"><link rel="prefetch" href="/matheusblog/assets/js/109.ba8701b1.js"><link rel="prefetch" href="/matheusblog/assets/js/11.4a30505f.js"><link rel="prefetch" href="/matheusblog/assets/js/110.453838e0.js"><link rel="prefetch" href="/matheusblog/assets/js/111.ac57f4b2.js"><link rel="prefetch" href="/matheusblog/assets/js/112.82e638b0.js"><link rel="prefetch" href="/matheusblog/assets/js/113.1ce5b63f.js"><link rel="prefetch" href="/matheusblog/assets/js/114.66fdb77c.js"><link rel="prefetch" href="/matheusblog/assets/js/115.e1117448.js"><link rel="prefetch" href="/matheusblog/assets/js/116.e10770a9.js"><link rel="prefetch" href="/matheusblog/assets/js/117.2c1f55c5.js"><link rel="prefetch" href="/matheusblog/assets/js/118.4c89ef98.js"><link rel="prefetch" href="/matheusblog/assets/js/119.4c819e7f.js"><link rel="prefetch" href="/matheusblog/assets/js/12.793e0ec0.js"><link rel="prefetch" href="/matheusblog/assets/js/120.06f737df.js"><link rel="prefetch" href="/matheusblog/assets/js/121.bbd8d065.js"><link rel="prefetch" href="/matheusblog/assets/js/122.c73b3422.js"><link rel="prefetch" href="/matheusblog/assets/js/123.9bedb19d.js"><link rel="prefetch" href="/matheusblog/assets/js/124.9c34bd89.js"><link rel="prefetch" href="/matheusblog/assets/js/125.753284bf.js"><link rel="prefetch" href="/matheusblog/assets/js/126.5ec35180.js"><link rel="prefetch" href="/matheusblog/assets/js/127.b1a67c51.js"><link rel="prefetch" href="/matheusblog/assets/js/128.0f85f83b.js"><link rel="prefetch" href="/matheusblog/assets/js/129.9754ca0d.js"><link rel="prefetch" href="/matheusblog/assets/js/13.95235336.js"><link rel="prefetch" href="/matheusblog/assets/js/130.0800b514.js"><link rel="prefetch" href="/matheusblog/assets/js/131.306af433.js"><link rel="prefetch" href="/matheusblog/assets/js/132.53acc92c.js"><link rel="prefetch" href="/matheusblog/assets/js/133.d61293a3.js"><link rel="prefetch" href="/matheusblog/assets/js/134.aadfc68d.js"><link rel="prefetch" href="/matheusblog/assets/js/135.f0f4f57e.js"><link rel="prefetch" href="/matheusblog/assets/js/136.edaa4cd0.js"><link rel="prefetch" href="/matheusblog/assets/js/137.34ef0d92.js"><link rel="prefetch" href="/matheusblog/assets/js/138.cb4cbaad.js"><link rel="prefetch" href="/matheusblog/assets/js/139.1225c28e.js"><link rel="prefetch" href="/matheusblog/assets/js/14.4af1e2de.js"><link rel="prefetch" href="/matheusblog/assets/js/140.ec773abf.js"><link rel="prefetch" href="/matheusblog/assets/js/141.ff8b4cad.js"><link rel="prefetch" href="/matheusblog/assets/js/142.e921849c.js"><link rel="prefetch" href="/matheusblog/assets/js/143.8bb224bc.js"><link rel="prefetch" href="/matheusblog/assets/js/144.a7d83462.js"><link rel="prefetch" href="/matheusblog/assets/js/145.45b8a227.js"><link rel="prefetch" href="/matheusblog/assets/js/146.7cf6ce58.js"><link rel="prefetch" href="/matheusblog/assets/js/147.089c834c.js"><link rel="prefetch" href="/matheusblog/assets/js/148.6ee41415.js"><link rel="prefetch" href="/matheusblog/assets/js/149.77fc6065.js"><link rel="prefetch" href="/matheusblog/assets/js/15.528e7431.js"><link rel="prefetch" href="/matheusblog/assets/js/150.084e2ce0.js"><link rel="prefetch" href="/matheusblog/assets/js/151.c252c8f4.js"><link rel="prefetch" href="/matheusblog/assets/js/152.33b572b8.js"><link rel="prefetch" href="/matheusblog/assets/js/153.570b665f.js"><link rel="prefetch" href="/matheusblog/assets/js/154.9a57835a.js"><link rel="prefetch" href="/matheusblog/assets/js/155.378ea095.js"><link rel="prefetch" href="/matheusblog/assets/js/156.e31769cc.js"><link rel="prefetch" href="/matheusblog/assets/js/157.2583dbbe.js"><link rel="prefetch" href="/matheusblog/assets/js/158.f73e2e8f.js"><link rel="prefetch" href="/matheusblog/assets/js/159.18062130.js"><link rel="prefetch" href="/matheusblog/assets/js/16.5f251fb5.js"><link rel="prefetch" href="/matheusblog/assets/js/160.38ec7e3b.js"><link rel="prefetch" href="/matheusblog/assets/js/161.71036bc2.js"><link rel="prefetch" href="/matheusblog/assets/js/162.6ac3d695.js"><link rel="prefetch" href="/matheusblog/assets/js/163.4a46abf7.js"><link rel="prefetch" href="/matheusblog/assets/js/164.5584f565.js"><link rel="prefetch" href="/matheusblog/assets/js/165.413a07d8.js"><link rel="prefetch" href="/matheusblog/assets/js/166.a8922048.js"><link rel="prefetch" href="/matheusblog/assets/js/167.60cc7908.js"><link rel="prefetch" href="/matheusblog/assets/js/168.4254c123.js"><link rel="prefetch" href="/matheusblog/assets/js/169.cbc70b26.js"><link rel="prefetch" href="/matheusblog/assets/js/17.355d31d9.js"><link rel="prefetch" href="/matheusblog/assets/js/171.07b53d73.js"><link rel="prefetch" href="/matheusblog/assets/js/172.1b33958a.js"><link rel="prefetch" href="/matheusblog/assets/js/173.31f5fa1a.js"><link rel="prefetch" href="/matheusblog/assets/js/174.9a39a5ac.js"><link rel="prefetch" href="/matheusblog/assets/js/175.c6bfd4ac.js"><link rel="prefetch" href="/matheusblog/assets/js/176.f65aa694.js"><link rel="prefetch" href="/matheusblog/assets/js/177.3b68b40b.js"><link rel="prefetch" href="/matheusblog/assets/js/178.6df30b74.js"><link rel="prefetch" href="/matheusblog/assets/js/179.861ac0bf.js"><link rel="prefetch" href="/matheusblog/assets/js/18.7f72dc01.js"><link rel="prefetch" href="/matheusblog/assets/js/180.9546e52a.js"><link rel="prefetch" href="/matheusblog/assets/js/181.bd834059.js"><link rel="prefetch" href="/matheusblog/assets/js/182.af4de693.js"><link rel="prefetch" href="/matheusblog/assets/js/183.1dc2e9c4.js"><link rel="prefetch" href="/matheusblog/assets/js/184.6a2a9374.js"><link rel="prefetch" href="/matheusblog/assets/js/185.59ad729c.js"><link rel="prefetch" href="/matheusblog/assets/js/186.7fe4fd1e.js"><link rel="prefetch" href="/matheusblog/assets/js/187.70003b09.js"><link rel="prefetch" href="/matheusblog/assets/js/188.8573a984.js"><link rel="prefetch" href="/matheusblog/assets/js/189.ec69892a.js"><link rel="prefetch" href="/matheusblog/assets/js/19.47699359.js"><link rel="prefetch" href="/matheusblog/assets/js/190.bed9ec84.js"><link rel="prefetch" href="/matheusblog/assets/js/191.543ed3aa.js"><link rel="prefetch" href="/matheusblog/assets/js/192.bc65c506.js"><link rel="prefetch" href="/matheusblog/assets/js/193.fcf26f62.js"><link rel="prefetch" href="/matheusblog/assets/js/194.c2ef52d4.js"><link rel="prefetch" href="/matheusblog/assets/js/195.686f093a.js"><link rel="prefetch" href="/matheusblog/assets/js/196.fd9d0a4e.js"><link rel="prefetch" href="/matheusblog/assets/js/197.f4534abe.js"><link rel="prefetch" href="/matheusblog/assets/js/198.e89e6439.js"><link rel="prefetch" href="/matheusblog/assets/js/199.0bc681f6.js"><link rel="prefetch" href="/matheusblog/assets/js/20.e5882ee9.js"><link rel="prefetch" href="/matheusblog/assets/js/200.5d1411b9.js"><link rel="prefetch" href="/matheusblog/assets/js/201.1b53caf7.js"><link rel="prefetch" href="/matheusblog/assets/js/202.3eb921e9.js"><link rel="prefetch" href="/matheusblog/assets/js/203.56e48204.js"><link rel="prefetch" href="/matheusblog/assets/js/204.0ee3bbf8.js"><link rel="prefetch" href="/matheusblog/assets/js/205.4b5d9136.js"><link rel="prefetch" href="/matheusblog/assets/js/206.3e6da766.js"><link rel="prefetch" href="/matheusblog/assets/js/207.4b3ddaae.js"><link rel="prefetch" href="/matheusblog/assets/js/208.4ed4f9f6.js"><link rel="prefetch" href="/matheusblog/assets/js/209.adbc8922.js"><link rel="prefetch" href="/matheusblog/assets/js/21.900a8ec7.js"><link rel="prefetch" href="/matheusblog/assets/js/210.518d0b2b.js"><link rel="prefetch" href="/matheusblog/assets/js/211.592c7ccb.js"><link rel="prefetch" href="/matheusblog/assets/js/212.54001ac2.js"><link rel="prefetch" href="/matheusblog/assets/js/213.80a72da6.js"><link rel="prefetch" href="/matheusblog/assets/js/214.e1a549d7.js"><link rel="prefetch" href="/matheusblog/assets/js/215.11e81270.js"><link rel="prefetch" href="/matheusblog/assets/js/216.ac929e20.js"><link rel="prefetch" href="/matheusblog/assets/js/217.fd0af17b.js"><link rel="prefetch" href="/matheusblog/assets/js/218.a65bbeaa.js"><link rel="prefetch" href="/matheusblog/assets/js/219.fbe13534.js"><link rel="prefetch" href="/matheusblog/assets/js/22.ff332d51.js"><link rel="prefetch" href="/matheusblog/assets/js/220.6dea16c6.js"><link rel="prefetch" href="/matheusblog/assets/js/221.bf7499ec.js"><link rel="prefetch" href="/matheusblog/assets/js/23.7c24c528.js"><link rel="prefetch" href="/matheusblog/assets/js/24.221c5e98.js"><link rel="prefetch" href="/matheusblog/assets/js/25.0134b188.js"><link rel="prefetch" href="/matheusblog/assets/js/26.ce908b7f.js"><link rel="prefetch" href="/matheusblog/assets/js/27.8790623d.js"><link rel="prefetch" href="/matheusblog/assets/js/28.b434aff5.js"><link rel="prefetch" href="/matheusblog/assets/js/29.098b8057.js"><link rel="prefetch" href="/matheusblog/assets/js/3.ce636248.js"><link rel="prefetch" href="/matheusblog/assets/js/30.52b0a576.js"><link rel="prefetch" href="/matheusblog/assets/js/31.1b25634d.js"><link rel="prefetch" href="/matheusblog/assets/js/32.f193a825.js"><link rel="prefetch" href="/matheusblog/assets/js/33.9ead944f.js"><link rel="prefetch" href="/matheusblog/assets/js/34.903e67f5.js"><link rel="prefetch" href="/matheusblog/assets/js/35.75904d44.js"><link rel="prefetch" href="/matheusblog/assets/js/36.1d55859f.js"><link rel="prefetch" href="/matheusblog/assets/js/37.70c7b1d8.js"><link rel="prefetch" href="/matheusblog/assets/js/38.15714070.js"><link rel="prefetch" href="/matheusblog/assets/js/39.68b93333.js"><link rel="prefetch" href="/matheusblog/assets/js/4.f99ce43b.js"><link rel="prefetch" href="/matheusblog/assets/js/40.1f15bc23.js"><link rel="prefetch" href="/matheusblog/assets/js/41.46d77c1a.js"><link rel="prefetch" href="/matheusblog/assets/js/42.a117ae6e.js"><link rel="prefetch" href="/matheusblog/assets/js/43.cbe38645.js"><link rel="prefetch" href="/matheusblog/assets/js/44.8222aed3.js"><link rel="prefetch" href="/matheusblog/assets/js/45.57722d0e.js"><link rel="prefetch" href="/matheusblog/assets/js/46.aafad694.js"><link rel="prefetch" href="/matheusblog/assets/js/47.ca0b1fe0.js"><link rel="prefetch" href="/matheusblog/assets/js/48.349b35d1.js"><link rel="prefetch" href="/matheusblog/assets/js/49.b9c08c0e.js"><link rel="prefetch" href="/matheusblog/assets/js/5.64180031.js"><link rel="prefetch" href="/matheusblog/assets/js/50.93e3d25c.js"><link rel="prefetch" href="/matheusblog/assets/js/51.e69e635d.js"><link rel="prefetch" href="/matheusblog/assets/js/52.37cb98bd.js"><link rel="prefetch" href="/matheusblog/assets/js/53.65a89bdb.js"><link rel="prefetch" href="/matheusblog/assets/js/54.65553c35.js"><link rel="prefetch" href="/matheusblog/assets/js/55.71dac7ad.js"><link rel="prefetch" href="/matheusblog/assets/js/56.33907187.js"><link rel="prefetch" href="/matheusblog/assets/js/57.181e26c4.js"><link rel="prefetch" href="/matheusblog/assets/js/58.795923e6.js"><link rel="prefetch" href="/matheusblog/assets/js/59.423ca6bd.js"><link rel="prefetch" href="/matheusblog/assets/js/6.390e3f0b.js"><link rel="prefetch" href="/matheusblog/assets/js/60.ee96cd1f.js"><link rel="prefetch" href="/matheusblog/assets/js/61.66f98f24.js"><link rel="prefetch" href="/matheusblog/assets/js/62.865f6944.js"><link rel="prefetch" href="/matheusblog/assets/js/63.7d692af1.js"><link rel="prefetch" href="/matheusblog/assets/js/64.84055070.js"><link rel="prefetch" href="/matheusblog/assets/js/65.40a56349.js"><link rel="prefetch" href="/matheusblog/assets/js/66.2fa72ab3.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b7531b45.js"><link rel="prefetch" href="/matheusblog/assets/js/68.b4af8ca3.js"><link rel="prefetch" href="/matheusblog/assets/js/69.b9dbb4bd.js"><link rel="prefetch" href="/matheusblog/assets/js/7.f2df787d.js"><link rel="prefetch" href="/matheusblog/assets/js/70.ff97ef74.js"><link rel="prefetch" href="/matheusblog/assets/js/71.5e965fbe.js"><link rel="prefetch" href="/matheusblog/assets/js/72.a54bc571.js"><link rel="prefetch" href="/matheusblog/assets/js/73.bbf446cc.js"><link rel="prefetch" href="/matheusblog/assets/js/74.83522c0f.js"><link rel="prefetch" href="/matheusblog/assets/js/75.4067083f.js"><link rel="prefetch" href="/matheusblog/assets/js/76.29b8408c.js"><link rel="prefetch" href="/matheusblog/assets/js/77.2f78c8a7.js"><link rel="prefetch" href="/matheusblog/assets/js/78.aa9c5da5.js"><link rel="prefetch" href="/matheusblog/assets/js/79.e27eae87.js"><link rel="prefetch" href="/matheusblog/assets/js/8.5abb2418.js"><link rel="prefetch" href="/matheusblog/assets/js/80.487f48d2.js"><link rel="prefetch" href="/matheusblog/assets/js/81.a148f0d5.js"><link rel="prefetch" href="/matheusblog/assets/js/82.ff6ff828.js"><link rel="prefetch" href="/matheusblog/assets/js/83.06905ba2.js"><link rel="prefetch" href="/matheusblog/assets/js/84.540e52ce.js"><link rel="prefetch" href="/matheusblog/assets/js/85.ea9f1eeb.js"><link rel="prefetch" href="/matheusblog/assets/js/86.08473beb.js"><link rel="prefetch" href="/matheusblog/assets/js/87.f29163d2.js"><link rel="prefetch" href="/matheusblog/assets/js/88.b13f950d.js"><link rel="prefetch" href="/matheusblog/assets/js/89.b4a3f121.js"><link rel="prefetch" href="/matheusblog/assets/js/9.5cecb6da.js"><link rel="prefetch" href="/matheusblog/assets/js/90.2982c28f.js"><link rel="prefetch" href="/matheusblog/assets/js/91.7952f324.js"><link rel="prefetch" href="/matheusblog/assets/js/92.a7d9d05a.js"><link rel="prefetch" href="/matheusblog/assets/js/93.622a0e9f.js"><link rel="prefetch" href="/matheusblog/assets/js/94.f7c65dc0.js"><link rel="prefetch" href="/matheusblog/assets/js/95.bf11ade2.js"><link rel="prefetch" href="/matheusblog/assets/js/96.c85a5970.js"><link rel="prefetch" href="/matheusblog/assets/js/97.4b82379b.js"><link rel="prefetch" href="/matheusblog/assets/js/98.52b620df.js"><link rel="prefetch" href="/matheusblog/assets/js/99.55cade5d.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.633991d7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">Java 全栈知识体系</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/01SpringMVC简介.html" class="nav-link">
+  SpringMVC简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/01SpringMVC简介.html" class="nav-link">
+  SpringMVC简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Maven</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/spring/maven/01Tomcat入门基础.html" class="sidebar-link">Tomcat入门基础</a></li><li><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="sidebar-link">Maven入门基础</a></li><li><a href="/matheusblog/md/spring/maven/03Maven pom.xml常用配置.html" class="sidebar-link">Maven的pox.xml常用配置</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Spring</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/spring/spring/Spring概述.html" class="sidebar-link">Spring概述</a></li><li><a href="/matheusblog/md/spring/spring/Spring入门案例.html" class="sidebar-link">Spring入门案例</a></li><li><a href="/matheusblog/md/spring/spring/IOC控制反转.html" class="sidebar-link">IOC控制反转</a></li><li><a href="/matheusblog/md/spring/spring/DI依赖注入.html" class="sidebar-link">DI依赖注入</a></li><li><a href="/matheusblog/md/spring/spring/Bean工厂.html" class="sidebar-link">Bean工厂</a></li><li><a href="/matheusblog/md/spring/spring/AOP面向切面编程.html" class="sidebar-link">AOP面向切面编程</a></li><li><a href="/matheusblog/md/spring/spring/事务控制.html" class="sidebar-link">事务控制</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>SpringMVC</span> <!----></p> <!----></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>MyBatis-Plus</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="sidebar-link">MyBatis简介</a></li><li><a href="/matheusblog/md/spring/mybatis/02入门程序.html" class="sidebar-link">MyBatis入门程序</a></li><li><a href="/matheusblog/md/spring/mybatis/03MyBatis框架.html" class="sidebar-link">MyBatis框架</a></li><li><a href="/matheusblog/md/spring/mybatis/04MyBatis-Plus.html" class="sidebar-link">MyBatis-Plus</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="_1-springboot介绍"><a href="#_1-springboot介绍" class="header-anchor">#</a> 1 SpringBoot介绍</h1> <p>理解: 传统框架在使用时,特别的繁琐 Spring/SpringMVC/Mybatis在使用时需要大量的配置文件. 使用SpringBoot可以简化传统框架的配置文件. 以注解的方式简化开发过程. <strong>SpringBoot可以理解为框架的框架(框架的工具API).</strong> <strong>优势: “开箱即用” 拿来就用 简化配置的过程.</strong></p> <h2 id="什么是-spring-boot"><a href="#什么是-spring-boot" class="header-anchor">#</a> 什么是 Spring Boot</h2> <p><img src="https://doc.shiyanlou.com/document-uid441493labid7986timestamp1535358082316.png" alt="Spring Boot"></p> <p>Spring Boot 其实就是 <a href="https://spring.io/" target="_blank" rel="noopener noreferrer">Spring<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>，学过 Spring 的同学一定都知道，即使是一个很简单的程序，Spring 都需要大量的配置。而 Spring Boot 将我们从配置文件中解放了出来，Spring Boot 提供了大量的默认配置，我们只需要少数的配置甚至不配置，就可以建立起来一个 Spring Boot 应用，简直就是 Java 程序员的福音。</p> <p>在之前学习 Spring 的时候，总是需要经过繁杂的配置才能正常使用。例如配置 Spring MVC，我们需要配置前端控制器、过滤器、还有视图解析器等相关内容。在这个过程中，我们似乎总要配置几个 Bean，而 Spring Boot 可以根据帮我们自动配置这些组件。Spring Boot 设计目的是用来简化新 Spring 应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。通过这种方式，Spring Boot 致力于在蓬勃发展的快速应用开发领域成为领导者。</p> <p><img src="https://doc.shiyanlou.com/document-uid441493labid7986timestamp1535420392554.png" alt="Spring Boot 架构图"></p> <p>上图为 Spring Boot 架构图，可以帮助同学们初步了解 Spring Boot 架构。</p> <p>本节教程采用 Spring Boot 2.0.4，该版本采用 Spring 5.0.8 构建，要求 JDK 至少 1.8 版本，并且 Servlet 容器要求 3.1 版本以上，也就是 tomcat8.5+，Jetty 9.4+，Undertow 1.4+，或者其他 3.1 版本以上的 Servlet 容器。</p> <p>2018 年 3 月 1 号 Spring Boot 2 正式发布，这是 Spring Boot 1.0 发布 4 年之后的一次非常重要的版本更新，有很多新功能和特性值得开发者们注意。</p> <ul><li>基于 Java 8，支持 Java 9</li> <li>支持 Quartz 调度程序</li> <li>大大简化了安全自动配置</li> <li>支持嵌入式 Netty</li> <li>Tomcat, Undertow 和 Jetty 均已支持 HTTP/2</li> <li>全新的执行器架构，支持 Spring MVC, WebFlux 和 Jersey</li> <li>使用 Spring WebFlux/WebFlux.fn 提供响应式 Web 编程支持</li> <li>为各种组件的响应式编程提供了自动化配置，如：Reactive Spring Data、Reactive Spring Security 等</li> <li>用于响应式 Spring Data Cassandra, MongoDB, Couchbase 和 Redis 的自动化配置和启动器 POM</li> <li>引入对 Kotlin 1.2.x 的支持，并提供了一个 <code>runApplication</code> 函数，让你通过惯用的 Kotlin 来运行 Spring Boot 应用程序。</li></ul> <p>首先是 JDK 版本的升级，Spring Boot 2.0 要求 JDK8 作为最低版本，许多现有的 API 已更新，以利用 Java 8 的特性，同时也，支持 JDK 9，但是不再支持 Java 6 和 7。</p> <p>同时，<strong>Spring Boot 2.0 基于 Spring Framework 5 构建</strong>，本次更新中也对部分其依赖的第三方组件进行了升级，主要有以下几个：</p> <ul><li>Jetty 9.4</li> <li>Tomcat 8.5</li> <li>Flyway 5</li> <li>Hibernate 5.2</li> <li>Gradle 3.4</li> <li>Thymeleaf 3.0</li></ul> <p>这里只介绍了与本次课程有关的一些内容，想要了解更多 Spring Boot 2.0 新特性的同学可以查看其官方发布内容：</p> <ul><li><a href="https://spring.io/blog/2018/03/01/spring-boot-2-0-goes-ga" target="_blank" rel="noopener noreferrer">Spring Boot 2.0 goes GA<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0-Release-Notes" target="_blank" rel="noopener noreferrer">Spring-Boot-2.0-Release-Notes<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <h2 id="spring-boot-的优点"><a href="#spring-boot-的优点" class="header-anchor">#</a> Spring Boot 的优点</h2> <ul><li>继承了 Spring 的优点</li></ul> <p>Spring Boot 框架来自于 Spring 大家族，因此 Spring 所有具备的功能和 Spring 框架的优点以及带给开发人员的便利， Spring Boot 框架同样能够提供并且做了大量的封装和优化，使得 Spring Boot 相交于 Spring 框架更容易上手和学习；简单来说，相对于 Spring 来说，完成同样的功能和效果，用户需要操作和编码的工作更少了。</p> <ul><li>可以快速创建独立运行的 Spring 项目，简化开发</li></ul> <p>Spring Boot 简化了基于 Spring 的应用开发，通过少量的代码就能快速构建一个个独立的、产品级别的 Spring 应用。</p> <p>官方的 Spring Initializr 方案是一个创建新的 Spring Boot 项目不错的选择，并根据自身业务需求选择和加载可能使用到的依赖，使用官方的初始化方案创建 Spring Boot 项目能够确保你获得经过测试和验证的依赖项，这些依赖项适用于自动配置，能够大大简化项目创建流程，同时，IDEA 和 STS 编辑器也支持这种直接初始化 Spring Boot 项目的方式，一分钟之内就可以完成一个项目的初始化工作，是不是被惊艳到了？</p> <ul><li>习惯优于配置</li></ul> <p>Spring Boot 遵循习惯优于配置的原则，使用 Spring Boot 我们只需要很少的配置甚至零配置即可完成项目开发，因为大多数大使用 Spring Boot 默认配置即可。</p> <ul><li>starters 自动依赖与版本控制</li></ul> <p>Spring Boot 通过一些 starter 的定义减少开发人员在依赖管理上所花费的时间，在整合各项功能的时候不需要去自行搜索和查找所需依赖并且在 Maven 的 pom 文件中进行定义。 starter 可以简单的理解为“场景启动器”，在不同的场景和功能中引入不同的 starter， 如果需要开发 web 项目，在 pom 文件中导入 spring-boot-starter-web ， web 项目开发中所需的依赖都已经维护在 spring-boot-starter-web 中，无需再去导入 servlet 、springmvc 等所需要的 jar 包，项目中如果需要使用 jdbc，在 pom 文件中导入 spring-boot-starter-web 即可，还有其他企业开发中的各种场景，Spring Boot 都已经准备好了，如果没有对应的 starter 也可以自行定义。starter 节选如下：</p> <p><img src="https://doc.shiyanlou.com/document-uid441493labid8432timestamp1549964256456.png" alt="此处输入图片的描述"></p> <p>能够如此方便的进行依赖管理是因为 Spring Boot 在场景启动器的设计中提供了 starter POM，这些 pom 文件的存在导致使用 Spring Boot 开发项目可以非常方便的进行包管理，所需依赖以及依赖 jar 包的关系和版本都由 starter 自行维护，很大程度上减少了自己维护依赖版本所造成的 jar 包冲突或者依赖的版本冲突。</p> <ul><li>对主流框架无配置集成 使用场景全覆盖</li></ul> <p>Spring Boot 集成的技术栈丰富，各互联网公司使用的技术框架大多可以无配置集成，其他的也可以通过自定义 Spring Boot-starter 进行快速集成，这也代表着 Spring Boot 的应用场景非常广泛，包括常见的 Web 应用、SOA 及目前十分火热的微服务等。在 Web 应用中，Spring Boot 提供了 spring-boot-starter-web 来为 Web 开发予以支持，spring-boot-starter-web 为我们提供了嵌入的 Tomcat 以及 SpringMVC 的依赖， 可以快速构建 MVC 模式的 Web 工程；在 SOA 及微服务中，用 Spring Boot 可以包装每个服务， Spring Cloud 即是一套基于 Spring Boot 实现分布式系统的工具，适用于构建微服务；Spring Boot 提供了 spring-boot-starter-websocket 可以快速实现消息推送，也可以整合流行的 RPC 框架，提供 RPC 服务接口，只要简单地加入对应的 starter 组件即可。</p> <ul><li><p>使用 Spring Initializr 可以在几秒钟就配置好一个 Spring Boot 应用。</p></li> <li><p>对大量的框架都可以无缝集成，基本不需要配置或者很少的配置就可以运行。</p></li> <li><p>简化的安全性。</p></li> <li><p>丰富的 SQL 和 NoSQL 支持。</p></li> <li><p>嵌入式 Servlet 容器的支持。如：Tomcat，Jetty 和 Undertow。</p> <p>内嵌 Servlet 容器，Spring Boot 直接嵌入 Tomcat 、 Jetty 或者 Undertow 作为 Servlet 容器 ，降低了对环境的要求，在开发和部署时都无需安装 Tomcat 或者 Jetty 等 Web 容器，调试方便，开发完成后可以将项目打包为 Jar 包，并使用命令行直接启动项目，减去部署环节打包并发布到 Servlet 容器中的过程。</p> <p>使用嵌入式的 Servlet 容器使得开发调试环节和部署环节的工作量有所减少，同时开发者也可以通过 Spring Boot 配置文件修改内置 Servlet 容器的配置，简单又灵活。</p></li> <li><p>提高开发、生产效率，如热部署等功能。</p></li> <li><p>提供监控功能，如跟踪，指标和健康状况。</p></li> <li><p>创建独立的 Spring 应用程序</p></li> <li><p>直接嵌入 Tomcat，Jetty 或 Undertow（无需部署 WAR 文件）</p></li> <li><p>提供启动器配置依赖项，以简化构建配置</p> <p>自动进行 Spring 框架的配置，节省程序员大量的时间和精力，能够让程序员专注在业务逻辑代码的编写上，由于自动配置，大量原先需要在 Spring 配置文件中配置项不用去做，但是 Spring Boot 也有自己的配置方式，简洁灵活。</p></li> <li><p>尽可能自动配置 Spring 和第三方库</p></li></ul> <h2 id="开发环境搭建"><a href="#开发环境搭建" class="header-anchor">#</a> 开发环境搭建</h2> <ol><li>JDK8的安装和配置</li> <li>IDEA编辑器的安装和配置</li> <li>Maven的安装和配置</li> <li>MySql8的安装和使用</li></ol> <h1 id="_2-idea环境配置"><a href="#_2-idea环境配置" class="header-anchor">#</a> 2 IDEA环境配置</h1> <h2 id="_2-1-准备项目目录"><a href="#_2-1-准备项目目录" class="header-anchor">#</a> 2.1 准备项目目录</h2> <p>程序员操守: 1.路径中不要出现中文/空格/特殊字符.
+2.中文对C语言的程序有致命的影响.</p> <ol><li>目录:
+<img src="https://img-blog.csdnimg.cn/b0ffc36b459e487d92f1c25321fc5baf.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li> <li>IDEA软件打开
+<img src="https://img-blog.csdnimg.cn/b4d3544c3a5a495098085e3c2e4f5f06.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li></ol> <h2 id="_2-2-idea环境配置"><a href="#_2-2-idea环境配置" class="header-anchor">#</a> 2.2 IDEA环境配置</h2> <p>具体配置查看PPT文档</p> <h2 id="_2-3-关于maven环境说明"><a href="#_2-3-关于maven环境说明" class="header-anchor">#</a> 2.3 关于Maven环境说明</h2> <p>组件:
+\1. 远程仓库 官方维护了几乎所有的项目的jar包.(版权问题oracle数据)
+\2. 私服镜像 在国内仓库. 阿里云镜像服务器.
+\3. 本地仓库 用户在自己本地维护的jar包文件.</p> <p>settings文件说明:
+\1. 配置本地仓库路径
+<img src="https://img-blog.csdnimg.cn/e81529430cf24e40adb1d9acd01355f1.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">
+\2. 配置私服镜像</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code>  <span class="token generics"><span class="token punctuation">&lt;</span>mirror<span class="token punctuation">&gt;</span></span>
+	<span class="token generics"><span class="token punctuation">&lt;</span>id<span class="token punctuation">&gt;</span></span>aliyun<span class="token operator">&lt;</span><span class="token operator">/</span>id<span class="token operator">&gt;</span>
+	<span class="token generics"><span class="token punctuation">&lt;</span>name<span class="token punctuation">&gt;</span></span>aliyun <span class="token keyword">for</span> maven<span class="token operator">&lt;</span><span class="token operator">/</span>name<span class="token operator">&gt;</span>
+	<span class="token generics"><span class="token punctuation">&lt;</span>mirrorOf<span class="token punctuation">&gt;</span></span><span class="token operator">*</span><span class="token operator">&lt;</span><span class="token operator">/</span>mirrorOf<span class="token operator">&gt;</span>
+	<span class="token generics"><span class="token punctuation">&lt;</span>url<span class="token punctuation">&gt;</span></span>https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>maven<span class="token punctuation">.</span>aliyun<span class="token punctuation">.</span>com<span class="token operator">/</span>repository<span class="token operator">/</span><span class="token keyword">public</span><span class="token operator">&lt;</span><span class="token operator">/</span>url<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>mirror<span class="token operator">&gt;</span>
+<span class="token number">123456</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>IDEA整合Maven
+<img src="https://img-blog.csdnimg.cn/f3343f7181ae4b938ee291c373772c79.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h2 id="_2-4-创建项目不能识别问题"><a href="#_2-4-创建项目不能识别问题" class="header-anchor">#</a> 2.4 创建项目不能识别问题</h2> <p>如图: 创建项目之后,不能被maven项目标识.
+<img src="https://img-blog.csdnimg.cn/ddb4366c5f9743069507619aae8d2f2c.png" alt="在这里插入图片描述"></p> <ol><li>解决方案
+<img src="https://img-blog.csdnimg.cn/e7b0e65e07b54095b595759186541fe8.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li></ol> <h2 id="_2-5-关于server-url地址说明"><a href="#_2-5-关于server-url地址说明" class="header-anchor">#</a> 2.5 关于Server URL地址说明</h2> <p>课上使用默认配置 jar包版本下载2.5.3</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code>路径<span class="token operator">:</span>	https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>start<span class="token punctuation">.</span>spring<span class="token punctuation">.</span>io<span class="token operator">/</span>
+     https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>start<span class="token punctuation">.</span>springboot<span class="token punctuation">.</span>io<span class="token operator">/</span>
+     https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>start<span class="token punctuation">.</span>aliyun<span class="token punctuation">.</span>com<span class="token operator">/</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p><img src="https://img-blog.csdnimg.cn/8d1c44d2694144c8bd74a76c2802e262.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h1 id="_3-springboot入门demo创建"><a href="#_3-springboot入门demo创建" class="header-anchor">#</a> 3 SpringBoot入门demo创建</h1> <h2 id="_3-1-项目创建"><a href="#_3-1-项目创建" class="header-anchor">#</a> 3.1 项目创建</h2> <p><img src="https://img-blog.csdnimg.cn/b366f251e9354036b66913e8195f25fd.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h2 id="_3-2-项目版本"><a href="#_3-2-项目版本" class="header-anchor">#</a> 3.2 项目版本</h2> <p><img src="https://img-blog.csdnimg.cn/489690c1f7674ee88505c1db2fa670e5.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h2 id="_3-3-关于项目报错说明"><a href="#_3-3-关于项目报错说明" class="header-anchor">#</a> 3.3 关于项目报错说明</h2> <p>如果项目中出现parent标签报错/插件报错说明:
+<img src="https://img-blog.csdnimg.cn/64f3abdf5a5b405094c3d9b36fe3a396.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <p>1.parent标签报错
+<img src="https://img-blog.csdnimg.cn/09369c861e8a45c2bc5ab14a4502c51e.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">
+\2. maven插件报错
+<img src="https://img-blog.csdnimg.cn/8377dce49f8342f3933dd22710d82821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h1 id="_4-关于maven-重要说明"><a href="#_4-关于maven-重要说明" class="header-anchor">#</a> 4. 关于maven 重要说明</h1> <h2 id="_4-1-jar包依赖传递性说明"><a href="#_4-1-jar包依赖传递性说明" class="header-anchor">#</a> 4.1 jar包依赖传递性说明</h2> <p>例子: 假设: A.jar 依赖 B.jar , B.jar 依赖于 C.jar
+说明: 在项目中 添加了web的jar包,则可以依赖其他的jar包,为项目提供支持.
+<img src="https://img-blog.csdnimg.cn/eeaada433b24463987ebf4dfea9bc5c9.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="_4-1-1-知识点1-jar包下载不完整解决方案"><a href="#_4-1-1-知识点1-jar包下载不完整解决方案" class="header-anchor">#</a> 4.1.1 知识点1 jar包下载不完整解决方案:</h3> <p>如果pom.xml文件jar包文件报错. 检查本地仓库中的jar包文件是否完整.如果下载不完整. 则手动删除文件.之后重写下载.</p> <h3 id="_4-1-2-知识点2-jar包传递性的原理"><a href="#_4-1-2-知识点2-jar包传递性的原理" class="header-anchor">#</a> 4.1.2 知识点2: jar包传递性的原理.</h3> <p>说明: 当maven依赖jar包文件时,首先根据坐标查找本地仓库的路径,之后添加jar包文件. 之后再次加载该文件目录的xxx.pom文件.读取其中的依赖项,进行再次依赖.以此类推.
+<img src="https://img-blog.csdnimg.cn/028d14d6420f44b58f627c450d668dc0.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h2 id="_4-2-jar包下载安全性说明-扩展"><a href="#_4-2-jar包下载安全性说明-扩展" class="header-anchor">#</a> 4.2 jar包下载安全性说明(扩展)</h2> <p>说明: maven数据传输 通过<strong>sha1的数字摘要</strong> 包装数据的完整性
+<img src="https://img-blog.csdnimg.cn/5742882782a641b59a962bc554c9bda4.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="_4-2-1-知识讲解"><a href="#_4-2-1-知识讲解" class="header-anchor">#</a> 4.2.1 知识讲解:</h3> <p>SHA-1（英语：Secure Hash Algorithm 1，中文名：安全散列算法1）是一种<strong>密码散列函数</strong>，美国国家安全局设计，并由美国国家标准技术研究所（NIST）发布为联邦数据处理标准（FIPS）。SHA-1可以生成一个被称为消息<strong>摘要</strong>的160位（20字节）散列值，散列值通常的呈现形式为<strong>40个十六进制数</strong>。</p> <h3 id="_4-2-2-知识扩展"><a href="#_4-2-2-知识扩展" class="header-anchor">#</a> 4.2.2 知识扩展:</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>问题1: 如果数据相同,采用相同的hash函数      问: 值是否相同?  答案:必然相同!!!!
+问题2:  常见hash编码 是多少位16进制数??    答案: 8位16进制数
+问题3:  8位16进制数,取值区间多少?                答案: 2^32
+			00000000-FFFFFFFF   
+问题4:  1kb的数据和1gb数据 hash谁快?         答案: 一样快
+问题5:  数据相同则hash码相同,hash码相同数据一定相同?  不正确. **hash碰撞!**
+			降低碰撞概率, 增大hash长度.
+1234567
+	(2^4)^8=2^32						
+1
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h3 id="_4-2-3-数据传递有效性"><a href="#_4-2-3-数据传递有效性" class="header-anchor">#</a> 4.2.3 数据传递有效性</h3> <p><img src="https://img-blog.csdnimg.cn/b6e758280f3244bc93f1d136fac3f157.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h1 id="_5-springboot高级用法"><a href="#_5-springboot高级用法" class="header-anchor">#</a> 5.SpringBoot高级用法</h1> <h2 id="_5-1-pom-xml文件说明"><a href="#_5-1-pom-xml文件说明" class="header-anchor">#</a> 5.1 pom.xml文件说明</h2> <div class="language-xml line-numbers-mode"><pre class="language-xml"><code><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://maven.apache.org/POM/4.0.0<span class="token punctuation">&quot;</span></span> <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">&quot;</span></span>
+         <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modelVersion</span><span class="token punctuation">&gt;</span></span>4.0.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modelVersion</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!--项目的坐标
+        1.标识当前的项目
+        2.坐标的位置就是jar包文件的位置
+        3.通过坐标可以被其它项目引用
+    --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.example<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>springboot_demo1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>0.0.1-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>springboot_demo1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>description</span><span class="token punctuation">&gt;</span></span>springboot_demo1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>description</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token comment">&lt;!--2.指定pom.xml中的配置信息--&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>java.version</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>java.version</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project.build.sourceEncoding</span><span class="token punctuation">&gt;</span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project.build.sourceEncoding</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project.reporting.outputEncoding</span><span class="token punctuation">&gt;</span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project.reporting.outputEncoding</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!--指定springboot的版本--&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>spring-boot.version</span><span class="token punctuation">&gt;</span></span>2.3.7.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>spring-boot.version</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token comment">&lt;!--3.当前项目依赖的其它jar包文件  --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!--3.1 添加依赖信息,其中版本号是默认的无序手写--&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-boot-starter-web<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token comment">&lt;!--版本号 &lt;version&gt;&lt;/version&gt;--&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">&gt;</span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.junit.vintage<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>junit-vintage-engine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token comment">&lt;!--4.依赖的管理器
+        历史: 早期项目使用时,需要自己手动的添加依赖jar包文件.可能导致jar包文件不兼容/冲突
+             直接导致项目启动出问题. 该问题是开发中的常见诟病.
+        SpringBoot优势:
+             SpringBoot将市面上常见的jar包都进行了兼容.并且在内部进行了测试.并且
+             使用其它第三方框架的时候,只需要简单的配置.可以使用其功能. (开箱即用)
+    --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencyManagement</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-boot-dependencies<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>${spring-boot.version}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>type</span><span class="token punctuation">&gt;</span></span>pom<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>type</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">&gt;</span></span>import<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencyManagement</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugins</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugin</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.apache.maven.plugins<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>maven-compiler-plugin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>3.8.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>source</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>target</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>target</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>encoding</span><span class="token punctuation">&gt;</span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>encoding</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugin</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugin</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-boot-maven-plugin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>2.3.7.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mainClass</span><span class="token punctuation">&gt;</span></span>com.jt.SpringbootDemo1Application<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mainClass</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>executions</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>execution</span><span class="token punctuation">&gt;</span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span>repackage<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">&gt;</span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>goals</span><span class="token punctuation">&gt;</span></span>
+                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>goal</span><span class="token punctuation">&gt;</span></span>repackage<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>goal</span><span class="token punctuation">&gt;</span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>goals</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>execution</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>executions</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugin</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugins</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project</span><span class="token punctuation">&gt;</span></span>
+
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br></div></div><h3 id="_5-1-1-parent标签作用"><a href="#_5-1-1-parent标签作用" class="header-anchor">#</a> 5.1.1 parent标签作用</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code>  <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>
+        继承特点<span class="token operator">:</span> 将父级内容进行引用<span class="token punctuation">.</span><span class="token punctuation">(</span>简化<span class="token punctuation">)</span>
+        <span class="token class-name">SpringBoot</span>理解<span class="token operator">:</span> <span class="token class-name">SpringBoot</span>是框架的框架
+        问题<span class="token operator">:</span>  jar包冲突问题严重<span class="token punctuation">,</span>之后需要有人统一管理
+              <span class="token class-name">A</span><span class="token punctuation">.</span>jar <span class="token operator">~</span><span class="token operator">~</span><span class="token operator">~</span><span class="token operator">~</span> <span class="token number">5.1</span><span class="token punctuation">.</span>jar
+              <span class="token class-name">B</span><span class="token punctuation">.</span>jar <span class="token operator">~</span><span class="token operator">~</span><span class="token operator">~</span><span class="token operator">~</span> <span class="token number">4.8</span><span class="token punctuation">.</span>jar
+        <span class="token class-name">SpringBoot</span>项目<span class="token operator">:</span> 官网将大部分框架在内部进行了整合<span class="token punctuation">.</span>
+        并且制定了<span class="token punctuation">,</span>统一的版本依赖信息<span class="token punctuation">.</span>
+        parent标签的作用<span class="token operator">:</span> 定义当前<span class="token class-name">SpringBoot</span>所有依赖的版本号
+    <span class="token operator">--</span><span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>parent<span class="token punctuation">&gt;</span></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>boot<span class="token operator">-</span>starter<span class="token operator">-</span>parent<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token number">2.5</span><span class="token number">.3</span><span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>relativePath<span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>parent<span class="token operator">&gt;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><h3 id="_5-1-2-dependency标签作用"><a href="#_5-1-2-dependency标签作用" class="header-anchor">#</a> 5.1.2 dependency标签作用</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code>    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>按需导入
+        历史说明<span class="token operator">:</span> <span class="token number">2010</span> 原来SSM 需要手动的编辑大量的的配置文件
+        思想<span class="token operator">:</span> <span class="token class-name">SpringBoot</span>使用体现了<span class="token string">&quot;开箱即用&quot;</span>的思想
+    <span class="token operator">--</span><span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>dependencies<span class="token punctuation">&gt;</span></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span><span class="token class-name">Springboot</span>的启动器 在内部已经将整合的配置写好<span class="token punctuation">,</span>实现拿来就用<span class="token operator">--</span><span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>boot<span class="token operator">-</span>starter<span class="token operator">-</span>web<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+
+        <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>boot<span class="token operator">-</span>starter<span class="token operator">-</span>test<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>scope<span class="token punctuation">&gt;</span></span>test<span class="token operator">&lt;</span><span class="token operator">/</span>scope<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>dependencies<span class="token operator">&gt;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h3 id="_5-1-3-build标签作用"><a href="#_5-1-3-build标签作用" class="header-anchor">#</a> 5.1.3 build标签作用</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>build标签
+        springboot项目在打包部署发布时<span class="token punctuation">,</span>需要依赖maven工具API
+        如果不添加该插件<span class="token punctuation">,</span>则直接影响项目发布
+    <span class="token operator">--</span><span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>build<span class="token punctuation">&gt;</span></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>plugins<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>plugin<span class="token punctuation">&gt;</span></span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>boot<span class="token operator">-</span>maven<span class="token operator">-</span>plugin<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token number">2.5</span><span class="token number">.3</span><span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>plugin<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>plugins<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>build<span class="token operator">&gt;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h3 id="_5-1-4-maven指令"><a href="#_5-1-4-maven指令" class="header-anchor">#</a> 5.1.4 Maven指令</h3> <p>1.clean 删除编译后的目录 target .java 文件源码 .jar包(xxx.class文
+件)
+- 用法: 1.当可能出现编译问题时 使用clean. 2.项目打包前使用
+2.install 项目发布 将xxx.class文件 打包成为 xxx.jar
+-jar包位置: 1.target目录下 2.本地仓库中.</p> <p>target目录下:
+<img src="https://img-blog.csdnimg.cn/a850385ef39142dba1ac33fa58d20355.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">
+本地仓库目录下:
+<img src="https://img-blog.csdnimg.cn/26b672528af846878cb5deaa3f0675bd.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="_5-1-5-java项目发布命令"><a href="#_5-1-5-java项目发布命令" class="header-anchor">#</a> 5.1.5 java项目发布命令</h3> <ol><li>进入jar包的根目录
+<img src="https://img-blog.csdnimg.cn/9e612f4130fa4ee1b2772f230664c7a7.png" alt="在这里插入图片描述">
+2.前提 必须配置JDK
+说明: 通过 <code>java -version</code> 检查JDK是否配置正常.
+如果提示java不是内部命令 则环境变量配置一定有问题.
+<img src="https://img-blog.csdnimg.cn/f018b24226d34e9881d85c4156981753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">
+环境变量配置:
+<img src="https://img-blog.csdnimg.cn/432e7eaf46554a19bca8a64cddace7fd.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li> <li>项目发布
+命令: <code>java -jar xxx.jar</code> <img src="https://img-blog.csdnimg.cn/19ff71ea97b94a8097c9e87fa5e0afa7.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li></ol> <h3 id="_5-1-6-项目关闭问题"><a href="#_5-1-6-项目关闭问题" class="header-anchor">#</a> 5.1.6 项目关闭问题</h3> <p>如果项目发布成功之后,需要关闭. 则直接关闭dos命令窗口即可.
+如果依然不能正常关闭.则<strong>杀死进程/或者重启计算机</strong>.
+<img src="https://img-blog.csdnimg.cn/32a1dd5a85d24951bf81feeceef50ebf.png" alt="在这里插入图片描述">
+右键结束进程项即可
+<img src="https://img-blog.csdnimg.cn/ab1829a020714ca0909dcf0671a21e8d.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="_5-1-7-关于dos命令窗口锁定问题"><a href="#_5-1-7-关于dos命令窗口锁定问题" class="header-anchor">#</a> 5.1.7 关于dos命令窗口锁定问题</h3> <p>说明: 当通过dos命令 启动tomcat服务器时,可能由于误操作.<strong>锁定</strong>当前dos窗口
+解决方案: 万能取消指令 <code>ctrl + c</code></p> <h1 id="_6-springboot高级用法"><a href="#_6-springboot高级用法" class="header-anchor">#</a> 6. SpringBoot高级用法</h1> <h2 id="_6-1-value注解"><a href="#_6-1-value注解" class="header-anchor">#</a> 6.1 @Value注解</h2> <h3 id="_6-1-1-需求说明"><a href="#_6-1-1-需求说明" class="header-anchor">#</a> 6.1.1 需求说明</h3> <p>有时需要动态的获取数据,不能直接写死在代码中, 如何处理???
+<img src="https://img-blog.csdnimg.cn/993ab493fc944ecd89d035987e8a8962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="_6-1-2-编辑yml文件-yml文件和xml文件不同时存在"><a href="#_6-1-2-编辑yml文件-yml文件和xml文件不同时存在" class="header-anchor">#</a> 6.1.2 编辑YML文件---YML文件和XML文件不同时存在</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code>#语法说明
+## 语法<span class="token number">1</span><span class="token operator">:</span> 数据结构  key<span class="token operator">-</span>value结构
+## 语法<span class="token number">2</span><span class="token operator">:</span> 写法     key<span class="token operator">:</span><span class="token punctuation">(</span>空格<span class="token punctuation">)</span>value
+## 语法<span class="token number">3</span><span class="token operator">:</span> yml文件  默认字符集是UTF<span class="token operator">-</span><span class="token number">8</span>编码 中文不乱码
+## 语法<span class="token number">4</span><span class="token operator">:</span> yml文件  有层级效果  注意缩进
+server<span class="token operator">:</span>
+  port<span class="token operator">:</span> <span class="token number">8080</span>
+
+# <span class="token class-name">SpringBoot</span>启动时 默认加载yml文件
+msg<span class="token operator">:</span>
+  hello<span class="token operator">:</span> <span class="token string">&quot;今天下雨,记得带伞~~&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h3 id="_6-1-3-编辑hellocontroller"><a href="#_6-1-3-编辑hellocontroller" class="header-anchor">#</a> 6.1.3 编辑HelloController</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@RestController</span>  <span class="token comment">//将该类交给Spring管理</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HelloController</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * 规则:
+     *    1. 当Spring容器启动时,会加载YML配置文件.
+     *       会将内部的key-value结构 加载到spring维护的内存空间中
+     *    2. @Value功能,从spring容器中根据key 动态赋值
+     *    3. springel表达式 简称:spel
+     *
+     * 使用场景:
+     *      如果代码中需要给成员变量赋值时,一般采用动态赋值的方式.
+     */</span>
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">&quot;${msg.hello}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> msg<span class="token punctuation">;</span>
+
+
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/hello&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> msg<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><h3 id="_6-1-4-页面效果展现"><a href="#_6-1-4-页面效果展现" class="header-anchor">#</a> 6.1.4 页面效果展现</h3> <p><img src="https://img-blog.csdnimg.cn/edc6e0b12fe94f5482383cfa436f3456.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h2 id="_6-2-属性赋值"><a href="#_6-2-属性赋值" class="header-anchor">#</a> 6.2 属性赋值</h2> <h3 id="_6-2-1-value为属性赋值"><a href="#_6-2-1-value为属性赋值" class="header-anchor">#</a> 6.2.1 @Value为属性赋值</h3> <p>YML配置信息</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code># <span class="token class-name">SpringBoot</span>启动时 默认加载yml文件
+msg<span class="token operator">:</span>
+  hello<span class="token operator">:</span> <span class="token string">&quot;今天下雨,记得带伞~~&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>动态赋值:
+<img src="https://img-blog.csdnimg.cn/c3451b26b4fb4fe19fbb3c40a0d7c82b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h2 id="_6-3-properties文件为属性赋值"><a href="#_6-3-properties文件为属性赋值" class="header-anchor">#</a> 6.3 properties文件为属性赋值</h2> <h3 id="_6-3-1-业务说明"><a href="#_6-3-1-业务说明" class="header-anchor">#</a> 6.3.1 业务说明</h3> <p>业务有时会需要动态赋值,如果将大量的业务数据写到yml文件中 导致代码混乱.最好的方式应该指定properties文件 为业务赋值.</p> <h3 id="_6-3-2-编辑properties文件"><a href="#_6-3-2-编辑properties文件" class="header-anchor">#</a> 6.3.2 编辑properties文件</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code>#语法<span class="token operator">:</span>
+#数据结构<span class="token operator">:</span>   key<span class="token operator">=</span>value
+#注意事项<span class="token operator">:</span>   不要添加<span class="token string">&quot;&quot;</span>号 本身就是字符串<span class="token punctuation">.</span>
+#字符集编码<span class="token operator">:</span>  写法采用utf<span class="token operator">-</span><span class="token number">8</span><span class="token punctuation">,</span>程序读取时采用ISO<span class="token operator">-</span><span class="token number">8859</span><span class="token operator">-</span><span class="token number">1</span>
+pro<span class="token punctuation">.</span>msg<span class="token operator">=</span>配置信息
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="_6-3-3-动态为属性赋值"><a href="#_6-3-3-动态为属性赋值" class="header-anchor">#</a> 6.3.3 动态为属性赋值</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>jt<span class="token punctuation">.</span>controller</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Value</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">PropertySource</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RequestMapping</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">RestController</span></span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@RestController</span>  <span class="token comment">//将该类交给Spring管理</span>
+<span class="token comment">//spring负责加载指定的配置文件</span>
+<span class="token comment">//如果注解中只有一个属性名称为value 则可以省略不写</span>
+<span class="token annotation punctuation">@PropertySource</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">&quot;classpath:/msg.properties&quot;</span><span class="token punctuation">,</span>encoding <span class="token operator">=</span> <span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HelloController</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * 规则:
+     *    1. 当Spring容器启动时,会加载YML配置文件.
+     *       会将内部的key-value结构 加载到spring维护的内存空间中
+     *    2. @Value功能,从spring容器中根据key 动态赋值
+     *    3. springel表达式 简称:spel
+     *
+     * 使用场景:
+     *      如果代码中需要给成员变量赋值时,一般采用动态赋值的方式.
+     */</span>
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">&quot;${msg.hello}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> msg<span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">&quot;${pro.msg}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> proMsg<span class="token punctuation">;</span>
+
+
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/hello&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> msg<span class="token operator">+</span><span class="token string">&quot;||&quot;</span><span class="token operator">+</span>proMsg<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br></div></div><h2 id="_6-4环境切换"><a href="#_6-4环境切换" class="header-anchor">#</a> 6.4环境切换</h2> <p>要求: 不管是几个环境,要求配置项都必须相同,值可以不同
+语法:
+1.使用—实现YML配置文件的分割
+2.定义环境名称
+3.定义默认环境名称</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code>#指定默认的环境
+spring<span class="token operator">:</span>
+  profiles<span class="token operator">:</span>
+    active<span class="token operator">:</span> test
+<span class="token operator">--</span><span class="token operator">-</span>
+
+#关于YML配置文件说明
+# <span class="token number">1.</span>数据结构    key<span class="token operator">=</span>value
+# <span class="token number">2.</span>数据类型    默认都是字符串 如果需要类型转化<span class="token punctuation">,</span>则框架已经在内部完成
+# <span class="token number">3.</span>yml写法<span class="token operator">:</span>   <span class="token number">1.</span>key<span class="token operator">:</span> <span class="token punctuation">(</span>空格<span class="token punctuation">)</span>value  <span class="token number">2.</span>有层级结构 编辑时注意
+# <span class="token number">4.</span>字符集编码<span class="token operator">:</span> 默认程序加载时都是UTF<span class="token operator">-</span><span class="token number">8</span>
+#定义环境名称
+spring<span class="token operator">:</span>
+  config<span class="token operator">:</span>
+    activate<span class="token operator">:</span>
+      on<span class="token operator">-</span>profile<span class="token operator">:</span> dev
+
+server<span class="token operator">:</span>
+  port<span class="token operator">:</span> <span class="token number">8080</span>
+  #项目发布的路径
+  servlet<span class="token operator">:</span>
+    #  <span class="token operator">/</span>缺省值  localhost<span class="token operator">:</span><span class="token number">8080</span><span class="token operator">/</span>jt<span class="token operator">/</span>xxxx请求路径
+    context<span class="token operator">-</span>path<span class="token operator">:</span> <span class="token operator">/</span>
+
+#<span class="token number">2.</span>为属性赋值  hello代表前缀    key<span class="token operator">=</span>hello<span class="token punctuation">.</span>msg
+hello<span class="token operator">:</span>
+    msg<span class="token operator">:</span> <span class="token string">&quot;我喜欢开发&quot;</span>
+
+#环境分割线
+<span class="token operator">--</span><span class="token operator">-</span>
+spring<span class="token operator">:</span>
+  config<span class="token operator">:</span>
+    activate<span class="token operator">:</span>
+      on<span class="token operator">-</span>profile<span class="token operator">:</span> test
+
+server<span class="token operator">:</span>
+  port<span class="token operator">:</span> <span class="token number">8090</span>
+  #项目发布的路径
+  servlet<span class="token operator">:</span>
+    #  <span class="token operator">/</span>缺省值  localhost<span class="token operator">:</span><span class="token number">8080</span><span class="token operator">/</span>jt<span class="token operator">/</span>xxxx请求路径
+    context<span class="token operator">-</span>path<span class="token operator">:</span> <span class="token operator">/</span>
+
+#<span class="token number">2.</span>为属性赋值  hello代表前缀    key<span class="token operator">=</span>hello<span class="token punctuation">.</span>msg
+hello<span class="token operator">:</span>
+  msg<span class="token operator">:</span> <span class="token string">&quot;我喜欢测试&quot;</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br></div></div><h2 id="_6-5热部署"><a href="#_6-5热部署" class="header-anchor">#</a> 6.5热部署</h2> <h3 id="_6-5-1-添加依赖"><a href="#_6-5-1-添加依赖" class="header-anchor">#</a> 6.5.1 添加依赖</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>支持热部署 <span class="token operator">--</span><span class="token operator">&gt;</span>
+<span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+	<span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+	<span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>boot<span class="token operator">-</span>devtools<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h3 id="_6-5-2-配置idea环境"><a href="#_6-5-2-配置idea环境" class="header-anchor">#</a> 6.5.2 配置IDEA环境</h3> <p>快捷键: ctrl + shift +alt + / 或者 ctrl + alt + a
+<img src="https://img-blog.csdnimg.cn/ad2e5c3c3bf940bdbb608e3de8815c68.png" alt="在这里插入图片描述">
+勾选属性即可实现热部署
+<img src="https://img-blog.csdnimg.cn/20210624094808594.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h2 id="_6-6-lombok插件安装"><a href="#_6-6-lombok插件安装" class="header-anchor">#</a> 6.6 Lombok插件安装</h2> <h3 id="_6-6-1-插件安装"><a href="#_6-6-1-插件安装" class="header-anchor">#</a> 6.6.1 插件安装</h3> <p><img src="https://img-blog.csdnimg.cn/73595e6d8b2a49a498b52ffa65b2d67c.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="_6-6-2-添加jar包"><a href="#_6-6-2-添加jar包" class="header-anchor">#</a> 6.6.2 添加jar包</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code>		<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>引入插件lombok 自动的set<span class="token operator">/</span>get<span class="token operator">/</span>构造方法插件  <span class="token operator">--</span><span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>projectlombok<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>lombok<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="_6-6-3-lombok作用"><a href="#_6-6-3-lombok作用" class="header-anchor">#</a> 6.6.3 lombok作用</h3> <p>动态生成常见 get/set/toString等方法</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">//标准写法</span>
+<span class="token comment">//知识点: 为什么需要添加无参构造???</span>
+<span class="token comment">//       利用反射机制实例化对象时,默认调用无参构造</span>
+<span class="token annotation punctuation">@Data</span> <span class="token comment">//get/set/toString/equals/hashcode</span>
+<span class="token annotation punctuation">@NoArgsConstructor</span> <span class="token comment">//无参构造</span>
+<span class="token annotation punctuation">@AllArgsConstructor</span><span class="token comment">//全参构造</span>
+<span class="token annotation punctuation">@Accessors</span><span class="token punctuation">(</span>chain <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">User</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token class-name">Integer</span> id<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+
+    <span class="token comment">//链式加载的底层原理 返回User对象</span>
+   <span class="token comment">/* public User setId(Integer id){
+        this.id = id;
+        return this;    //代表当前对象!!!!!
+    }
+
+    public User setName(String name){
+        this.name = name;
+        return this;
+    }*/</span>
+<span class="token punctuation">}</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><h3 id="_6-6-4-lombok知识点"><a href="#_6-6-4-lombok知识点" class="header-anchor">#</a> 6.6.4 lombok知识点</h3> <p>问题: lombok使用需要提前安装lombok插件!!, 如果项目发布在Linux系统中.问: 系统是否需要提前安装插件?</p> <p>答案: 不要 <strong>因为lombok插件在编译期有效!!!</strong></p> <p>xxx.java文件编译为xxx.class文件.
+知识衍生: 写的是java源码, 运行的是编译后的.class</p> <h2 id="_6-7-springboot测试类用法"><a href="#_6-7-springboot测试类用法" class="header-anchor">#</a> 6.7 SpringBoot测试类用法</h2> <h3 id="_6-7-1-业务说明"><a href="#_6-7-1-业务说明" class="header-anchor">#</a> 6.7.1 业务说明</h3> <p>说明:有时由于业务需要,需要进行单元测试, 单元测试中的对象可能会依赖Spring容器.
+需求: 需要Spring容器管理一个User对象. id=101 name=“好好学习”
+分析: 难点: 定制化属性内容!!! 具体业务功能. 利用配置类实现!!!</p> <h3 id="_6-7-2-编辑配置类"><a href="#_6-7-2-编辑配置类" class="header-anchor">#</a> 6.7.2 编辑配置类</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">//作用: 将自己需要的对象交给Spring容器管理</span>
+<span class="token annotation punctuation">@Configuration</span>  <span class="token comment">//标识这是一个配置类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserConfig</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * 知识点:1.Spring内部维护一个Map集合
+     *       2. Map集合 key/value 分别是谁???
+     *       3.IOC管理的对象的方式   1.@Controller等注解 2.@bean
+     *  
+     * 1.注解组合:  @Configuration +  @Bean
+     * 2.什么是bean: 被spring管理的对象就是bean
+     * 3.@Bean注解的作用
+     *      将方法的返回值对象交给Spring管理
+     * 4.Spring如何管理对象?
+     *   数据结构: Map集合   Map&lt;K,V&gt;
+     *   key:   对象的ID
+     *   value: 实例化之后的对象
+     * demo1: Spring如何管理对象
+     *      key: 方法的名称
+     *      value: 方法的返回值   Map&lt;user,new User()&gt;
+     *
+     * demo2:
+     *      @Controller
+     *      HelloController{}
+     *      key: helloController   首字母小写
+     *      value: spring通过反射创建的HelloController对象
+     * @return
+     */</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token number">101</span><span class="token punctuation">,</span><span class="token string">&quot;好好学习&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br></div></div><h3 id="_6-7-3-spring对象注入原理"><a href="#_6-7-3-spring对象注入原理" class="header-anchor">#</a> 6.7.3 Spring对象注入原理</h3> <p>1.根据对象类型进行注入
+<img src="https://img-blog.csdnimg.cn/14c7c70fdec045a3bb6771e8e1041552.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="_6-7-4-编辑测试类"><a href="#_6-7-4-编辑测试类" class="header-anchor">#</a> 6.7.4 编辑测试类</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>jt<span class="token punctuation">.</span>test</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">com<span class="token punctuation">.</span>jt<span class="token punctuation">.</span>pojo<span class="token punctuation">.</span></span><span class="token class-name">User</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>jupiter<span class="token punctuation">.</span>api<span class="token punctuation">.</span></span><span class="token class-name">Test</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Autowired</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Qualifier</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>test<span class="token punctuation">.</span>context<span class="token punctuation">.</span></span><span class="token class-name">SpringBootTest</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 原理说明:
+ *  1.当测试类执行时,会根据SpringBoot的配置,动态启动Spring容器.
+ *  2.当spring容器启动时,会加载所有的注解和配置类,最终将所有的对象
+ *  交给Spring容器管理  Map集合
+ *  3.@SpringBootTest 通过这个注解,可以动态的从spring容器中
+ *  获取对象
+ *
+ */</span>
+<span class="token annotation punctuation">@SpringBootTest</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestSpring</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * 注入方式:
+     *      1. 根据类型注入 (默认规则)
+     *      2. 根据名称注入   @Autowired
+     *                      @Qualifier(&quot;user&quot;)
+     */</span>
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token comment">//@Qualifier(value=&quot;user&quot;)</span>
+    <span class="token keyword">private</span> <span class="token class-name">User</span> user<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>user<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br></div></div><h1 id="_7-springboot使用注意事项"><a href="#_7-springboot使用注意事项" class="header-anchor">#</a> 7. SpringBoot使用注意事项</h1> <h2 id="_7-1-关于build标签说明"><a href="#_7-1-关于build标签说明" class="header-anchor">#</a> 7.1 关于Build标签说明</h2> <p>如果没有build标签则项目打包之后不能正常执行.报错如下
+<img src="https://img-blog.csdnimg.cn/94ecc2c1628943fbaa33242c0223c09b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h2 id="_7-2-关于主启动类说明"><a href="#_7-2-关于主启动类说明" class="header-anchor">#</a> 7.2 关于主启动类说明</h2> <p>说明: 主启动类运行,真正起作用的是注解@SpringBootApplication</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SpringbootDemo1Application</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">SpringbootDemo1Application</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h3 id="_7-2-1-关于元注解的说明"><a href="#_7-2-1-关于元注解的说明" class="header-anchor">#</a> 7.2.1 关于元注解的说明</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span>TYPE<span class="token punctuation">)</span>    	<span class="token comment">//注解对谁有效</span>
+<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span> <span class="token comment">//注解的声明周期,在运行期有效</span>
+<span class="token annotation punctuation">@Documented</span>						<span class="token comment">//文档支持,生成源码时 是否动态生成注释文档</span>
+<span class="token annotation punctuation">@Inherited</span>						<span class="token comment">//是否可以被继承</span>
+<span class="token annotation punctuation">@SpringBootConfiguration</span>		<span class="token comment">//springboot的配置类</span>
+<span class="token annotation punctuation">@EnableAutoConfiguration</span>		<span class="token comment">//启动自动化的配置,加载pom.xml文件中的启动项</span>
+<span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span>excludeFilters <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token annotation punctuation">@Filter</span><span class="token punctuation">(</span>type <span class="token operator">=</span> <span class="token class-name">FilterType</span><span class="token punctuation">.</span>CUSTOM<span class="token punctuation">,</span> classes <span class="token operator">=</span> <span class="token class-name">TypeExcludeFilter</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">,</span>		<span class="token comment">//包扫描路径,默认条件下是主启动类的包路径. 所以以后写代码在主启动类的同包及子包中编辑.</span>
+		<span class="token annotation punctuation">@Filter</span><span class="token punctuation">(</span>type <span class="token operator">=</span> <span class="token class-name">FilterType</span><span class="token punctuation">.</span>CUSTOM<span class="token punctuation">,</span> classes <span class="token operator">=</span> <span class="token class-name">AutoConfigurationExcludeFilter</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h3 id="_7-2-2-componentscan说明"><a href="#_7-2-2-componentscan说明" class="header-anchor">#</a> 7.2.2 @ComponentScan说明</h3> <p>说明: 当springBoot启动时,会实例化很多的对象,但是需要排除特定的类型
+原因: SpringBoot内部兼容了很多的第三方框架,但是其中个别加入之后会影响整个代码流程,所以通过这样的方式将个别的类排除在外.</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span>excludeFilters <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token annotation punctuation">@Filter</span><span class="token punctuation">(</span>type <span class="token operator">=</span> <span class="token class-name">FilterType</span><span class="token punctuation">.</span>CUSTOM<span class="token punctuation">,</span> classes <span class="token operator">=</span> <span class="token class-name">TypeExcludeFilter</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token annotation punctuation">@Filter</span><span class="token punctuation">(</span>type <span class="token operator">=</span> <span class="token class-name">FilterType</span><span class="token punctuation">.</span>CUSTOM<span class="token punctuation">,</span> classes <span class="token operator">=</span> <span class="token class-name">AutoConfigurationExcludeFilter</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token number">123</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="_7-2-3-springbootconfiguration注解说明"><a href="#_7-2-3-springbootconfiguration注解说明" class="header-anchor">#</a> 7.2.3 @SpringBootConfiguration注解说明</h3> <p>关键词: 配置文件/配置类 作用:整合第三方框架(配置)
+@Configuration: 该注解一般标识类文件,告知springBoot程序 这个类是用来整合第三方框架/配置的.
+<img src="https://img-blog.csdnimg.cn/bdc96b340a4e4ccc812f93f245e4d289.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">
+说明2: @SpringBootConfiguration修饰主启动类,说明主启动类也是一个配置类.
+<img src="https://img-blog.csdnimg.cn/111a9439ca4645a08b4d382efdd0d24a.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">
+说明3: SpringBoot主启动类会扫描用户自己的配置类,并且实例化对象.
+<img src="https://img-blog.csdnimg.cn/82a1a1d2a1304fe081549b9607e6d69c.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="_7-2-4-enableautoconfiguration注解说明"><a href="#_7-2-4-enableautoconfiguration注解说明" class="header-anchor">#</a> 7.2.4 @EnableAutoConfiguration注解说明</h3> <p>说明: 自动化的配置如图所示:
+<img src="https://img-blog.csdnimg.cn/0b2362e5c8ae4c0694feb565c597787c.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h4 id="autoconfigurationpackage说明"><a href="#autoconfigurationpackage说明" class="header-anchor">#</a> @AutoConfigurationPackage说明</h4> <p>该注解表示自动配置的包扫描的路径.
+工作原理: 该注解会动态的获取主启动类当前的包路径.之后开启包扫描的机制.
+<strong>知识点: 以后写代码都应该在主启动类的同包及子包中.</strong></p> <h4 id="import-autoconfigurationimportselector-class"><a href="#import-autoconfigurationimportselector-class" class="header-anchor">#</a> @Import(AutoConfigurationImportSelector.class)</h4> <p>知识回顾: SpringBoot使用体现了&quot;开箱即用&quot;的思想,用户引入jar包之后 可以直接使用(少量配置).
+思考: dependencies代表程序的依赖项,(将其他的包<strong>加载</strong>到自己的项目中), 只是加载不负责执行.</p> <h4 id="流程说明-重点"><a href="#流程说明-重点" class="header-anchor">#</a> 流程说明(重点!!!)</h4> <p>当SpringBoot主启动项执行时,内部会加载@Import(AutoConfigurationImportSelector.class),
+该注解的作用就是根据依赖信息,根据SpringBoot内部的配置信息,依次加载执行.
+当匹配了用户添加的启动器之后,程序负责实例化框架(执行jar包中的内容).
+如果匹配不到,则继续向下执行.最终SpringBoot程序加载成功.</p> <p><img src="https://img-blog.csdnimg.cn/a2f5b83c91b94d3a977efa38b93a54a4.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="_7-2-5-主启动类注解结构图"><a href="#_7-2-5-主启动类注解结构图" class="header-anchor">#</a> 7.2.5 主启动类注解结构图</h3> <p><img src="https://img-blog.csdnimg.cn/5b7635b2b51d448a8586257cbf1867db.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h3 id="_7-2-6-关于依赖考题"><a href="#_7-2-6-关于依赖考题" class="header-anchor">#</a> 7.2.6 关于依赖考题</h3> <p>问题: 用户暂时不需要数据库的配置. 问:能否先行添加数据源的启动项?? (不添加任何注解!!!)
+答案: 不可以,因为启动项执行需要完整配置,数据源信息并未添加.导致报错.</p> <p>总结: SpringBoot项目中的依赖包尤其启动项,添加时慎重. 如果需要添加启动器,则必须保证配置完整.否则程序启动必然失败!!!.</p> <p><img src="https://img-blog.csdnimg.cn/3a76808713bb4bdcab625b0209fad929.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE2ODA0ODQ3,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <h2 id="_7-3-关于yml文件的说明"><a href="#_7-3-关于yml文件的说明" class="header-anchor">#</a> 7.3 关于YML文件的说明</h2> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code><span class="token comment"># 数据结构   key-value</span>
+<span class="token comment"># 语法结构   key:(空格)value</span>
+<span class="token comment"># 注意层级缩进</span>
+<span class="token comment"># 默认字符集: utf-8编码格式 支持中文</span>
+<span class="token key atrule">server</span><span class="token punctuation">:</span>
+  <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">8080</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.98d32d61.js" defer></script><script src="/matheusblog/assets/js/2.34da62ad.js" defer></script><script src="/matheusblog/assets/js/170.916a1019.js" defer></script>
+  </body>
+</html>

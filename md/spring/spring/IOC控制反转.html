@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>IOC控制反转 | Java 全栈知识体系</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 大数据, 机器学习...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.633991d7.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.98d32d61.js" as="script"><link rel="preload" href="/matheusblog/assets/js/2.34da62ad.js" as="script"><link rel="preload" href="/matheusblog/assets/js/78.aa9c5da5.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.f75180e8.js"><link rel="prefetch" href="/matheusblog/assets/js/100.3d5ca5a0.js"><link rel="prefetch" href="/matheusblog/assets/js/101.f6854eb6.js"><link rel="prefetch" href="/matheusblog/assets/js/102.ca49a8b6.js"><link rel="prefetch" href="/matheusblog/assets/js/103.cca70b63.js"><link rel="prefetch" href="/matheusblog/assets/js/104.a595cff9.js"><link rel="prefetch" href="/matheusblog/assets/js/105.db4b4b05.js"><link rel="prefetch" href="/matheusblog/assets/js/106.5f758be1.js"><link rel="prefetch" href="/matheusblog/assets/js/107.7da45dc8.js"><link rel="prefetch" href="/matheusblog/assets/js/108.8fa7a262.js"><link rel="prefetch" href="/matheusblog/assets/js/109.ba8701b1.js"><link rel="prefetch" href="/matheusblog/assets/js/11.4a30505f.js"><link rel="prefetch" href="/matheusblog/assets/js/110.453838e0.js"><link rel="prefetch" href="/matheusblog/assets/js/111.ac57f4b2.js"><link rel="prefetch" href="/matheusblog/assets/js/112.82e638b0.js"><link rel="prefetch" href="/matheusblog/assets/js/113.1ce5b63f.js"><link rel="prefetch" href="/matheusblog/assets/js/114.66fdb77c.js"><link rel="prefetch" href="/matheusblog/assets/js/115.e1117448.js"><link rel="prefetch" href="/matheusblog/assets/js/116.e10770a9.js"><link rel="prefetch" href="/matheusblog/assets/js/117.2c1f55c5.js"><link rel="prefetch" href="/matheusblog/assets/js/118.4c89ef98.js"><link rel="prefetch" href="/matheusblog/assets/js/119.4c819e7f.js"><link rel="prefetch" href="/matheusblog/assets/js/12.793e0ec0.js"><link rel="prefetch" href="/matheusblog/assets/js/120.06f737df.js"><link rel="prefetch" href="/matheusblog/assets/js/121.bbd8d065.js"><link rel="prefetch" href="/matheusblog/assets/js/122.c73b3422.js"><link rel="prefetch" href="/matheusblog/assets/js/123.9bedb19d.js"><link rel="prefetch" href="/matheusblog/assets/js/124.9c34bd89.js"><link rel="prefetch" href="/matheusblog/assets/js/125.753284bf.js"><link rel="prefetch" href="/matheusblog/assets/js/126.5ec35180.js"><link rel="prefetch" href="/matheusblog/assets/js/127.b1a67c51.js"><link rel="prefetch" href="/matheusblog/assets/js/128.0f85f83b.js"><link rel="prefetch" href="/matheusblog/assets/js/129.9754ca0d.js"><link rel="prefetch" href="/matheusblog/assets/js/13.95235336.js"><link rel="prefetch" href="/matheusblog/assets/js/130.0800b514.js"><link rel="prefetch" href="/matheusblog/assets/js/131.306af433.js"><link rel="prefetch" href="/matheusblog/assets/js/132.53acc92c.js"><link rel="prefetch" href="/matheusblog/assets/js/133.d61293a3.js"><link rel="prefetch" href="/matheusblog/assets/js/134.aadfc68d.js"><link rel="prefetch" href="/matheusblog/assets/js/135.f0f4f57e.js"><link rel="prefetch" href="/matheusblog/assets/js/136.edaa4cd0.js"><link rel="prefetch" href="/matheusblog/assets/js/137.34ef0d92.js"><link rel="prefetch" href="/matheusblog/assets/js/138.cb4cbaad.js"><link rel="prefetch" href="/matheusblog/assets/js/139.1225c28e.js"><link rel="prefetch" href="/matheusblog/assets/js/14.4af1e2de.js"><link rel="prefetch" href="/matheusblog/assets/js/140.ec773abf.js"><link rel="prefetch" href="/matheusblog/assets/js/141.ff8b4cad.js"><link rel="prefetch" href="/matheusblog/assets/js/142.e921849c.js"><link rel="prefetch" href="/matheusblog/assets/js/143.8bb224bc.js"><link rel="prefetch" href="/matheusblog/assets/js/144.a7d83462.js"><link rel="prefetch" href="/matheusblog/assets/js/145.45b8a227.js"><link rel="prefetch" href="/matheusblog/assets/js/146.7cf6ce58.js"><link rel="prefetch" href="/matheusblog/assets/js/147.089c834c.js"><link rel="prefetch" href="/matheusblog/assets/js/148.6ee41415.js"><link rel="prefetch" href="/matheusblog/assets/js/149.77fc6065.js"><link rel="prefetch" href="/matheusblog/assets/js/15.528e7431.js"><link rel="prefetch" href="/matheusblog/assets/js/150.084e2ce0.js"><link rel="prefetch" href="/matheusblog/assets/js/151.c252c8f4.js"><link rel="prefetch" href="/matheusblog/assets/js/152.33b572b8.js"><link rel="prefetch" href="/matheusblog/assets/js/153.570b665f.js"><link rel="prefetch" href="/matheusblog/assets/js/154.9a57835a.js"><link rel="prefetch" href="/matheusblog/assets/js/155.378ea095.js"><link rel="prefetch" href="/matheusblog/assets/js/156.e31769cc.js"><link rel="prefetch" href="/matheusblog/assets/js/157.2583dbbe.js"><link rel="prefetch" href="/matheusblog/assets/js/158.f73e2e8f.js"><link rel="prefetch" href="/matheusblog/assets/js/159.18062130.js"><link rel="prefetch" href="/matheusblog/assets/js/16.5f251fb5.js"><link rel="prefetch" href="/matheusblog/assets/js/160.38ec7e3b.js"><link rel="prefetch" href="/matheusblog/assets/js/161.71036bc2.js"><link rel="prefetch" href="/matheusblog/assets/js/162.6ac3d695.js"><link rel="prefetch" href="/matheusblog/assets/js/163.4a46abf7.js"><link rel="prefetch" href="/matheusblog/assets/js/164.5584f565.js"><link rel="prefetch" href="/matheusblog/assets/js/165.413a07d8.js"><link rel="prefetch" href="/matheusblog/assets/js/166.a8922048.js"><link rel="prefetch" href="/matheusblog/assets/js/167.60cc7908.js"><link rel="prefetch" href="/matheusblog/assets/js/168.4254c123.js"><link rel="prefetch" href="/matheusblog/assets/js/169.cbc70b26.js"><link rel="prefetch" href="/matheusblog/assets/js/17.355d31d9.js"><link rel="prefetch" href="/matheusblog/assets/js/170.916a1019.js"><link rel="prefetch" href="/matheusblog/assets/js/171.07b53d73.js"><link rel="prefetch" href="/matheusblog/assets/js/172.1b33958a.js"><link rel="prefetch" href="/matheusblog/assets/js/173.31f5fa1a.js"><link rel="prefetch" href="/matheusblog/assets/js/174.9a39a5ac.js"><link rel="prefetch" href="/matheusblog/assets/js/175.c6bfd4ac.js"><link rel="prefetch" href="/matheusblog/assets/js/176.f65aa694.js"><link rel="prefetch" href="/matheusblog/assets/js/177.3b68b40b.js"><link rel="prefetch" href="/matheusblog/assets/js/178.6df30b74.js"><link rel="prefetch" href="/matheusblog/assets/js/179.861ac0bf.js"><link rel="prefetch" href="/matheusblog/assets/js/18.7f72dc01.js"><link rel="prefetch" href="/matheusblog/assets/js/180.9546e52a.js"><link rel="prefetch" href="/matheusblog/assets/js/181.bd834059.js"><link rel="prefetch" href="/matheusblog/assets/js/182.af4de693.js"><link rel="prefetch" href="/matheusblog/assets/js/183.1dc2e9c4.js"><link rel="prefetch" href="/matheusblog/assets/js/184.6a2a9374.js"><link rel="prefetch" href="/matheusblog/assets/js/185.59ad729c.js"><link rel="prefetch" href="/matheusblog/assets/js/186.7fe4fd1e.js"><link rel="prefetch" href="/matheusblog/assets/js/187.70003b09.js"><link rel="prefetch" href="/matheusblog/assets/js/188.8573a984.js"><link rel="prefetch" href="/matheusblog/assets/js/189.ec69892a.js"><link rel="prefetch" href="/matheusblog/assets/js/19.47699359.js"><link rel="prefetch" href="/matheusblog/assets/js/190.bed9ec84.js"><link rel="prefetch" href="/matheusblog/assets/js/191.543ed3aa.js"><link rel="prefetch" href="/matheusblog/assets/js/192.bc65c506.js"><link rel="prefetch" href="/matheusblog/assets/js/193.fcf26f62.js"><link rel="prefetch" href="/matheusblog/assets/js/194.c2ef52d4.js"><link rel="prefetch" href="/matheusblog/assets/js/195.686f093a.js"><link rel="prefetch" href="/matheusblog/assets/js/196.fd9d0a4e.js"><link rel="prefetch" href="/matheusblog/assets/js/197.f4534abe.js"><link rel="prefetch" href="/matheusblog/assets/js/198.e89e6439.js"><link rel="prefetch" href="/matheusblog/assets/js/199.0bc681f6.js"><link rel="prefetch" href="/matheusblog/assets/js/20.e5882ee9.js"><link rel="prefetch" href="/matheusblog/assets/js/200.5d1411b9.js"><link rel="prefetch" href="/matheusblog/assets/js/201.1b53caf7.js"><link rel="prefetch" href="/matheusblog/assets/js/202.3eb921e9.js"><link rel="prefetch" href="/matheusblog/assets/js/203.56e48204.js"><link rel="prefetch" href="/matheusblog/assets/js/204.0ee3bbf8.js"><link rel="prefetch" href="/matheusblog/assets/js/205.4b5d9136.js"><link rel="prefetch" href="/matheusblog/assets/js/206.3e6da766.js"><link rel="prefetch" href="/matheusblog/assets/js/207.4b3ddaae.js"><link rel="prefetch" href="/matheusblog/assets/js/208.4ed4f9f6.js"><link rel="prefetch" href="/matheusblog/assets/js/209.adbc8922.js"><link rel="prefetch" href="/matheusblog/assets/js/21.900a8ec7.js"><link rel="prefetch" href="/matheusblog/assets/js/210.518d0b2b.js"><link rel="prefetch" href="/matheusblog/assets/js/211.592c7ccb.js"><link rel="prefetch" href="/matheusblog/assets/js/212.54001ac2.js"><link rel="prefetch" href="/matheusblog/assets/js/213.80a72da6.js"><link rel="prefetch" href="/matheusblog/assets/js/214.e1a549d7.js"><link rel="prefetch" href="/matheusblog/assets/js/215.11e81270.js"><link rel="prefetch" href="/matheusblog/assets/js/216.ac929e20.js"><link rel="prefetch" href="/matheusblog/assets/js/217.fd0af17b.js"><link rel="prefetch" href="/matheusblog/assets/js/218.a65bbeaa.js"><link rel="prefetch" href="/matheusblog/assets/js/219.fbe13534.js"><link rel="prefetch" href="/matheusblog/assets/js/22.ff332d51.js"><link rel="prefetch" href="/matheusblog/assets/js/220.6dea16c6.js"><link rel="prefetch" href="/matheusblog/assets/js/221.bf7499ec.js"><link rel="prefetch" href="/matheusblog/assets/js/23.7c24c528.js"><link rel="prefetch" href="/matheusblog/assets/js/24.221c5e98.js"><link rel="prefetch" href="/matheusblog/assets/js/25.0134b188.js"><link rel="prefetch" href="/matheusblog/assets/js/26.ce908b7f.js"><link rel="prefetch" href="/matheusblog/assets/js/27.8790623d.js"><link rel="prefetch" href="/matheusblog/assets/js/28.b434aff5.js"><link rel="prefetch" href="/matheusblog/assets/js/29.098b8057.js"><link rel="prefetch" href="/matheusblog/assets/js/3.ce636248.js"><link rel="prefetch" href="/matheusblog/assets/js/30.52b0a576.js"><link rel="prefetch" href="/matheusblog/assets/js/31.1b25634d.js"><link rel="prefetch" href="/matheusblog/assets/js/32.f193a825.js"><link rel="prefetch" href="/matheusblog/assets/js/33.9ead944f.js"><link rel="prefetch" href="/matheusblog/assets/js/34.903e67f5.js"><link rel="prefetch" href="/matheusblog/assets/js/35.75904d44.js"><link rel="prefetch" href="/matheusblog/assets/js/36.1d55859f.js"><link rel="prefetch" href="/matheusblog/assets/js/37.70c7b1d8.js"><link rel="prefetch" href="/matheusblog/assets/js/38.15714070.js"><link rel="prefetch" href="/matheusblog/assets/js/39.68b93333.js"><link rel="prefetch" href="/matheusblog/assets/js/4.f99ce43b.js"><link rel="prefetch" href="/matheusblog/assets/js/40.1f15bc23.js"><link rel="prefetch" href="/matheusblog/assets/js/41.46d77c1a.js"><link rel="prefetch" href="/matheusblog/assets/js/42.a117ae6e.js"><link rel="prefetch" href="/matheusblog/assets/js/43.cbe38645.js"><link rel="prefetch" href="/matheusblog/assets/js/44.8222aed3.js"><link rel="prefetch" href="/matheusblog/assets/js/45.57722d0e.js"><link rel="prefetch" href="/matheusblog/assets/js/46.aafad694.js"><link rel="prefetch" href="/matheusblog/assets/js/47.ca0b1fe0.js"><link rel="prefetch" href="/matheusblog/assets/js/48.349b35d1.js"><link rel="prefetch" href="/matheusblog/assets/js/49.b9c08c0e.js"><link rel="prefetch" href="/matheusblog/assets/js/5.64180031.js"><link rel="prefetch" href="/matheusblog/assets/js/50.93e3d25c.js"><link rel="prefetch" href="/matheusblog/assets/js/51.e69e635d.js"><link rel="prefetch" href="/matheusblog/assets/js/52.37cb98bd.js"><link rel="prefetch" href="/matheusblog/assets/js/53.65a89bdb.js"><link rel="prefetch" href="/matheusblog/assets/js/54.65553c35.js"><link rel="prefetch" href="/matheusblog/assets/js/55.71dac7ad.js"><link rel="prefetch" href="/matheusblog/assets/js/56.33907187.js"><link rel="prefetch" href="/matheusblog/assets/js/57.181e26c4.js"><link rel="prefetch" href="/matheusblog/assets/js/58.795923e6.js"><link rel="prefetch" href="/matheusblog/assets/js/59.423ca6bd.js"><link rel="prefetch" href="/matheusblog/assets/js/6.390e3f0b.js"><link rel="prefetch" href="/matheusblog/assets/js/60.ee96cd1f.js"><link rel="prefetch" href="/matheusblog/assets/js/61.66f98f24.js"><link rel="prefetch" href="/matheusblog/assets/js/62.865f6944.js"><link rel="prefetch" href="/matheusblog/assets/js/63.7d692af1.js"><link rel="prefetch" href="/matheusblog/assets/js/64.84055070.js"><link rel="prefetch" href="/matheusblog/assets/js/65.40a56349.js"><link rel="prefetch" href="/matheusblog/assets/js/66.2fa72ab3.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b7531b45.js"><link rel="prefetch" href="/matheusblog/assets/js/68.b4af8ca3.js"><link rel="prefetch" href="/matheusblog/assets/js/69.b9dbb4bd.js"><link rel="prefetch" href="/matheusblog/assets/js/7.f2df787d.js"><link rel="prefetch" href="/matheusblog/assets/js/70.ff97ef74.js"><link rel="prefetch" href="/matheusblog/assets/js/71.5e965fbe.js"><link rel="prefetch" href="/matheusblog/assets/js/72.a54bc571.js"><link rel="prefetch" href="/matheusblog/assets/js/73.bbf446cc.js"><link rel="prefetch" href="/matheusblog/assets/js/74.83522c0f.js"><link rel="prefetch" href="/matheusblog/assets/js/75.4067083f.js"><link rel="prefetch" href="/matheusblog/assets/js/76.29b8408c.js"><link rel="prefetch" href="/matheusblog/assets/js/77.2f78c8a7.js"><link rel="prefetch" href="/matheusblog/assets/js/79.e27eae87.js"><link rel="prefetch" href="/matheusblog/assets/js/8.5abb2418.js"><link rel="prefetch" href="/matheusblog/assets/js/80.487f48d2.js"><link rel="prefetch" href="/matheusblog/assets/js/81.a148f0d5.js"><link rel="prefetch" href="/matheusblog/assets/js/82.ff6ff828.js"><link rel="prefetch" href="/matheusblog/assets/js/83.06905ba2.js"><link rel="prefetch" href="/matheusblog/assets/js/84.540e52ce.js"><link rel="prefetch" href="/matheusblog/assets/js/85.ea9f1eeb.js"><link rel="prefetch" href="/matheusblog/assets/js/86.08473beb.js"><link rel="prefetch" href="/matheusblog/assets/js/87.f29163d2.js"><link rel="prefetch" href="/matheusblog/assets/js/88.b13f950d.js"><link rel="prefetch" href="/matheusblog/assets/js/89.b4a3f121.js"><link rel="prefetch" href="/matheusblog/assets/js/9.5cecb6da.js"><link rel="prefetch" href="/matheusblog/assets/js/90.2982c28f.js"><link rel="prefetch" href="/matheusblog/assets/js/91.7952f324.js"><link rel="prefetch" href="/matheusblog/assets/js/92.a7d9d05a.js"><link rel="prefetch" href="/matheusblog/assets/js/93.622a0e9f.js"><link rel="prefetch" href="/matheusblog/assets/js/94.f7c65dc0.js"><link rel="prefetch" href="/matheusblog/assets/js/95.bf11ade2.js"><link rel="prefetch" href="/matheusblog/assets/js/96.c85a5970.js"><link rel="prefetch" href="/matheusblog/assets/js/97.4b82379b.js"><link rel="prefetch" href="/matheusblog/assets/js/98.52b620df.js"><link rel="prefetch" href="/matheusblog/assets/js/99.55cade5d.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.633991d7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">Java 全栈知识体系</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/01SpringMVC简介.html" class="nav-link">
+  SpringMVC简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/01SpringMVC简介.html" class="nav-link">
+  SpringMVC简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Maven</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/spring/maven/01Tomcat入门基础.html" class="sidebar-link">Tomcat入门基础</a></li><li><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="sidebar-link">Maven入门基础</a></li><li><a href="/matheusblog/md/spring/maven/03Maven pom.xml常用配置.html" class="sidebar-link">Maven的pox.xml常用配置</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Spring</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/spring/spring/Spring概述.html" class="sidebar-link">Spring概述</a></li><li><a href="/matheusblog/md/spring/spring/Spring入门案例.html" class="sidebar-link">Spring入门案例</a></li><li><a href="/matheusblog/md/spring/spring/IOC控制反转.html" class="active sidebar-link">IOC控制反转</a></li><li><a href="/matheusblog/md/spring/spring/DI依赖注入.html" class="sidebar-link">DI依赖注入</a></li><li><a href="/matheusblog/md/spring/spring/Bean工厂.html" class="sidebar-link">Bean工厂</a></li><li><a href="/matheusblog/md/spring/spring/AOP面向切面编程.html" class="sidebar-link">AOP面向切面编程</a></li><li><a href="/matheusblog/md/spring/spring/事务控制.html" class="sidebar-link">事务控制</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>SpringMVC</span> <!----></p> <!----></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>MyBatis-Plus</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="sidebar-link">MyBatis简介</a></li><li><a href="/matheusblog/md/spring/mybatis/02入门程序.html" class="sidebar-link">MyBatis入门程序</a></li><li><a href="/matheusblog/md/spring/mybatis/03MyBatis框架.html" class="sidebar-link">MyBatis框架</a></li><li><a href="/matheusblog/md/spring/mybatis/04MyBatis-Plus.html" class="sidebar-link">MyBatis-Plus</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="ioc控制反转"><a href="#ioc控制反转" class="header-anchor">#</a> IOC控制反转</h1> <p></p><div class="table-of-contents"><ul><li><a href="#概述">概述</a></li><li><a href="#如何理解ioc">如何理解IOC</a><ul><li><a href="#spring-bean是什么">Spring Bean是什么</a></li><li><a href="#ioc是什么">IOC是什么</a></li><li><a href="#ioc能做什么">IOC能做什么</a></li></ul></li><li><a href="#ioc配置的三种方式">IOC配置的三种方式</a><ul><li><a href="#xml配置">XML配置</a></li><li><a href="#java配置">Java配置</a></li><li><a href="#注解配置">注解配置</a></li></ul></li><li><a href="#关于单例多例模式说明">关于单例多例模式说明</a></li><li><a href="#生命周期">生命周期</a><ul><li><a href="#spring-bean的生命周期流程">Spring Bean的生命周期流程</a></li></ul></li></ul></div><p></p> <h2 id="概述"><a href="#概述" class="header-anchor">#</a> 概述</h2> <p>就是指将对象的创建，对象的存储(map)，对象的管理(依赖查找,依赖注入)交给了spring容器。</p> <p><img src="/matheusblog/assets/img/image-20220601101454417.5e4320c6.png" alt="image-20220601101454417"></p> <p>如果你有精力看英文，首推 Martin Fowler大师的 <a href="https://www.martinfowler.com/articles/injection.html" target="_blank" rel="noopener noreferrer">Inversion of Control Containers and the Dependency Injection pattern  (opens new window)<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>；其次IoC作为一种设计思想，不要过度解读，而是应该简化理解，所以我这里也整合了 张开涛早前的博客[IoC基础]  (https://www.iteye.com/blog/jinnianshilongnian-1413846)并加入了自己的理解。</p> <h2 id="如何理解ioc"><a href="#如何理解ioc" class="header-anchor">#</a> 如何理解IOC</h2> <h3 id="spring-bean是什么"><a href="#spring-bean是什么" class="header-anchor">#</a> Spring Bean是什么</h3> <p>Spring里面的bean就类似是定义的一个组件，而这个组件的作用就是实现某个功能的，这里所定义的bean就相当于给了你一个更为简便的方法来调用这个组件去实现你要完成的功能。</p> <h3 id="ioc是什么"><a href="#ioc是什么" class="header-anchor">#</a> IOC是什么</h3> <p>Ioc—Inversion of Control，即“控制反转”，不是什么技术，而是一种设计思想。在Java开发中，Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。</p> <p>我们来深入分析一下：</p> <ul><li><p>谁控制谁，控制什么？</p> <p>传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对 象的创建；</p> <p>谁控制谁？当然是IoC 容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象包括比如文件等）。</p></li> <li><p>为何是反转，哪些方面反转了?</p> <p>有反转就有正转，传统应用程序是由我们自己在对象中主动控制去直接获取依赖对象，也就是正转；而反转则是由容器来帮忙创建及注入依赖对象；</p> <p>为何是反转？因为由容器帮我们查找及注入依赖对象，对象只是被动的接受依赖对象，所以是反转；哪些方面反转了？依赖对象的获取被反转了。</p></li> <li><p>用图例说明一下?</p> <p>传统程序设计下，都是主动去创建相关对象然后再组合起来：</p> <p><img src="/matheusblog/assets/img/spring-framework-ioc-1.0cbe9767.png" alt=""></p> <p>当有了IOC/DI的容器后, 在客户端类中不再主动去创建这些对象了, 如图</p> <p><img src="/matheusblog/assets/img/spring-framework-ioc-2.2c1525d6.png" alt=""></p></li></ul> <h3 id="ioc能做什么"><a href="#ioc能做什么" class="header-anchor">#</a> IOC能做什么</h3> <p>传统应用程序都是由我们在类内部主动创建依赖对象，从而导致类与类之间高耦合，难于测试；有了IoC容器后，<strong>把创建和查找依赖对象的控制权交给了容器，由容器进行注入组合对象，所以对象与对象之间是 松散耦合，这样也方便测试，利于功能复用，更重要的是使得程序的整个体系结构变得非常灵活。</strong></p> <p>其实IoC对编程带来的最大改变不是从代码上，而是从思想上，发生了“主从换位”的变化。应用程序原本是老大，要获取什么资源都是主动出击，但是在IoC/DI思想中，应用程序就变成被动的了，被动的等待IoC容器来创建并注入它所需要的资源了。</p> <p>IoC很好的体现了面向对象设计法则之一—— 好莱坞法则：“别找我们，我们找你”；即由IoC容器帮对象找相应的依赖对象并注入，而不是由对象主动去找。</p> <h2 id="ioc配置的三种方式"><a href="#ioc配置的三种方式" class="header-anchor">#</a> IOC配置的三种方式</h2> <p>总体上目前的主流方式是 <strong>注解 + Java 配置</strong>。</p> <h3 id="xml配置"><a href="#xml配置" class="header-anchor">#</a> XML配置</h3> <p>优点： 可以使用于任何场景，结构清晰，通俗易懂</p> <p>缺点： 配置繁琐，不易维护，枯燥无味，扩展性差</p> <h3 id="java配置"><a href="#java配置" class="header-anchor">#</a> Java配置</h3> <p>将类的创建交给我们配置的JavcConfig类来完成，Spring只负责维护和管理，采用纯Java创建方式。其本质上就是把在XML上的配置声明转移到Java配置类中</p> <ul><li>优点：适用于任何场景，配置方便，因为是纯Java代码，扩展性高，十分灵活</li> <li>缺点：由于是采用Java类的方式，声明不明显，如果大量配置，可读性比较差</li> <li>举例：
+<ul><li>创建一个配置类， 添加@Configuration注解声明为配置类</li> <li>创建方法，方法上加上@bean，该方法用于创建实例并返回，该实例创建后会交给spring管理，方法名建议与实例名相同（首字母小写）。注：实例类不需要加任何注解</li></ul></li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author pdai
+ */</span>
+<span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BeansConfig</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * @return user dao
+     */</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">&quot;userDao&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">UserDaoImpl</span> <span class="token function">userDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">UserDaoImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * @return user service
+     */</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">&quot;userService&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">UserServiceImpl</span> <span class="token function">userService</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">UserServiceImpl</span> userService <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UserServiceImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        userService<span class="token punctuation">.</span><span class="token function">setUserDao</span><span class="token punctuation">(</span><span class="token function">userDao</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> userService<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><h3 id="注解配置"><a href="#注解配置" class="header-anchor">#</a> 注解配置</h3> <p>通过在类上加注解的方式，来声明一个类交给Spring管理，Spring会自动扫描带有@Component，@Controller，@Service，@Repository这四个注解的类，然后帮我们创建并管理，前提是需要先配置Spring的注解扫描器。</p> <ul><li>优点：开发便捷，通俗易懂，方便维护。</li> <li>缺点：具有局限性，对于一些第三方资源，无法添加注解。只能采用XML或JavaConfig的方式配置</li> <li>举例：
+<ul><li>对类添加@Component相关的注解，比如@Controller，@Service，@Repository</li> <li>设置ComponentScan的basePackage, 比如<code>&lt;context:component-scan base-package='tech.pdai.springframework'&gt;</code>, 或者<code>@ComponentScan(&quot;tech.pdai.springframework&quot;)</code>注解，或者 <code>new AnnotationConfigApplicationContext(&quot;tech.pdai.springframework&quot;)</code>指定扫描的basePackage.</li></ul></li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * @author pdai
+ */</span>
+<span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserServiceImpl</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * user dao impl.
+     */</span>
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">UserDaoImpl</span> userDao<span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * find user list.
+     *
+     * @return user list
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span> <span class="token function">findUserList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> userDao<span class="token punctuation">.</span><span class="token function">findUserList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><h2 id="关于单例多例模式说明"><a href="#关于单例多例模式说明" class="header-anchor">#</a> 关于单例多例模式说明</h2> <p>由Spring管理的对象的作用域默认是单例的（并不是单例模式），对于同一个Bean，无论获取多少次，得到的都是同一个对象！如果希望某个被Spring管理的对象不是单例的，可以在类上添加<code>@Scope(&quot;prototype&quot;)</code>注解。</p> <p>并且，在单例的情况下，默认不是懒加载的，还可以通过<code>@Lazy</code>注解控制它是否为懒加载模式！所谓的懒加载，就是“不要逼不得已不创建对象”。</p> <h2 id="生命周期"><a href="#生命周期" class="header-anchor">#</a> 生命周期</h2> <p>Spring 只帮我们管理单例模式 Bean 的完整生命周期，对于 prototype 的 bean ，Spring 在创建好交给使用者之后则不会再管理后续的生命周期。</p> <p>Spring 容器可以管理 singleton 作用域 Bean 的生命周期，在此作用域下，Spring 能够精确地知道该 Bean 何时被创建，何时初始化完成，以及何时被销毁。</p> <p>而对于 prototype 作用域的 Bean，Spring 只负责创建，当容器创建了 Bean 的实例后，Bean 的实例就交给客户端代码管理，Spring 容器将不再跟踪其生命周期。每次客户端请求 prototype 作用域的 Bean 时，Spring 容器都会创建一个新的实例，并且不会管那些被配置成 prototype 作用域的 Bean 的生命周期。</p> <p>了解 Spring 生命周期的意义就在于，可以利用 Bean 在其存活期间的指定时刻完成一些相关操作。这种时刻可能有很多，但一般情况下，会在 Bean 被初始化后和被销毁前执行一些相关操作。</p> <h3 id="spring-bean的生命周期流程"><a href="#spring-bean的生命周期流程" class="header-anchor">#</a> Spring Bean的生命周期流程</h3> <p>在 Spring 中，Bean 的生命周期是一个很复杂的执行过程，我们可以利用 Spring 提供的方法定制 Bean 的创建过程。</p> <p><img src="/matheusblog/assets/img/spring-framework-ioc-source-102.17c24027.png" alt=""></p> <p>由Spring创建并管理对象，则开发人员就没有了对象的控制权，无法对此对象的历程进行干预，而Spring允许在类中自定义最多2个方法，分别表示初始化方法和销毁方法，并且，Spring会在创建对象之后就执行初始化方法，在销毁对象之前执行销毁方法。</p> <p>关于这2个方法，你可以按需添加，例如，当你只需要干预销毁过程时，你可以只定义销毁的方法，不需要定义初始化方法。</p> <p>关于这2个方法的声明：</p> <ul><li>访问权限：推荐使用<code>public</code></li> <li>返回值类型：推荐使用<code>void</code></li> <li>方法名称：自定义</li> <li>参数列表：推荐为空</li></ul> <p>然后，需要在初始化方法的声明之前添加<code>@PostConstruct</code>注解，在销毁方法的声明之前添加<code>@PreDestroy</code>注解。</p> <p>例如：</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">cn<span class="token punctuation">.</span>tedu<span class="token punctuation">.</span>spring</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Configuration</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Lazy</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Scope</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Component</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Controller</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Repository</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Service</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">PostConstruct</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">javax<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">PreDestroy</span></span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserMapper</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">UserMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;\tUserMapper.UserMapper()&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@PostConstruct</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;\tUserMapper.init()&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@PreDestroy</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;\tUserMapper.destroy()&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><p>注意：仅当类的对象被Spring管理且是单例的，才有讨论生命周期的价值，否则，不讨论生命周期。</p> <p>如果某个类的对象是通过<code>@Bean</code>方法被Spring管理的，并且这个类不是自定义的，可以在<code>@Bean</code>注解中配置<code>initMethod</code>和<code>destroyMethod</code>这2个属性（它们的值就是方法名称，例如<code>destroyMethod=&quot;close&quot;</code>），将这个类中的方法指定为生命周期方法。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matheusblog/md/spring/spring/Spring入门案例.html" class="prev">
+        Spring入门案例
+      </a></span> <span class="next"><a href="/matheusblog/md/spring/spring/DI依赖注入.html">
+        DI依赖注入
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.98d32d61.js" defer></script><script src="/matheusblog/assets/js/2.34da62ad.js" defer></script><script src="/matheusblog/assets/js/78.aa9c5da5.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>基本运算符 | Java 全栈知识体系</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 大数据, 机器学习...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.633991d7.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.98d32d61.js" as="script"><link rel="preload" href="/matheusblog/assets/js/2.34da62ad.js" as="script"><link rel="preload" href="/matheusblog/assets/js/57.181e26c4.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.f75180e8.js"><link rel="prefetch" href="/matheusblog/assets/js/100.3d5ca5a0.js"><link rel="prefetch" href="/matheusblog/assets/js/101.f6854eb6.js"><link rel="prefetch" href="/matheusblog/assets/js/102.ca49a8b6.js"><link rel="prefetch" href="/matheusblog/assets/js/103.cca70b63.js"><link rel="prefetch" href="/matheusblog/assets/js/104.a595cff9.js"><link rel="prefetch" href="/matheusblog/assets/js/105.db4b4b05.js"><link rel="prefetch" href="/matheusblog/assets/js/106.5f758be1.js"><link rel="prefetch" href="/matheusblog/assets/js/107.7da45dc8.js"><link rel="prefetch" href="/matheusblog/assets/js/108.8fa7a262.js"><link rel="prefetch" href="/matheusblog/assets/js/109.ba8701b1.js"><link rel="prefetch" href="/matheusblog/assets/js/11.4a30505f.js"><link rel="prefetch" href="/matheusblog/assets/js/110.453838e0.js"><link rel="prefetch" href="/matheusblog/assets/js/111.ac57f4b2.js"><link rel="prefetch" href="/matheusblog/assets/js/112.82e638b0.js"><link rel="prefetch" href="/matheusblog/assets/js/113.1ce5b63f.js"><link rel="prefetch" href="/matheusblog/assets/js/114.66fdb77c.js"><link rel="prefetch" href="/matheusblog/assets/js/115.e1117448.js"><link rel="prefetch" href="/matheusblog/assets/js/116.e10770a9.js"><link rel="prefetch" href="/matheusblog/assets/js/117.2c1f55c5.js"><link rel="prefetch" href="/matheusblog/assets/js/118.4c89ef98.js"><link rel="prefetch" href="/matheusblog/assets/js/119.4c819e7f.js"><link rel="prefetch" href="/matheusblog/assets/js/12.793e0ec0.js"><link rel="prefetch" href="/matheusblog/assets/js/120.06f737df.js"><link rel="prefetch" href="/matheusblog/assets/js/121.bbd8d065.js"><link rel="prefetch" href="/matheusblog/assets/js/122.c73b3422.js"><link rel="prefetch" href="/matheusblog/assets/js/123.9bedb19d.js"><link rel="prefetch" href="/matheusblog/assets/js/124.9c34bd89.js"><link rel="prefetch" href="/matheusblog/assets/js/125.753284bf.js"><link rel="prefetch" href="/matheusblog/assets/js/126.5ec35180.js"><link rel="prefetch" href="/matheusblog/assets/js/127.b1a67c51.js"><link rel="prefetch" href="/matheusblog/assets/js/128.0f85f83b.js"><link rel="prefetch" href="/matheusblog/assets/js/129.9754ca0d.js"><link rel="prefetch" href="/matheusblog/assets/js/13.95235336.js"><link rel="prefetch" href="/matheusblog/assets/js/130.0800b514.js"><link rel="prefetch" href="/matheusblog/assets/js/131.306af433.js"><link rel="prefetch" href="/matheusblog/assets/js/132.53acc92c.js"><link rel="prefetch" href="/matheusblog/assets/js/133.d61293a3.js"><link rel="prefetch" href="/matheusblog/assets/js/134.aadfc68d.js"><link rel="prefetch" href="/matheusblog/assets/js/135.f0f4f57e.js"><link rel="prefetch" href="/matheusblog/assets/js/136.edaa4cd0.js"><link rel="prefetch" href="/matheusblog/assets/js/137.34ef0d92.js"><link rel="prefetch" href="/matheusblog/assets/js/138.cb4cbaad.js"><link rel="prefetch" href="/matheusblog/assets/js/139.1225c28e.js"><link rel="prefetch" href="/matheusblog/assets/js/14.4af1e2de.js"><link rel="prefetch" href="/matheusblog/assets/js/140.ec773abf.js"><link rel="prefetch" href="/matheusblog/assets/js/141.ff8b4cad.js"><link rel="prefetch" href="/matheusblog/assets/js/142.e921849c.js"><link rel="prefetch" href="/matheusblog/assets/js/143.8bb224bc.js"><link rel="prefetch" href="/matheusblog/assets/js/144.a7d83462.js"><link rel="prefetch" href="/matheusblog/assets/js/145.45b8a227.js"><link rel="prefetch" href="/matheusblog/assets/js/146.7cf6ce58.js"><link rel="prefetch" href="/matheusblog/assets/js/147.089c834c.js"><link rel="prefetch" href="/matheusblog/assets/js/148.6ee41415.js"><link rel="prefetch" href="/matheusblog/assets/js/149.77fc6065.js"><link rel="prefetch" href="/matheusblog/assets/js/15.528e7431.js"><link rel="prefetch" href="/matheusblog/assets/js/150.084e2ce0.js"><link rel="prefetch" href="/matheusblog/assets/js/151.c252c8f4.js"><link rel="prefetch" href="/matheusblog/assets/js/152.33b572b8.js"><link rel="prefetch" href="/matheusblog/assets/js/153.570b665f.js"><link rel="prefetch" href="/matheusblog/assets/js/154.9a57835a.js"><link rel="prefetch" href="/matheusblog/assets/js/155.378ea095.js"><link rel="prefetch" href="/matheusblog/assets/js/156.e31769cc.js"><link rel="prefetch" href="/matheusblog/assets/js/157.2583dbbe.js"><link rel="prefetch" href="/matheusblog/assets/js/158.f73e2e8f.js"><link rel="prefetch" href="/matheusblog/assets/js/159.18062130.js"><link rel="prefetch" href="/matheusblog/assets/js/16.5f251fb5.js"><link rel="prefetch" href="/matheusblog/assets/js/160.38ec7e3b.js"><link rel="prefetch" href="/matheusblog/assets/js/161.71036bc2.js"><link rel="prefetch" href="/matheusblog/assets/js/162.6ac3d695.js"><link rel="prefetch" href="/matheusblog/assets/js/163.4a46abf7.js"><link rel="prefetch" href="/matheusblog/assets/js/164.5584f565.js"><link rel="prefetch" href="/matheusblog/assets/js/165.413a07d8.js"><link rel="prefetch" href="/matheusblog/assets/js/166.a8922048.js"><link rel="prefetch" href="/matheusblog/assets/js/167.60cc7908.js"><link rel="prefetch" href="/matheusblog/assets/js/168.4254c123.js"><link rel="prefetch" href="/matheusblog/assets/js/169.cbc70b26.js"><link rel="prefetch" href="/matheusblog/assets/js/17.355d31d9.js"><link rel="prefetch" href="/matheusblog/assets/js/170.916a1019.js"><link rel="prefetch" href="/matheusblog/assets/js/171.07b53d73.js"><link rel="prefetch" href="/matheusblog/assets/js/172.1b33958a.js"><link rel="prefetch" href="/matheusblog/assets/js/173.31f5fa1a.js"><link rel="prefetch" href="/matheusblog/assets/js/174.9a39a5ac.js"><link rel="prefetch" href="/matheusblog/assets/js/175.c6bfd4ac.js"><link rel="prefetch" href="/matheusblog/assets/js/176.f65aa694.js"><link rel="prefetch" href="/matheusblog/assets/js/177.3b68b40b.js"><link rel="prefetch" href="/matheusblog/assets/js/178.6df30b74.js"><link rel="prefetch" href="/matheusblog/assets/js/179.861ac0bf.js"><link rel="prefetch" href="/matheusblog/assets/js/18.7f72dc01.js"><link rel="prefetch" href="/matheusblog/assets/js/180.9546e52a.js"><link rel="prefetch" href="/matheusblog/assets/js/181.bd834059.js"><link rel="prefetch" href="/matheusblog/assets/js/182.af4de693.js"><link rel="prefetch" href="/matheusblog/assets/js/183.1dc2e9c4.js"><link rel="prefetch" href="/matheusblog/assets/js/184.6a2a9374.js"><link rel="prefetch" href="/matheusblog/assets/js/185.59ad729c.js"><link rel="prefetch" href="/matheusblog/assets/js/186.7fe4fd1e.js"><link rel="prefetch" href="/matheusblog/assets/js/187.70003b09.js"><link rel="prefetch" href="/matheusblog/assets/js/188.8573a984.js"><link rel="prefetch" href="/matheusblog/assets/js/189.ec69892a.js"><link rel="prefetch" href="/matheusblog/assets/js/19.47699359.js"><link rel="prefetch" href="/matheusblog/assets/js/190.bed9ec84.js"><link rel="prefetch" href="/matheusblog/assets/js/191.543ed3aa.js"><link rel="prefetch" href="/matheusblog/assets/js/192.bc65c506.js"><link rel="prefetch" href="/matheusblog/assets/js/193.fcf26f62.js"><link rel="prefetch" href="/matheusblog/assets/js/194.c2ef52d4.js"><link rel="prefetch" href="/matheusblog/assets/js/195.686f093a.js"><link rel="prefetch" href="/matheusblog/assets/js/196.fd9d0a4e.js"><link rel="prefetch" href="/matheusblog/assets/js/197.f4534abe.js"><link rel="prefetch" href="/matheusblog/assets/js/198.e89e6439.js"><link rel="prefetch" href="/matheusblog/assets/js/199.0bc681f6.js"><link rel="prefetch" href="/matheusblog/assets/js/20.e5882ee9.js"><link rel="prefetch" href="/matheusblog/assets/js/200.5d1411b9.js"><link rel="prefetch" href="/matheusblog/assets/js/201.1b53caf7.js"><link rel="prefetch" href="/matheusblog/assets/js/202.3eb921e9.js"><link rel="prefetch" href="/matheusblog/assets/js/203.56e48204.js"><link rel="prefetch" href="/matheusblog/assets/js/204.0ee3bbf8.js"><link rel="prefetch" href="/matheusblog/assets/js/205.4b5d9136.js"><link rel="prefetch" href="/matheusblog/assets/js/206.3e6da766.js"><link rel="prefetch" href="/matheusblog/assets/js/207.4b3ddaae.js"><link rel="prefetch" href="/matheusblog/assets/js/208.4ed4f9f6.js"><link rel="prefetch" href="/matheusblog/assets/js/209.adbc8922.js"><link rel="prefetch" href="/matheusblog/assets/js/21.900a8ec7.js"><link rel="prefetch" href="/matheusblog/assets/js/210.518d0b2b.js"><link rel="prefetch" href="/matheusblog/assets/js/211.592c7ccb.js"><link rel="prefetch" href="/matheusblog/assets/js/212.54001ac2.js"><link rel="prefetch" href="/matheusblog/assets/js/213.80a72da6.js"><link rel="prefetch" href="/matheusblog/assets/js/214.e1a549d7.js"><link rel="prefetch" href="/matheusblog/assets/js/215.11e81270.js"><link rel="prefetch" href="/matheusblog/assets/js/216.ac929e20.js"><link rel="prefetch" href="/matheusblog/assets/js/217.fd0af17b.js"><link rel="prefetch" href="/matheusblog/assets/js/218.a65bbeaa.js"><link rel="prefetch" href="/matheusblog/assets/js/219.fbe13534.js"><link rel="prefetch" href="/matheusblog/assets/js/22.ff332d51.js"><link rel="prefetch" href="/matheusblog/assets/js/220.6dea16c6.js"><link rel="prefetch" href="/matheusblog/assets/js/221.bf7499ec.js"><link rel="prefetch" href="/matheusblog/assets/js/23.7c24c528.js"><link rel="prefetch" href="/matheusblog/assets/js/24.221c5e98.js"><link rel="prefetch" href="/matheusblog/assets/js/25.0134b188.js"><link rel="prefetch" href="/matheusblog/assets/js/26.ce908b7f.js"><link rel="prefetch" href="/matheusblog/assets/js/27.8790623d.js"><link rel="prefetch" href="/matheusblog/assets/js/28.b434aff5.js"><link rel="prefetch" href="/matheusblog/assets/js/29.098b8057.js"><link rel="prefetch" href="/matheusblog/assets/js/3.ce636248.js"><link rel="prefetch" href="/matheusblog/assets/js/30.52b0a576.js"><link rel="prefetch" href="/matheusblog/assets/js/31.1b25634d.js"><link rel="prefetch" href="/matheusblog/assets/js/32.f193a825.js"><link rel="prefetch" href="/matheusblog/assets/js/33.9ead944f.js"><link rel="prefetch" href="/matheusblog/assets/js/34.903e67f5.js"><link rel="prefetch" href="/matheusblog/assets/js/35.75904d44.js"><link rel="prefetch" href="/matheusblog/assets/js/36.1d55859f.js"><link rel="prefetch" href="/matheusblog/assets/js/37.70c7b1d8.js"><link rel="prefetch" href="/matheusblog/assets/js/38.15714070.js"><link rel="prefetch" href="/matheusblog/assets/js/39.68b93333.js"><link rel="prefetch" href="/matheusblog/assets/js/4.f99ce43b.js"><link rel="prefetch" href="/matheusblog/assets/js/40.1f15bc23.js"><link rel="prefetch" href="/matheusblog/assets/js/41.46d77c1a.js"><link rel="prefetch" href="/matheusblog/assets/js/42.a117ae6e.js"><link rel="prefetch" href="/matheusblog/assets/js/43.cbe38645.js"><link rel="prefetch" href="/matheusblog/assets/js/44.8222aed3.js"><link rel="prefetch" href="/matheusblog/assets/js/45.57722d0e.js"><link rel="prefetch" href="/matheusblog/assets/js/46.aafad694.js"><link rel="prefetch" href="/matheusblog/assets/js/47.ca0b1fe0.js"><link rel="prefetch" href="/matheusblog/assets/js/48.349b35d1.js"><link rel="prefetch" href="/matheusblog/assets/js/49.b9c08c0e.js"><link rel="prefetch" href="/matheusblog/assets/js/5.64180031.js"><link rel="prefetch" href="/matheusblog/assets/js/50.93e3d25c.js"><link rel="prefetch" href="/matheusblog/assets/js/51.e69e635d.js"><link rel="prefetch" href="/matheusblog/assets/js/52.37cb98bd.js"><link rel="prefetch" href="/matheusblog/assets/js/53.65a89bdb.js"><link rel="prefetch" href="/matheusblog/assets/js/54.65553c35.js"><link rel="prefetch" href="/matheusblog/assets/js/55.71dac7ad.js"><link rel="prefetch" href="/matheusblog/assets/js/56.33907187.js"><link rel="prefetch" href="/matheusblog/assets/js/58.795923e6.js"><link rel="prefetch" href="/matheusblog/assets/js/59.423ca6bd.js"><link rel="prefetch" href="/matheusblog/assets/js/6.390e3f0b.js"><link rel="prefetch" href="/matheusblog/assets/js/60.ee96cd1f.js"><link rel="prefetch" href="/matheusblog/assets/js/61.66f98f24.js"><link rel="prefetch" href="/matheusblog/assets/js/62.865f6944.js"><link rel="prefetch" href="/matheusblog/assets/js/63.7d692af1.js"><link rel="prefetch" href="/matheusblog/assets/js/64.84055070.js"><link rel="prefetch" href="/matheusblog/assets/js/65.40a56349.js"><link rel="prefetch" href="/matheusblog/assets/js/66.2fa72ab3.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b7531b45.js"><link rel="prefetch" href="/matheusblog/assets/js/68.b4af8ca3.js"><link rel="prefetch" href="/matheusblog/assets/js/69.b9dbb4bd.js"><link rel="prefetch" href="/matheusblog/assets/js/7.f2df787d.js"><link rel="prefetch" href="/matheusblog/assets/js/70.ff97ef74.js"><link rel="prefetch" href="/matheusblog/assets/js/71.5e965fbe.js"><link rel="prefetch" href="/matheusblog/assets/js/72.a54bc571.js"><link rel="prefetch" href="/matheusblog/assets/js/73.bbf446cc.js"><link rel="prefetch" href="/matheusblog/assets/js/74.83522c0f.js"><link rel="prefetch" href="/matheusblog/assets/js/75.4067083f.js"><link rel="prefetch" href="/matheusblog/assets/js/76.29b8408c.js"><link rel="prefetch" href="/matheusblog/assets/js/77.2f78c8a7.js"><link rel="prefetch" href="/matheusblog/assets/js/78.aa9c5da5.js"><link rel="prefetch" href="/matheusblog/assets/js/79.e27eae87.js"><link rel="prefetch" href="/matheusblog/assets/js/8.5abb2418.js"><link rel="prefetch" href="/matheusblog/assets/js/80.487f48d2.js"><link rel="prefetch" href="/matheusblog/assets/js/81.a148f0d5.js"><link rel="prefetch" href="/matheusblog/assets/js/82.ff6ff828.js"><link rel="prefetch" href="/matheusblog/assets/js/83.06905ba2.js"><link rel="prefetch" href="/matheusblog/assets/js/84.540e52ce.js"><link rel="prefetch" href="/matheusblog/assets/js/85.ea9f1eeb.js"><link rel="prefetch" href="/matheusblog/assets/js/86.08473beb.js"><link rel="prefetch" href="/matheusblog/assets/js/87.f29163d2.js"><link rel="prefetch" href="/matheusblog/assets/js/88.b13f950d.js"><link rel="prefetch" href="/matheusblog/assets/js/89.b4a3f121.js"><link rel="prefetch" href="/matheusblog/assets/js/9.5cecb6da.js"><link rel="prefetch" href="/matheusblog/assets/js/90.2982c28f.js"><link rel="prefetch" href="/matheusblog/assets/js/91.7952f324.js"><link rel="prefetch" href="/matheusblog/assets/js/92.a7d9d05a.js"><link rel="prefetch" href="/matheusblog/assets/js/93.622a0e9f.js"><link rel="prefetch" href="/matheusblog/assets/js/94.f7c65dc0.js"><link rel="prefetch" href="/matheusblog/assets/js/95.bf11ade2.js"><link rel="prefetch" href="/matheusblog/assets/js/96.c85a5970.js"><link rel="prefetch" href="/matheusblog/assets/js/97.4b82379b.js"><link rel="prefetch" href="/matheusblog/assets/js/98.52b620df.js"><link rel="prefetch" href="/matheusblog/assets/js/99.55cade5d.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.633991d7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">Java 全栈知识体系</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/01SpringMVC简介.html" class="nav-link">
+  SpringMVC简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/01SpringMVC简介.html" class="nav-link">
+  SpringMVC简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>工具</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="sidebar-link">VScode使用</a></li><li><a href="/matheusblog/md/devops/tools/Notebook.html" class="sidebar-link">Notebook环境使用指南</a></li><li><a href="/matheusblog/md/devops/tools/HBuilderX.html" class="sidebar-link">HBuilderX</a></li><li><a href="/matheusblog/md/devops/tools/硬件设置.html" class="sidebar-link">硬件设置</a></li><li><a href="/matheusblog/md/devops/tools/IDEA使用.html" class="sidebar-link">IDEA</a></li><li><a href="/matheusblog/md/devops/tools/IDEA快捷键与JavaDoc.html" class="sidebar-link">IDEA快捷键与JavaDoc</a></li><li><a href="/matheusblog/md/devops/tools/网页扒手.html" class="sidebar-link">网页扒手</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Git</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/git/01 基本用法.html" class="sidebar-link">Git安装</a></li><li><a href="/matheusblog/md/devops/tools/git/02 Github快速上手.html" class="sidebar-link">GitHub快速上手</a></li><li><a href="/matheusblog/md/devops/tools/git/03 Git分支操作.html" class="sidebar-link">Git分支操作</a></li><li><a href="/matheusblog/md/devops/tools/git/04 多人协作GitHub部分.html" class="sidebar-link">多人协作GitHub部分</a></li><li><a href="/matheusblog/md/devops/tools/git/05 多人协作Git部分.html" class="sidebar-link">多人协作Git部分</a></li><li><a href="/matheusblog/md/devops/tools/git/06 Git tag和GitHub releases.html" class="sidebar-link">Git tag和GitHub releases</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vim</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/tools/vim/01 Vim快速入门.html" class="sidebar-link">Vim快速入门</a></li><li><a href="/matheusblog/md/devops/tools/vim/02Vim文档编辑.html" class="sidebar-link">Vim文档编辑</a></li><li><a href="/matheusblog/md/devops/tools/vim/03Vim查找替换.html" class="sidebar-link">Vim查找替换</a></li><li><a href="/matheusblog/md/devops/tools/vim/04Vim高级功能.html" class="sidebar-link">Vim高级功能</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/linux/00 Centos.html" class="sidebar-link">Centos</a></li><li><a href="/matheusblog/md/devops/linux/01 编辑c.html" class="sidebar-link">编辑c</a></li><li><a href="/matheusblog/md/devops/linux/03 TCP_IP命令.html" class="sidebar-link">TCP/IP命令</a></li><li><a href="/matheusblog/md/devops/linux/04 基本概念及操作.html" class="sidebar-link">基本概念及操作</a></li><li><a href="/matheusblog/md/devops/linux/05 用户及文件权限管理.html" class="sidebar-link">用户及文件权限管理</a></li><li><a href="/matheusblog/md/devops/linux/06 Linux 目录结构及文件基本操作.html" class="sidebar-link">Linux 目录结构及文件基本操作</a></li><li><a href="/matheusblog/md/devops/linux/07 环境变量与文件查找.html" class="sidebar-link">环境变量与文件查找</a></li><li><a href="/matheusblog/md/devops/linux/08  文件打包与解压缩.html" class="sidebar-link">文件打包与解压缩</a></li><li><a href="/matheusblog/md/devops/linux/09 文件系统操作与磁盘管理.html" class="sidebar-link">文件系统操作与磁盘管理</a></li><li><a href="/matheusblog/md/devops/linux/10 Linux下的帮助命令.html" class="sidebar-link">Linux下的帮助命令</a></li><li><a href="/matheusblog/md/devops/linux/11 Linux任务计划crontab.html" class="sidebar-link">Linux任务计划crontab</a></li><li><a href="/matheusblog/md/devops/linux/12 命令执行顺序控制与管道.html" class="sidebar-link">命令执行顺序控制与管道</a></li><li><a href="/matheusblog/md/devops/linux/13简单的文本处理.html" class="sidebar-link">文本处理命令</a></li><li><a href="/matheusblog/md/devops/linux/14数据流重定向.html" class="sidebar-link">数据流重定向</a></li><li><a href="/matheusblog/md/devops/linux/15正则表达式基础.html" class="sidebar-link">正则表达式</a></li><li><a href="/matheusblog/md/devops/linux/16Linux下软件安装.html" class="sidebar-link">LInux下软件安装</a></li><li><a href="/matheusblog/md/devops/linux/17Linux进程概念.html" class="sidebar-link">Linux进程概念</a></li><li><a href="/matheusblog/md/devops/linux/18Linux进程管理.html" class="sidebar-link">Linux进程管理</a></li><li><a href="/matheusblog/md/devops/linux/19Linux日志系统.html" class="sidebar-link">Linux日志系统</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Bash</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/devops/docker/bash/01bash介绍与入门.html" class="sidebar-link">Bash介绍与入门</a></li><li><a href="/matheusblog/md/devops/docker/bash/02bash特殊字符.html" class="sidebar-link">Bash特殊字符</a></li><li><a href="/matheusblog/md/devops/docker/bash/03变量与参数.html" class="sidebar-link">变量与参数</a></li><li><a href="/matheusblog/md/devops/docker/bash/04基本运算符.html" class="active sidebar-link">基本运算符</a></li><li><a href="/matheusblog/md/devops/docker/bash/05流程控制.html" class="sidebar-link">流程控制</a></li><li><a href="/matheusblog/md/devops/docker/bash/06函数.html" class="sidebar-link">函数</a></li><li><a href="/matheusblog/md/devops/docker/bash/07Shell脚本实现Linux系统监控.html" class="sidebar-link">Shell脚本实现Linux系统监控</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="基本运算符"><a href="#基本运算符" class="header-anchor">#</a> 基本运算符</h1> <h2 id="算数运算符"><a href="#算数运算符" class="header-anchor">#</a> 算数运算符</h2> <p><img src="data:image/png;base64,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" alt="image-20220531210537392"></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">vim</span> test.sh
+<span class="token comment">#!/bin/bash</span>
+
+<span class="token assign-left variable">a</span><span class="token operator">=</span><span class="token number">10</span>
+<span class="token assign-left variable">b</span><span class="token operator">=</span><span class="token number">20</span>
+
+<span class="token assign-left variable">val</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">expr</span> $a + $b<span class="token variable">`</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;a + b : <span class="token variable">$val</span>&quot;</span>
+
+<span class="token assign-left variable">val</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">expr</span> $a - $b<span class="token variable">`</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;a - b : <span class="token variable">$val</span>&quot;</span>
+
+<span class="token assign-left variable">val</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">expr</span> $a <span class="token punctuation">\</span>* $b<span class="token variable">`</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;a * b : <span class="token variable">$val</span>&quot;</span>
+
+<span class="token assign-left variable">val</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">expr</span> $b / $a<span class="token variable">`</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;b / a : <span class="token variable">$val</span>&quot;</span>
+
+<span class="token assign-left variable">val</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">expr</span> $b % $a<span class="token variable">`</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;b % a : <span class="token variable">$val</span>&quot;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$a</span> <span class="token operator">==</span> <span class="token variable">$b</span> <span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;a == b&quot;</span>
+<span class="token keyword">fi</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$a</span> <span class="token operator">!=</span> <span class="token variable">$b</span> <span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;a != b&quot;</span>
+<span class="token keyword">fi</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><p>运行</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">bash</span> test.sh
+
+a + b <span class="token builtin class-name">:</span> <span class="token number">30</span>
+a - b <span class="token builtin class-name">:</span> -10
+a * b <span class="token builtin class-name">:</span> <span class="token number">200</span>
+b / a <span class="token builtin class-name">:</span> <span class="token number">2</span>
+b % a <span class="token builtin class-name">:</span> <span class="token number">0</span>
+a <span class="token operator">!=</span> b
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><blockquote><ul><li>原生 bash 不支持简单的数学运算，但是可以通过其他命令来实现，例如 <code>awk</code> 和 <code>expr</code>，<code>expr</code> 最常用。</li> <li><code>expr</code> 是一款表达式计算工具，使用它能完成表达式的求值操作。</li> <li>注意使用的反引号（esc 键下边）</li> <li>表达式和运算符之间要有空格 <code>$a + $b</code> 写成 <code>$a+$b</code> 不行</li> <li>条件表达式要放在方括号之间，并且要有空格 <code>[ $a == $b ]</code> 写成 <code>[$a==$b]</code> 不行</li> <li>乘号（<code>*</code>）前边必须加反斜杠（<code>\</code>)才能实现乘法运算</li></ul></blockquote> <h2 id="关系运算符"><a href="#关系运算符" class="header-anchor">#</a> 关系运算符</h2> <p>关系运算符只支持数字，不支持字符串，除非字符串的值是数字。</p> <p><img src="/matheusblog/assets/img/image-20220531210544071.de143b0e.png" alt="image-20220531210544071"></p> <p>实例</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">vim</span> test2.sh
+<span class="token comment">#!/bin/bash</span>
+
+<span class="token assign-left variable">a</span><span class="token operator">=</span><span class="token number">10</span>
+<span class="token assign-left variable">b</span><span class="token operator">=</span><span class="token number">20</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$a</span> -eq <span class="token variable">$b</span> <span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$a</span> -eq <span class="token variable">$b</span> : a == b&quot;</span>
+<span class="token keyword">else</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$a</span> -eq <span class="token variable">$b</span>: a != b&quot;</span>
+<span class="token keyword">fi</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>运行</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">bash</span> test2.sh
+
+<span class="token number">10</span> -eq <span class="token number">20</span>: a <span class="token operator">!=</span> b
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="逻辑运算符"><a href="#逻辑运算符" class="header-anchor">#</a> 逻辑运算符</h2> <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAekAAABACAYAAAA+qo8FAAAFgUlEQVR4nO3dyZXjRAAG4NK8DoQY4NahDERAOqQwkIl9m5jEBfOqy7VpsbV93wW3LMllmze/ax9ut9v4+fkZrup+v4crv38A9iGXR982KgsA0CCkAWCnhtvtNm5dCADg2UcI4dJ9svqkAdgDfdIAcCAfr7rxMAwhhBDGcew6vvb1S6SvkXvNOeV4XJPzyvcDwDFlQ7oUUjm5cInPL12bHi+FVHxeLiRb188xjmMYhiEMwxDGcXz6u6b0fuPrau8DAB6yIZ0LqV61WmjpcekecXlq93q3ntfu+YEDADWrN3eXwqmndh0/F98nV5ueUrudo1TbzT3WVA3A2oZhKIf0WsHT04xdOr+ntr12QNaa0Uv940tfAwBS4zi2a9K9gTI1jPdqrWbq3n78o30+ALzPU0jXapJzaq9zwzvX/9w6b0/0SQOw1FNIrx0ua9znnc3dNQIXgHep9knnTg5h+sjqOTXp3HNb1pinjEzvIewBaOnqkw7hOSDXmDc89fxXj+aeWp4l1+mTBqDHpIFjpRpuLjRLq3W1aqG15vat+p1b/eKla2J77TsHYL+aIV0LlVqzdOv4K1cMW1PvwitxKwMArKG6LOjjcavWWzq21prXW1izfEd5zwDsS3EKVmnFr5J3Ne++uw839z7i/vE518fHAaBk+P3vX1XvQgg/vv/cuggAXFhuP+mXbVV5NPf7fesiAHBxaRYJ6f+kv14A4J2qNekrNvf+8c9vWxcBAIq+bV2APXrl5hpzrzfQDOB6NHdnPEZv9y5iMnfVNVOyAKgR0h3i6WhxgD+OPeQelxY5qS360rveuZAHOLfqYiatsDhzSMx5b2mAx6bMqY7PLd1zTvN36z5py0GpJeHM3zvAnmQXM0lrjlOeP6NcDXlKSM7df/sdG4qUgjndTCUt1xW+d4Ctae5OpIE1JZxazeE5rbBbKwxzZZtrrfsAUFcM6d5AOptSuJZq0KXm43T/6VqLRI931ajP+J0CHFWxT7q2tWTr+bMp1UJLgb2kD7m1n/aZP2cAvvoyT7pnb+jWzldnk+ufTY/3eDSdp03otfMAuDZ90g1pWPbWaHO7ia1dll5pE3ztx5ZFUwD2IxvSrSC6atNr79S03Dlbb1VZa6YHYJ+KNenWKOXc82cN7d5+955aczqd64if2VHLDXA0X0K6tphFLoByzx9JaVORdKDYkveWG+0dv0bp/LWkTdytv9P/B0oLrADwek816VYzbevvo8jtgPXj+8/iQLGa1kCwKVrN0lN/FM35/uJjR/1+Ac7g/5C+0raNtW051/gR0nNNzyj5q42kB+Aro7sj9/t96yIAcGFpDgnpyOfn59ZFAOCi7vf7Uw59/PnLX8IJAHaoWpM+8/rdj37p3C+Xpe/rFdcf+bMGYB7N3Rnx9Kulo7tDqK/HDQAlQrpDOre5tMhL7nE8nStWCu5ajbm1AxcA5yKkC+ZOvVqySElp4ZAlu2rlzm/NxRb+APsgpDu0VuBqmbpbVvxaa/RF57bYTBdsKT0PwHaEdCKtcU4Jr1ZzeE7veuBz5cp81Q1SAI5GSCdK4VqqQZeaoeM+6TVGawtVgOsR0h1yNeTH8Vht84ze5vHaSPBXBrUNNAD2R0g3lPpvpwZmb2hvte+zJnCA/RHSDXP7c2tbfK5VlrUJaoB9EdITtLaJrDUZL51CBcD1fNu6AEcQT4Vq7R3dU8OeM41rrtyqabXacu8qawC8npp0RtrvvHQd7vi/tcFl8XlrSoM31+9trjTA/gjpRG6gWEurdj1Fa+BYq8l9ajlyx4UzwD4I6USrL3nOPXrP6XltAQpwHcPtdvOvPgDs0EcI4Wk/5SvJ7ScNAO+WyyOjuwFgp4Q0AOyUkAaAnRLSALBTQhoAdupfC3tV1M6G62YAAAAASUVORK5CYII=" alt="image-20220531210549581"></p> <p>实例</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token assign-left variable">a</span><span class="token operator">=</span><span class="token number">10</span>
+<span class="token assign-left variable">b</span><span class="token operator">=</span><span class="token number">20</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$a</span> -lt <span class="token number">100</span> <span class="token operator">&amp;&amp;</span> <span class="token variable">$b</span> -gt <span class="token number">100</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;return true&quot;</span>
+<span class="token keyword">else</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;return false&quot;</span>
+<span class="token keyword">fi</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$a</span> -lt <span class="token number">100</span> <span class="token operator">||</span> <span class="token variable">$b</span> -gt <span class="token number">100</span> <span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;return true&quot;</span>
+<span class="token keyword">else</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;return false&quot;</span>
+<span class="token keyword">fi</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>结果</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token builtin class-name">return</span> <span class="token boolean">false</span>
+<span class="token builtin class-name">return</span> <span class="token boolean">true</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="字符串运算符"><a href="#字符串运算符" class="header-anchor">#</a> 字符串运算符</h2> <p><img src="/matheusblog/assets/img/image-20220531210555775.bb2e6787.png" alt="image-20220531210555775"></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable">a</span><span class="token operator">=</span><span class="token string">&quot;abc&quot;</span>
+<span class="token assign-left variable">b</span><span class="token operator">=</span><span class="token string">&quot;efg&quot;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$a</span> <span class="token operator">=</span> <span class="token variable">$b</span> <span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$a</span> = <span class="token variable">$b</span> : a == b&quot;</span>
+<span class="token keyword">else</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$a</span> = <span class="token variable">$b</span>: a != b&quot;</span>
+<span class="token keyword">fi</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> -n <span class="token variable">$a</span> <span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;-n <span class="token variable">$a</span> : The string length is not 0&quot;</span>
+<span class="token keyword">else</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;-n <span class="token variable">$a</span> : The string length is  0&quot;</span>
+<span class="token keyword">fi</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$a</span> <span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$a</span> : The string is not empty&quot;</span>
+<span class="token keyword">else</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$a</span> : The string is empty&quot;</span>
+<span class="token keyword">fi</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p>结果</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>abc <span class="token operator">=</span> efg: a <span class="token operator">!=</span> b
+-n abc <span class="token builtin class-name">:</span> The string length is not <span class="token number">0</span>
+abc <span class="token builtin class-name">:</span> The string is not empty
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="文件测试运算符"><a href="#文件测试运算符" class="header-anchor">#</a> 文件测试运算符</h2> <p><img src="/matheusblog/assets/img/image-20220531210603249.b58ba76e.png" alt="image-20220531210603249"></p> <p>实例：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable">file</span><span class="token operator">=</span><span class="token string">&quot;/home/shiyanlou/test.sh&quot;</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> -r <span class="token variable">$file</span> <span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;The file is readable&quot;</span>
+<span class="token keyword">else</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;The file is not readable&quot;</span>
+<span class="token keyword">fi</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> -e <span class="token variable">$file</span> <span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;File exists&quot;</span>
+<span class="token keyword">else</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">&quot;File not exists&quot;</span>
+<span class="token keyword">fi</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>结果</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>The <span class="token function">file</span> is readable
+File exists
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="思考"><a href="#思考" class="header-anchor">#</a> 思考</h2> <p>浮点运算，比如实现求圆的面积和周长。</p> <p><code>expr</code> 只能用于整数计算，可以使用 <code>bc</code> 或者 <code>awk</code> 进行浮点数运算。</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable">radius</span><span class="token operator">=</span><span class="token number">2.4</span>
+
+<span class="token assign-left variable">pi</span><span class="token operator">=</span><span class="token number">3.14159</span>
+
+<span class="token assign-left variable">girth</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> <span class="token string">&quot;scale=4; 3.14 * 2 * <span class="token variable">$radius</span>&quot;</span> <span class="token operator">|</span> <span class="token function">bc</span><span class="token variable">)</span></span>
+
+<span class="token assign-left variable">area</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> <span class="token string">&quot;scale=4; 3.14 * <span class="token variable">$radius</span> * <span class="token variable">$radius</span>&quot;</span> <span class="token operator">|</span> <span class="token function">bc</span><span class="token variable">)</span></span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;girth=<span class="token variable">$girth</span>&quot;</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;area=<span class="token variable">$area</span>&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><blockquote><p>以上代码如果想在环境中运行，需要先安装 <code>bc</code>。</p></blockquote> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token function">bc</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matheusblog/md/devops/docker/bash/03变量与参数.html" class="prev">
+        变量与参数
+      </a></span> <span class="next"><a href="/matheusblog/md/devops/docker/bash/05流程控制.html">
+        流程控制
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.98d32d61.js" defer></script><script src="/matheusblog/assets/js/2.34da62ad.js" defer></script><script src="/matheusblog/assets/js/57.181e26c4.js" defer></script>
+  </body>
+</html>
