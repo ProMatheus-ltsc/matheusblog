@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>程序计数器 | Java 全栈知识体系</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 大数据, 机器学习...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.633991d7.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.ca6f1787.js" as="script"><link rel="preload" href="/matheusblog/assets/js/2.3ab44821.js" as="script"><link rel="preload" href="/matheusblog/assets/js/179.47ec8f47.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.d5ff9241.js"><link rel="prefetch" href="/matheusblog/assets/js/100.2a4b443b.js"><link rel="prefetch" href="/matheusblog/assets/js/101.e7f6a456.js"><link rel="prefetch" href="/matheusblog/assets/js/102.d28d5139.js"><link rel="prefetch" href="/matheusblog/assets/js/103.c68ccf8a.js"><link rel="prefetch" href="/matheusblog/assets/js/104.2cf98bfc.js"><link rel="prefetch" href="/matheusblog/assets/js/105.c00f2ea5.js"><link rel="prefetch" href="/matheusblog/assets/js/106.3c431d25.js"><link rel="prefetch" href="/matheusblog/assets/js/107.743db453.js"><link rel="prefetch" href="/matheusblog/assets/js/108.1bb98844.js"><link rel="prefetch" href="/matheusblog/assets/js/109.0ffeb335.js"><link rel="prefetch" href="/matheusblog/assets/js/11.e91cd461.js"><link rel="prefetch" href="/matheusblog/assets/js/110.2fefdecd.js"><link rel="prefetch" href="/matheusblog/assets/js/111.7444f6f1.js"><link rel="prefetch" href="/matheusblog/assets/js/112.97882824.js"><link rel="prefetch" href="/matheusblog/assets/js/113.51f8a6ab.js"><link rel="prefetch" href="/matheusblog/assets/js/114.90c9dc6a.js"><link rel="prefetch" href="/matheusblog/assets/js/115.8b8ab4a8.js"><link rel="prefetch" href="/matheusblog/assets/js/116.9c11c72f.js"><link rel="prefetch" href="/matheusblog/assets/js/117.a81e1184.js"><link rel="prefetch" href="/matheusblog/assets/js/118.d7006eda.js"><link rel="prefetch" href="/matheusblog/assets/js/119.ba753928.js"><link rel="prefetch" href="/matheusblog/assets/js/12.b6af2673.js"><link rel="prefetch" href="/matheusblog/assets/js/120.bcbfed56.js"><link rel="prefetch" href="/matheusblog/assets/js/121.9774d590.js"><link rel="prefetch" href="/matheusblog/assets/js/122.c8fc2df8.js"><link rel="prefetch" href="/matheusblog/assets/js/123.94a64eb8.js"><link rel="prefetch" href="/matheusblog/assets/js/124.fcefa01d.js"><link rel="prefetch" href="/matheusblog/assets/js/125.65ff9987.js"><link rel="prefetch" href="/matheusblog/assets/js/126.50818a84.js"><link rel="prefetch" href="/matheusblog/assets/js/127.6527425b.js"><link rel="prefetch" href="/matheusblog/assets/js/128.dc5a8481.js"><link rel="prefetch" href="/matheusblog/assets/js/129.9c871e11.js"><link rel="prefetch" href="/matheusblog/assets/js/13.890636a0.js"><link rel="prefetch" href="/matheusblog/assets/js/130.e6c0f9ef.js"><link rel="prefetch" href="/matheusblog/assets/js/131.5b0eb015.js"><link rel="prefetch" href="/matheusblog/assets/js/132.5c76a362.js"><link rel="prefetch" href="/matheusblog/assets/js/133.eb9a3ecf.js"><link rel="prefetch" href="/matheusblog/assets/js/134.8cd94c08.js"><link rel="prefetch" href="/matheusblog/assets/js/135.1998da0a.js"><link rel="prefetch" href="/matheusblog/assets/js/136.1f0f2c2d.js"><link rel="prefetch" href="/matheusblog/assets/js/137.70cb69e2.js"><link rel="prefetch" href="/matheusblog/assets/js/138.f843a6ff.js"><link rel="prefetch" href="/matheusblog/assets/js/139.3b636ee1.js"><link rel="prefetch" href="/matheusblog/assets/js/14.b04a52b5.js"><link rel="prefetch" href="/matheusblog/assets/js/140.5cf7a295.js"><link rel="prefetch" href="/matheusblog/assets/js/141.462355da.js"><link rel="prefetch" href="/matheusblog/assets/js/142.39d3c868.js"><link rel="prefetch" href="/matheusblog/assets/js/143.5accfcdd.js"><link rel="prefetch" href="/matheusblog/assets/js/144.a88ca16e.js"><link rel="prefetch" href="/matheusblog/assets/js/145.f335b555.js"><link rel="prefetch" href="/matheusblog/assets/js/146.5fe91445.js"><link rel="prefetch" href="/matheusblog/assets/js/147.f7628213.js"><link rel="prefetch" href="/matheusblog/assets/js/148.efde8379.js"><link rel="prefetch" href="/matheusblog/assets/js/149.46581093.js"><link rel="prefetch" href="/matheusblog/assets/js/15.5132a6c0.js"><link rel="prefetch" href="/matheusblog/assets/js/150.0e22711d.js"><link rel="prefetch" href="/matheusblog/assets/js/151.2f985c3a.js"><link rel="prefetch" href="/matheusblog/assets/js/152.f2be924b.js"><link rel="prefetch" href="/matheusblog/assets/js/153.eeab863b.js"><link rel="prefetch" href="/matheusblog/assets/js/154.66c17576.js"><link rel="prefetch" href="/matheusblog/assets/js/155.55f16c8c.js"><link rel="prefetch" href="/matheusblog/assets/js/156.6ca4591d.js"><link rel="prefetch" href="/matheusblog/assets/js/157.a6d4084e.js"><link rel="prefetch" href="/matheusblog/assets/js/158.03a2a55a.js"><link rel="prefetch" href="/matheusblog/assets/js/159.51cd5a82.js"><link rel="prefetch" href="/matheusblog/assets/js/16.52846c06.js"><link rel="prefetch" href="/matheusblog/assets/js/160.c3581f33.js"><link rel="prefetch" href="/matheusblog/assets/js/161.c9811054.js"><link rel="prefetch" href="/matheusblog/assets/js/162.f10439b6.js"><link rel="prefetch" href="/matheusblog/assets/js/163.6250e603.js"><link rel="prefetch" href="/matheusblog/assets/js/164.2ce765aa.js"><link rel="prefetch" href="/matheusblog/assets/js/165.d25a9e48.js"><link rel="prefetch" href="/matheusblog/assets/js/166.9400e44c.js"><link rel="prefetch" href="/matheusblog/assets/js/167.6809f804.js"><link rel="prefetch" href="/matheusblog/assets/js/168.f8098b99.js"><link rel="prefetch" href="/matheusblog/assets/js/169.a47701c0.js"><link rel="prefetch" href="/matheusblog/assets/js/17.5a4fd4a1.js"><link rel="prefetch" href="/matheusblog/assets/js/170.fa834b61.js"><link rel="prefetch" href="/matheusblog/assets/js/171.c835f9e1.js"><link rel="prefetch" href="/matheusblog/assets/js/172.0bd8b338.js"><link rel="prefetch" href="/matheusblog/assets/js/173.d7d8a74d.js"><link rel="prefetch" href="/matheusblog/assets/js/174.7db9a340.js"><link rel="prefetch" href="/matheusblog/assets/js/175.4ccb791e.js"><link rel="prefetch" href="/matheusblog/assets/js/176.1fcd5c57.js"><link rel="prefetch" href="/matheusblog/assets/js/177.719ae8f1.js"><link rel="prefetch" href="/matheusblog/assets/js/178.bf9d9b91.js"><link rel="prefetch" href="/matheusblog/assets/js/18.9635c6a6.js"><link rel="prefetch" href="/matheusblog/assets/js/180.1eab303f.js"><link rel="prefetch" href="/matheusblog/assets/js/181.3b496761.js"><link rel="prefetch" href="/matheusblog/assets/js/182.b9311257.js"><link rel="prefetch" href="/matheusblog/assets/js/183.3f867970.js"><link rel="prefetch" href="/matheusblog/assets/js/184.463e1268.js"><link rel="prefetch" href="/matheusblog/assets/js/185.89b2a65a.js"><link rel="prefetch" href="/matheusblog/assets/js/186.1ff2a8a7.js"><link rel="prefetch" href="/matheusblog/assets/js/187.76f8b786.js"><link rel="prefetch" href="/matheusblog/assets/js/188.1a78f204.js"><link rel="prefetch" href="/matheusblog/assets/js/189.7cde9ac2.js"><link rel="prefetch" href="/matheusblog/assets/js/19.78a0836c.js"><link rel="prefetch" href="/matheusblog/assets/js/190.6540500a.js"><link rel="prefetch" href="/matheusblog/assets/js/191.2361e362.js"><link rel="prefetch" href="/matheusblog/assets/js/192.96e6c7dc.js"><link rel="prefetch" href="/matheusblog/assets/js/193.896cbab5.js"><link rel="prefetch" href="/matheusblog/assets/js/194.2ef289f9.js"><link rel="prefetch" href="/matheusblog/assets/js/195.269b7e19.js"><link rel="prefetch" href="/matheusblog/assets/js/196.a2a5c180.js"><link rel="prefetch" href="/matheusblog/assets/js/197.fd328828.js"><link rel="prefetch" href="/matheusblog/assets/js/198.7c8abb29.js"><link rel="prefetch" href="/matheusblog/assets/js/199.dcea7293.js"><link rel="prefetch" href="/matheusblog/assets/js/20.82e51fb7.js"><link rel="prefetch" href="/matheusblog/assets/js/200.91668771.js"><link rel="prefetch" href="/matheusblog/assets/js/201.3ddbd4d3.js"><link rel="prefetch" href="/matheusblog/assets/js/202.cb420bf9.js"><link rel="prefetch" href="/matheusblog/assets/js/203.42defa17.js"><link rel="prefetch" href="/matheusblog/assets/js/204.5a3227c2.js"><link rel="prefetch" href="/matheusblog/assets/js/205.b99fce14.js"><link rel="prefetch" href="/matheusblog/assets/js/206.18c37c29.js"><link rel="prefetch" href="/matheusblog/assets/js/207.8794f4be.js"><link rel="prefetch" href="/matheusblog/assets/js/208.db822d7d.js"><link rel="prefetch" href="/matheusblog/assets/js/209.a4b1b0b2.js"><link rel="prefetch" href="/matheusblog/assets/js/21.85fb779a.js"><link rel="prefetch" href="/matheusblog/assets/js/210.df67d73a.js"><link rel="prefetch" href="/matheusblog/assets/js/211.91b4c4bc.js"><link rel="prefetch" href="/matheusblog/assets/js/212.7c11a1a3.js"><link rel="prefetch" href="/matheusblog/assets/js/213.03380282.js"><link rel="prefetch" href="/matheusblog/assets/js/214.51f61ece.js"><link rel="prefetch" href="/matheusblog/assets/js/215.f5415af0.js"><link rel="prefetch" href="/matheusblog/assets/js/216.27a973e7.js"><link rel="prefetch" href="/matheusblog/assets/js/217.c8b62c1e.js"><link rel="prefetch" href="/matheusblog/assets/js/218.c7c9e771.js"><link rel="prefetch" href="/matheusblog/assets/js/219.38cb12fe.js"><link rel="prefetch" href="/matheusblog/assets/js/22.a434f24b.js"><link rel="prefetch" href="/matheusblog/assets/js/220.d610f7cc.js"><link rel="prefetch" href="/matheusblog/assets/js/221.39bbbf2d.js"><link rel="prefetch" href="/matheusblog/assets/js/222.c34162f3.js"><link rel="prefetch" href="/matheusblog/assets/js/223.15745df9.js"><link rel="prefetch" href="/matheusblog/assets/js/224.0e286803.js"><link rel="prefetch" href="/matheusblog/assets/js/225.e02617b3.js"><link rel="prefetch" href="/matheusblog/assets/js/226.13e87e8e.js"><link rel="prefetch" href="/matheusblog/assets/js/227.428fdd14.js"><link rel="prefetch" href="/matheusblog/assets/js/228.5b02ad24.js"><link rel="prefetch" href="/matheusblog/assets/js/229.113a8ae4.js"><link rel="prefetch" href="/matheusblog/assets/js/23.bfcc3c8e.js"><link rel="prefetch" href="/matheusblog/assets/js/230.83062d6d.js"><link rel="prefetch" href="/matheusblog/assets/js/231.5e5739bc.js"><link rel="prefetch" href="/matheusblog/assets/js/232.6e6b8889.js"><link rel="prefetch" href="/matheusblog/assets/js/233.812903ac.js"><link rel="prefetch" href="/matheusblog/assets/js/234.0d0cc16b.js"><link rel="prefetch" href="/matheusblog/assets/js/235.36f62ebb.js"><link rel="prefetch" href="/matheusblog/assets/js/236.c61a5e32.js"><link rel="prefetch" href="/matheusblog/assets/js/237.e828a447.js"><link rel="prefetch" href="/matheusblog/assets/js/238.833139dc.js"><link rel="prefetch" href="/matheusblog/assets/js/239.fb2ac8ee.js"><link rel="prefetch" href="/matheusblog/assets/js/24.ce9bb440.js"><link rel="prefetch" href="/matheusblog/assets/js/240.e6ca2a27.js"><link rel="prefetch" href="/matheusblog/assets/js/241.8cb294e4.js"><link rel="prefetch" href="/matheusblog/assets/js/242.345fe0a0.js"><link rel="prefetch" href="/matheusblog/assets/js/243.36dc5f24.js"><link rel="prefetch" href="/matheusblog/assets/js/244.72ce567d.js"><link rel="prefetch" href="/matheusblog/assets/js/245.4d9c55f8.js"><link rel="prefetch" href="/matheusblog/assets/js/246.3a672382.js"><link rel="prefetch" href="/matheusblog/assets/js/247.f385370f.js"><link rel="prefetch" href="/matheusblog/assets/js/248.8be8d698.js"><link rel="prefetch" href="/matheusblog/assets/js/249.1073726a.js"><link rel="prefetch" href="/matheusblog/assets/js/25.f8a33640.js"><link rel="prefetch" href="/matheusblog/assets/js/250.ed5c1277.js"><link rel="prefetch" href="/matheusblog/assets/js/251.61ed7842.js"><link rel="prefetch" href="/matheusblog/assets/js/252.35de18bc.js"><link rel="prefetch" href="/matheusblog/assets/js/253.bcdcf6ad.js"><link rel="prefetch" href="/matheusblog/assets/js/254.f401b547.js"><link rel="prefetch" href="/matheusblog/assets/js/255.70ae7d59.js"><link rel="prefetch" href="/matheusblog/assets/js/26.a06ff6ff.js"><link rel="prefetch" href="/matheusblog/assets/js/27.5d2958b1.js"><link rel="prefetch" href="/matheusblog/assets/js/28.8d5af880.js"><link rel="prefetch" href="/matheusblog/assets/js/29.708761e2.js"><link rel="prefetch" href="/matheusblog/assets/js/3.e8627096.js"><link rel="prefetch" href="/matheusblog/assets/js/30.de113b6a.js"><link rel="prefetch" href="/matheusblog/assets/js/31.bc0c45cc.js"><link rel="prefetch" href="/matheusblog/assets/js/32.429f7d0e.js"><link rel="prefetch" href="/matheusblog/assets/js/33.4dbbbee8.js"><link rel="prefetch" href="/matheusblog/assets/js/34.0ce6e2ff.js"><link rel="prefetch" href="/matheusblog/assets/js/35.83c0ce66.js"><link rel="prefetch" href="/matheusblog/assets/js/36.d6b0293d.js"><link rel="prefetch" href="/matheusblog/assets/js/37.3548af85.js"><link rel="prefetch" href="/matheusblog/assets/js/38.96c5e50a.js"><link rel="prefetch" href="/matheusblog/assets/js/39.4c0dd85f.js"><link rel="prefetch" href="/matheusblog/assets/js/4.bd8b439e.js"><link rel="prefetch" href="/matheusblog/assets/js/40.0a90896f.js"><link rel="prefetch" href="/matheusblog/assets/js/41.bcddfdff.js"><link rel="prefetch" href="/matheusblog/assets/js/42.27cdba94.js"><link rel="prefetch" href="/matheusblog/assets/js/43.5866dfba.js"><link rel="prefetch" href="/matheusblog/assets/js/44.ffed47dd.js"><link rel="prefetch" href="/matheusblog/assets/js/45.28bcbfd6.js"><link rel="prefetch" href="/matheusblog/assets/js/46.a620ca35.js"><link rel="prefetch" href="/matheusblog/assets/js/47.b5a2ed7a.js"><link rel="prefetch" href="/matheusblog/assets/js/48.0a4de8df.js"><link rel="prefetch" href="/matheusblog/assets/js/49.f5e824fa.js"><link rel="prefetch" href="/matheusblog/assets/js/5.416279c2.js"><link rel="prefetch" href="/matheusblog/assets/js/50.c287e152.js"><link rel="prefetch" href="/matheusblog/assets/js/51.91823f03.js"><link rel="prefetch" href="/matheusblog/assets/js/52.9cffb31d.js"><link rel="prefetch" href="/matheusblog/assets/js/53.58bbf890.js"><link rel="prefetch" href="/matheusblog/assets/js/54.f1642448.js"><link rel="prefetch" href="/matheusblog/assets/js/55.0035bcc5.js"><link rel="prefetch" href="/matheusblog/assets/js/56.fea6d6bf.js"><link rel="prefetch" href="/matheusblog/assets/js/57.9f0ad6e1.js"><link rel="prefetch" href="/matheusblog/assets/js/58.541388c1.js"><link rel="prefetch" href="/matheusblog/assets/js/59.b0fc7250.js"><link rel="prefetch" href="/matheusblog/assets/js/6.fb06d160.js"><link rel="prefetch" href="/matheusblog/assets/js/60.cb3ba656.js"><link rel="prefetch" href="/matheusblog/assets/js/61.bcfbf5a9.js"><link rel="prefetch" href="/matheusblog/assets/js/62.105b07a2.js"><link rel="prefetch" href="/matheusblog/assets/js/63.327b2406.js"><link rel="prefetch" href="/matheusblog/assets/js/64.d5ba8113.js"><link rel="prefetch" href="/matheusblog/assets/js/65.ec0a2650.js"><link rel="prefetch" href="/matheusblog/assets/js/66.04b36e40.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b2889221.js"><link rel="prefetch" href="/matheusblog/assets/js/68.99bcabf0.js"><link rel="prefetch" href="/matheusblog/assets/js/69.7fdd978d.js"><link rel="prefetch" href="/matheusblog/assets/js/7.09370985.js"><link rel="prefetch" href="/matheusblog/assets/js/70.f517da0e.js"><link rel="prefetch" href="/matheusblog/assets/js/71.435f2963.js"><link rel="prefetch" href="/matheusblog/assets/js/72.b91d62d7.js"><link rel="prefetch" href="/matheusblog/assets/js/73.85f484b2.js"><link rel="prefetch" href="/matheusblog/assets/js/74.a2d2e4ed.js"><link rel="prefetch" href="/matheusblog/assets/js/75.99a4801b.js"><link rel="prefetch" href="/matheusblog/assets/js/76.72a6e57a.js"><link rel="prefetch" href="/matheusblog/assets/js/77.afa11c98.js"><link rel="prefetch" href="/matheusblog/assets/js/78.078be77b.js"><link rel="prefetch" href="/matheusblog/assets/js/79.f9fd7ea4.js"><link rel="prefetch" href="/matheusblog/assets/js/8.e1d4fa67.js"><link rel="prefetch" href="/matheusblog/assets/js/80.907ae465.js"><link rel="prefetch" href="/matheusblog/assets/js/81.b90754cd.js"><link rel="prefetch" href="/matheusblog/assets/js/82.9deab36a.js"><link rel="prefetch" href="/matheusblog/assets/js/83.7e948584.js"><link rel="prefetch" href="/matheusblog/assets/js/84.ea3cec8f.js"><link rel="prefetch" href="/matheusblog/assets/js/85.855a9970.js"><link rel="prefetch" href="/matheusblog/assets/js/86.de9792db.js"><link rel="prefetch" href="/matheusblog/assets/js/87.88e29d00.js"><link rel="prefetch" href="/matheusblog/assets/js/88.8f12f613.js"><link rel="prefetch" href="/matheusblog/assets/js/89.960f3d00.js"><link rel="prefetch" href="/matheusblog/assets/js/9.3a58cfd5.js"><link rel="prefetch" href="/matheusblog/assets/js/90.8a6e7cba.js"><link rel="prefetch" href="/matheusblog/assets/js/91.df21ddcc.js"><link rel="prefetch" href="/matheusblog/assets/js/92.c0f9fb2e.js"><link rel="prefetch" href="/matheusblog/assets/js/93.81b88134.js"><link rel="prefetch" href="/matheusblog/assets/js/94.4d45f302.js"><link rel="prefetch" href="/matheusblog/assets/js/95.ec66033f.js"><link rel="prefetch" href="/matheusblog/assets/js/96.b9bef806.js"><link rel="prefetch" href="/matheusblog/assets/js/97.ec98bf74.js"><link rel="prefetch" href="/matheusblog/assets/js/98.fdf445b3.js"><link rel="prefetch" href="/matheusblog/assets/js/99.fa45dac2.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.633991d7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">Java 全栈知识体系</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/01JVM简介.html" class="nav-link">
+  JVM简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/01JVM简介.html" class="nav-link">
+  JVM简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Java基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/java/basic/helloworld.html" class="sidebar-link">认识编程</a></li><li><a href="/matheusblog/md/java/basic/1Java开发环境配置.html" class="sidebar-link">Java开发环境配置</a></li><li><a href="/matheusblog/md/java/basic/2变量,常量与运算符.html" class="sidebar-link">变量与常量</a></li><li><a href="/matheusblog/md/java/basic/3Java流程控制.html" class="sidebar-link">Java流程控制</a></li><li><a href="/matheusblog/md/java/basic/4数组.html" class="sidebar-link">数组</a></li><li><a href="/matheusblog/md/java/basic/5输入输出.html" class="sidebar-link">输入输出</a></li><li><a href="/matheusblog/md/java/basic/6面向对象编程.html" class="sidebar-link">面向对象编程</a></li><li><a href="/matheusblog/md/java/basic/7接口与继承.html" class="sidebar-link">接口与继承</a></li><li><a href="/matheusblog/md/java/basic/8API基础.html" class="sidebar-link">API基础</a></li><li><a href="/matheusblog/md/java/basic/9Lambda.html" class="sidebar-link">函数式编程</a></li><li><a href="/matheusblog/md/java/basic/10异常.html" class="sidebar-link">异常</a></li><li><a href="/matheusblog/md/java/basic/11网络编程.html" class="sidebar-link">网络编程</a></li><li><a href="/matheusblog/md/java/basic/12JDBC.html" class="sidebar-link">JDBC</a></li><li><a href="/matheusblog/md/java/basic/13反射.html" class="sidebar-link">反射</a></li><li><a href="/matheusblog/md/java/basic/14正则表达式.html" class="sidebar-link">正则表达式</a></li><li><a href="/matheusblog/md/java/basic/15二进制.html" class="sidebar-link">二进制</a></li><li><a href="/matheusblog/md/java/basic/16QRCode.html" class="sidebar-link">QRCode</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>集合</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/java/collection/泛型和集合.html" class="sidebar-link">泛型和集合</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>IO</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/java/io/IO.html" class="sidebar-link">IO</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>并发编程</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/java/thread/多线程.html" class="sidebar-link">多线程</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>JVM</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/java/jvm/01JVM简介.html" class="sidebar-link">JVM 简介</a></li><li><a href="/matheusblog/md/java/jvm/02类加载子系统分析与实践.html" class="sidebar-link">简介</a></li><li><a href="/matheusblog/md/java/jvm/03字节码解读分析与实践.html" class="sidebar-link">字节码简介</a></li><li><a href="/matheusblog/md/java/jvm/04字节码增强技术分析与实践.html" class="sidebar-link">简介</a></li><li><a href="/matheusblog/md/java/jvm/05JVM常用工具应用.html" class="sidebar-link">Jconsole 应用</a></li><li><a href="/matheusblog/md/java/jvm/06JVM运行时内存分析.html" class="active sidebar-link">程序计数器</a></li><li><a href="/matheusblog/md/java/jvm/07JVM内存逃逸分析与实践.html" class="sidebar-link">简介</a></li><li><a href="/matheusblog/md/java/jvm/08JVM中的内存溢出.html" class="sidebar-link">简介</a></li><li><a href="/matheusblog/md/java/jvm/09JVM内存泄漏分析与实践.html" class="sidebar-link">简介</a></li><li><a href="/matheusblog/md/java/jvm/10JVM中的GC初识.html" class="sidebar-link">GC简介</a></li><li><a href="/matheusblog/md/java/jvm/11JVM中常用垃圾回收器分析与实践.html" class="sidebar-link">概述</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="程序计数器"><a href="#程序计数器" class="header-anchor">#</a> <a href="https://so.csdn.net/so/search?q=%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">程序计数器<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></h1> <h2 id="概述"><a href="#概述" class="header-anchor">#</a> 概述</h2> <p>程序计数器（Program Counter Register)也称之为PC寄存器，是一块较小的<a href="https://so.csdn.net/so/search?q=%E5%86%85%E5%AD%98&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">内存<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>空间，用来存储指向下一条指令的地址，也可以看作是当前线程执行的字节码的行号指示器。</p> <p>在虚拟机的概念模型里，字节码解析器的工作是通过改变这个计数器的值来选取下一条 要执行的字节码指令。分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</p> <h2 id="特点分析"><a href="#特点分析" class="header-anchor">#</a> 特点分析</h2> <p>1)计算机在任何时刻，一个处理器（或者说一个内核）都只会执行一条线程中的指令。因此为了线程切换后能恢复到正确的执行位置，每个线程都有独立的程序计数器。</p> <p>2)如果线程正在执行 Java 中的方法，程序计数器记录的就是正在执行虚拟机字节码指令的地址，如果是 Native 方法，这个计数器就为空（undefined），因此 该内存区域是唯一一个在 Java 虚拟机规范中没有规定 OutOfMemoryError 的区域。</p> <h2 id="常见问题分析"><a href="#常见问题分析" class="header-anchor">#</a> 常见问题分析</h2> <p><strong>1) 使用程序计数器(PC寄存器)存储字节码指令地址有什么用？</strong>
+我们知道，CPU运行时，需要在线程间来回切换，当切换回当前线程时，为了知道从哪里开始执行，就需要一个计数器记录CPU在当前线程的执行位置。</p> <p><strong>2) JVM规范中为什么将PC寄存器设置为线程私有？</strong>
+我们知道，一个线程在特定时间段内只能执行某个线程的一个方法。但是CPU在运行过程中会不停的做任务切换，这样必然会导致线程经常中断或恢复执行。为了能够准确记录每个线程正在执行的当前字节码指令地址，最好的办法就是为每个线程都分配一个PC寄存器，这样的的好处是，每个线程都可以独立计算，从而不会出现相互干扰的情况。</p> <h2 id="pc寄存器实践分析"><a href="#pc寄存器实践分析" class="header-anchor">#</a> PC寄存器实践分析</h2> <p>第一步：定义java类，代码如下：</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>java<span class="token punctuation">.</span>jvm</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PCRegisterTests</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> a<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> b<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> c<span class="token operator">=</span><span class="token number">10</span><span class="token operator">+</span><span class="token number">20</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token number">123456789</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>第二步：对字节码文件进行解析</p> <p>在PCRegisterTests.class文件对应的目录，基于javap指令进行解析，例如：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>Javap -v PCRegisterTests.class
+1
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>解析结果为</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token class-name">Classfile</span> <span class="token operator">/</span><span class="token class-name">E</span><span class="token operator">:</span><span class="token operator">/</span>TCGBIV<span class="token operator">/</span>DEVCODES<span class="token operator">/</span>CGB2112CODES<span class="token operator">/</span><span class="token number">01</span><span class="token operator">-</span>java<span class="token operator">/</span>target<span class="token operator">/</span>classes<span class="token operator">/</span>com<span class="token operator">/</span>java<span class="token operator">/</span>jvm<span class="token operator">/</span><span class="token class-name">PCRegisterTes</span>
+ts<span class="token punctuation">.</span><span class="token keyword">class</span>
+  <span class="token class-name">Last</span> modified <span class="token number">2022</span><span class="token operator">-</span><span class="token number">5</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">;</span> size <span class="token number">481</span> bytes
+  MD5 checksum <span class="token number">5e04f</span><span class="token number">67d</span><span class="token number">41d</span><span class="token number">8d</span>a019d39c068301cbf74
+  <span class="token class-name">Compiled</span> from <span class="token string">&quot;PCRegisterTests.java&quot;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>java<span class="token punctuation">.</span>jvm<span class="token punctuation">.</span></span>PCRegisterTests</span>
+  minor version<span class="token operator">:</span> <span class="token number">0</span>
+  major version<span class="token operator">:</span> <span class="token number">52</span>
+  flags<span class="token operator">:</span> ACC_PUBLIC<span class="token punctuation">,</span> ACC_SUPER
+<span class="token class-name">Constant</span> pool<span class="token operator">:</span>
+   #<span class="token number">1</span> <span class="token operator">=</span> <span class="token class-name">Methodref</span>          #<span class="token number">3.</span>#<span class="token number">21</span>         <span class="token comment">// java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span>
+   #<span class="token number">2</span> <span class="token operator">=</span> <span class="token class-name">Class</span>              #<span class="token number">22</span>            <span class="token comment">// com/java/jvm/PCRegisterTests</span>
+   #<span class="token number">3</span> <span class="token operator">=</span> <span class="token class-name">Class</span>              #<span class="token number">23</span>            <span class="token comment">// java/lang/Object</span>
+   #<span class="token number">4</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token generics"><span class="token punctuation">&lt;</span>init<span class="token punctuation">&gt;</span></span>
+   #<span class="token number">5</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+   #<span class="token number">6</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">Code</span>
+   #<span class="token number">7</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">LineNumberTable</span>
+   #<span class="token number">8</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">LocalVariableTable</span>
+   #<span class="token number">9</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token keyword">this</span>
+  #<span class="token number">10</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">Lcom</span><span class="token operator">/</span>java<span class="token operator">/</span>jvm<span class="token operator">/</span><span class="token class-name">PCRegisterTests</span><span class="token punctuation">;</span>
+  #<span class="token number">11</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               main
+  #<span class="token number">12</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token class-name">Ljava</span><span class="token operator">/</span>lang<span class="token operator">/</span><span class="token class-name">String</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+  #<span class="token number">13</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               args
+  #<span class="token number">14</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token punctuation">[</span><span class="token class-name">Ljava</span><span class="token operator">/</span>lang<span class="token operator">/</span><span class="token class-name">String</span><span class="token punctuation">;</span>
+  #<span class="token number">15</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               a
+  #<span class="token number">16</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">I</span>
+  #<span class="token number">17</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               b
+  #<span class="token number">18</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               c
+  #<span class="token number">19</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">SourceFile</span>
+  #<span class="token number">20</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">PCRegisterTests</span><span class="token punctuation">.</span>java
+  #<span class="token number">21</span> <span class="token operator">=</span> <span class="token class-name">NameAndType</span>        #<span class="token number">4</span><span class="token operator">:</span>#<span class="token number">5</span>          <span class="token comment">// &quot;&lt;init&gt;&quot;:()V</span>
+  #<span class="token number">22</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               com<span class="token operator">/</span>java<span class="token operator">/</span>jvm<span class="token operator">/</span><span class="token class-name">PCRegisterTests</span>
+  #<span class="token number">23</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               java<span class="token operator">/</span>lang<span class="token operator">/</span><span class="token class-name">Object</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">public</span> <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>java<span class="token punctuation">.</span>jvm<span class="token punctuation">.</span></span>PCRegisterTests</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    descriptor<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+    flags<span class="token operator">:</span> ACC_PUBLIC
+    <span class="token class-name">Code</span><span class="token operator">:</span>
+      stack<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> locals<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> args_size<span class="token operator">=</span><span class="token number">1</span>
+         <span class="token number">0</span><span class="token operator">:</span> aload_0
+         <span class="token number">1</span><span class="token operator">:</span> invokespecial #<span class="token number">1</span>                  <span class="token comment">// Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span>
+         <span class="token number">4</span><span class="token operator">:</span> <span class="token keyword">return</span>
+      <span class="token class-name">LineNumberTable</span><span class="token operator">:</span>
+        line <span class="token number">3</span><span class="token operator">:</span> <span class="token number">0</span>
+      <span class="token class-name">LocalVariableTable</span><span class="token operator">:</span>
+        <span class="token class-name">Start</span>  <span class="token class-name">Length</span>  <span class="token class-name">Slot</span>  <span class="token class-name">Name</span>   <span class="token class-name">Signature</span>
+            <span class="token number">0</span>       <span class="token number">5</span>     <span class="token number">0</span>  <span class="token keyword">this</span>   <span class="token class-name">Lcom</span><span class="token operator">/</span>java<span class="token operator">/</span>jvm<span class="token operator">/</span><span class="token class-name">PCRegisterTests</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span>String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    descriptor<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token class-name">Ljava</span><span class="token operator">/</span>lang<span class="token operator">/</span><span class="token class-name">String</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+    flags<span class="token operator">:</span> ACC_PUBLIC<span class="token punctuation">,</span> ACC_STATIC
+    <span class="token class-name">Code</span><span class="token operator">:</span>
+      stack<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> locals<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> args_size<span class="token operator">=</span><span class="token number">1</span>
+         <span class="token number">0</span><span class="token operator">:</span> bipush        <span class="token number">10</span>
+         <span class="token number">2</span><span class="token operator">:</span> istore_1
+         <span class="token number">3</span><span class="token operator">:</span> bipush        <span class="token number">20</span>
+         <span class="token number">5</span><span class="token operator">:</span> istore_2
+         <span class="token number">6</span><span class="token operator">:</span> bipush        <span class="token number">30</span>
+         <span class="token number">8</span><span class="token operator">:</span> istore_3
+         <span class="token number">9</span><span class="token operator">:</span> <span class="token keyword">return</span>
+      <span class="token class-name">LineNumberTable</span><span class="token operator">:</span>
+        line <span class="token number">5</span><span class="token operator">:</span> <span class="token number">0</span>
+        line <span class="token number">6</span><span class="token operator">:</span> <span class="token number">3</span>
+        line <span class="token number">7</span><span class="token operator">:</span> <span class="token number">6</span>
+        line <span class="token number">8</span><span class="token operator">:</span> <span class="token number">9</span>
+      <span class="token class-name">LocalVariableTable</span><span class="token operator">:</span>
+        <span class="token class-name">Start</span>  <span class="token class-name">Length</span>  <span class="token class-name">Slot</span>  <span class="token class-name">Name</span>   <span class="token class-name">Signature</span>
+            <span class="token number">0</span>      <span class="token number">10</span>     <span class="token number">0</span>  args   <span class="token punctuation">[</span><span class="token class-name">Ljava</span><span class="token operator">/</span>lang<span class="token operator">/</span><span class="token class-name">String</span><span class="token punctuation">;</span>
+            <span class="token number">3</span>       <span class="token number">7</span>     <span class="token number">1</span>     a   <span class="token class-name">I</span>
+            <span class="token number">6</span>       <span class="token number">4</span>     <span class="token number">2</span>     b   <span class="token class-name">I</span>
+            <span class="token number">9</span>       <span class="token number">1</span>     <span class="token number">3</span>     c   <span class="token class-name">I</span>
+<span class="token punctuation">}</span>
+<span class="token class-name">SourceFile</span><span class="token operator">:</span> <span class="token string">&quot;PCRegisterTests.java&quot;</span>
+<span class="token number">12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br></div></div><p>其中，如上代码中的0~9部分为指令偏移地址，这部分值会存储在pc寄存器中，例如：</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token number">0</span><span class="token operator">:</span> bipush        <span class="token number">10</span>
+         <span class="token number">2</span><span class="token operator">:</span> istore_1
+         <span class="token number">3</span><span class="token operator">:</span> bipush        <span class="token number">20</span>
+         <span class="token number">5</span><span class="token operator">:</span> istore_2
+         <span class="token number">6</span><span class="token operator">:</span> bipush        <span class="token number">30</span>
+         <span class="token number">8</span><span class="token operator">:</span> istore_3
+         <span class="token number">9</span><span class="token operator">:</span> <span class="token keyword">return</span>
+<span class="token number">1234567</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p><a href="https://so.csdn.net/so/search?q=JVM&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">JVM<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>执行指令时，执行引擎会从当前线程的PC寄存器中，基于地址找到具体指令，然后进行执行这些指令。</p> <h2 id="小节面试分析"><a href="#小节面试分析" class="header-anchor">#</a> 小节面试分析</h2> <p>1)什么是PC寄存器？是一块较小的内存空间，用来存储指向下一条指令的地址？
+2)每个线程都有一个PC寄存器吗？是的。
+3)JVM规范中为什么将PC寄存器设置为线程私有？</p> <h1 id="栈结构分析"><a href="#栈结构分析" class="header-anchor">#</a> 栈结构分析</h1> <h2 id="概述-2"><a href="#概述-2" class="header-anchor">#</a> 概述</h2> <p>Java 虚拟机栈（Java Virtual Machine Stacks）描述的是 Java 方法执行时的内存模型，解决的是程序运行时数据的操作问题，即程序如何执行，或者说如何处理数据。而堆解决的是数据存储的问题，即数据怎么放，放哪里。</p> <h2 id="特点分析-2"><a href="#特点分析-2" class="header-anchor">#</a> 特点分析</h2> <p>由于跨平台性的设计，Java的指令都是根据栈来设计的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p> <p>Java 虚拟机栈是线程私有的，每个方法在被线程调用时都会创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链接、方法出口等信息，每个方法从调用直至执行完成的过程，都对应着一个栈帧在虚拟机栈中入栈到出栈的过程。栈的生命周期和线程一致，也就是线程结束了，该虚拟机栈也销毁了。</p> <p>如果线程请求的栈深度大于虚拟机所允许的栈深度就会抛出 StackOverflowError 异常。如果虚拟机是可以动态扩展的，如果扩展时无法申请到足够的内存就会抛出 OutOfMemoryError 异常。</p> <h2 id="栈桢构成分析"><a href="#栈桢构成分析" class="header-anchor">#</a> 栈桢构成分析</h2> <p>每个线程都有自己的栈，栈中的数据都是以栈帧（Stack Frame）的格式存在，在这个线程上正在执行的每个方法都各自对应一个栈帧（Stack Frame）。每个栈帧中存储着：</p> <p>1)局部变量表（Local Variables）
+2)操作数栈（Operand Stack）（或表达式栈）
+3)动态链接（Dynamic Linking）（或指向运行时常量池的方法引用）
+4)方法返回地址（Return Address）（或方法正常退出或者异常退出的定义）
+5)一些附加信息</p> <p>总之，栈帧是一个内存区块，是一个数据集，维系着方法执行过程中的各种数据信息。</p> <h2 id="局部变量表分析"><a href="#局部变量表分析" class="header-anchor">#</a> 局部变量表分析</h2> <p>局部变量表也称之为局部变量数组或本地变量表，用于存放方法参数和方法内部定义的局部变量信息。在Java程序被编译为Class文件时，就已经确定了每个方法所需局部变量表的大小。
+局部变量表以变量槽为最小单位，每个变量槽可以存放一个32位以内的数据类型，故每个变量槽都应该能存放 boolean、byte、char、short、int、float、refrence或returnAddress类型的数据，对于long、double两种，会占用两个变量槽。例如：
+<img src="https://img-blog.csdnimg.cn/06ba6690a7dc42d783f506157efad5fb.png" alt="在这里插入图片描述"></p> <h2 id="操作数栈分析"><a href="#操作数栈分析" class="header-anchor">#</a> 操作数栈分析</h2> <p>每一个独立的栈帧除了包含局部变量表以外，还包含一个后进先出（Last - In - First -Out）的 操作数栈（Operand Stack）。
+操作数栈，在方法执行过程中，根据字节码指令，往栈中写入数据或提取数据，即入栈（push）和 出栈（pop）。例如：</p> <p><img src="https://img-blog.csdnimg.cn/52e3c8a74ce94b89a685af225634fff7.png" alt="在这里插入图片描述"></p> <h2 id="动态链接分析"><a href="#动态链接分析" class="header-anchor">#</a> 动态链接分析</h2> <p>每个方法在运行时，都会创建一个栈帧，其内部包含一个指向运行时常量池的引用，这个引用的目的是为了支持当前方法的代码能够实现动态链接(Dynamic Linking)。
+Java源文件编译后的字节码文件中，所有类中变量和方法的引用都会保存在class文件的常量池中。动态链接的作用就是为了将这些符号引用转换为调用方法时的直接引用。</p> <p><img src="https://img-blog.csdnimg.cn/b1ccc428b59a4e36b754563a4fcd2f82.png" alt="在这里插入图片描述"></p> <h2 id="常用参数配置分析"><a href="#常用参数配置分析" class="header-anchor">#</a> 常用参数配置分析</h2> <p>我们可以使用参数 -Xss 选项来设置线程的最大栈空间，栈的大小直接决定了函数调用的最大可达深度。例如：</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token operator">-</span><span class="token class-name">Xss1m</span>
+<span class="token operator">-</span><span class="token class-name">Xss1024k</span>
+<span class="token operator">-</span><span class="token class-name">Xss1048576</span>
+<span class="token number">123</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>案例演示：</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StackErrorTests</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        count<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token function">main</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token number">12345678</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>程序运行的最终结果为StackOverflowError，此时，可以基于idea配置栈内存大小，并检查不同栈大小的配置对输出结果有什么影响。
+<img src="https://img-blog.csdnimg.cn/670be01f26ff458cafb4156663dc6348.png" alt="在这里插入图片描述"></p> <h2 id="本地-native-方法栈分析"><a href="#本地-native-方法栈分析" class="header-anchor">#</a> 本地(native)方法栈分析</h2> <p>本地方法栈（Native Method Stack）与虚拟机栈的作用类似，只不过虚拟机栈是服务 Java 方法的，而本地方法栈是为虚拟机调用 Native 方法服务的（查看一下Object类中的本地方法）。在 Java 虚拟机规范中对于本地方法栈没有特殊的要求，虚拟机可以自由的实现它，因此在 Sun HotSpot 虚拟机直接把本地方法栈和虚拟机栈合二为一了。</p> <h2 id="小节面试分析-2"><a href="#小节面试分析-2" class="header-anchor">#</a> 小节面试分析</h2> <p>1)JAVA方法栈有什么特点？
+2)JAVA方法栈中都可以存储什么？</p> <h1 id="堆内存分析"><a href="#堆内存分析" class="header-anchor">#</a> <a href="https://so.csdn.net/so/search?q=%E5%A0%86%E5%86%85%E5%AD%98&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">堆内存<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>分析</h1> <h2 id="概述-3"><a href="#概述-3" class="header-anchor">#</a> 概述</h2> <p>Java堆（Java Heap）是JVM 中内存最大的一块，被所有线程共享，在虚拟机启动 时创建，主要用于存放对象实例，大部分对象实例也都是在这里分配。但是，随着JIT编译器的发展和逃逸分析技术的逐渐成熟，栈上分配、标量替换优化的技术将会导致一些微妙的变化，所有的对象都分配在堆上渐渐变得不那么绝对了。小对象未逃逸还可以在直接在栈上分配。</p> <h2 id="特点分析-3"><a href="#特点分析-3" class="header-anchor">#</a> 特点分析</h2> <p>Java 虚拟机规范规定， Java堆可以处在物理上不连续的内存空间中，只要逻辑上连续即可，就像我们的磁盘空间一样。在实现上也可以是固定大小的，也可以是可扩展的，不过当前主流的虚拟机都是可扩展的，通过 -Xmx 和 -Xms 参数定义堆内存大小。如果在堆中没有内存完成实例分配， 并且堆已不可以再进行扩展时，系统底层运行时将会抛出 OutOfMemoryError。</p> <h2 id="堆构成分析"><a href="#堆构成分析" class="header-anchor">#</a> 堆构成分析</h2> <p>JAVA堆内存在JVM中可分为年轻代和老年代。年轻代又分为Eden和两个Survivor区。如图所示：
+<img src="https://img-blog.csdnimg.cn/52e11faa37724ba898d5fa5b28833377.png" alt="在这里插入图片描述">
+其中，堆内存又是垃圾收集器（GC）管理的主要区域。</p> <h2 id="对象内存分配"><a href="#对象内存分配" class="header-anchor">#</a> 对象内存分配</h2> <p>基于此内存架构，对象内存分配过程如下：</p> <ol><li>编译器通过逃逸分析（JDK8已默认开启），确定对象是在栈上分配还是在堆上分配。</li> <li>如果是在堆上分配，则首先检测是否可在TLAB（Thread Local Allocation Buffer）上直接分配。</li> <li>如果TLAB上无法直接分配则在Eden加锁区进行分配(线程共享区)。</li> <li>如果Eden区无法存储对象，则执行Yong GC（Minor Collection）。</li> <li>如果Yong GC之后Eden区仍然不足以存储对象，则直接分配在老年代。
+说明：在对象创建时可能会触发Yong GC，此GC过程的简易原理图分析如下:
+<img src="https://img-blog.csdnimg.cn/e7deefffc7a142a89db666f4ad375c0a.png" alt="在这里插入图片描述">
+其中：</li> <li>新生代由Eden 区和两个幸存区构成(假定为s1,s2), 任意时刻至少有一个幸存区是空的(empty)，用于存放下次GC时未被收集的对象。</li> <li>GC触发时Eden区所有”可达对象”会被复制到一个幸存区，假设为s1，当幸存区s1无法存储这些对象时会直接复制到老年代。</li> <li>GC再次触发时Eden区和s1幸存区中的”可达对象”会被复制到另一个幸存区s2，同时清空eden区和s1幸存区。</li> <li>GC再次触发时Eden区和s2幸存区中的”可达对象”会被复制到另一个幸存区s1，同时清空eden区和s2幸存区.依次类推。</li> <li>当多次GC过程完成后，幸存区中的对象存活时间达到了一定阀值（可以用参数 -XX:+MaxTenuringThreshold 来指定上限，默认15），会被看成是“年老”的对象然后直接移动到老年代。</li></ol> <h2 id="常用参数配置分析-2"><a href="#常用参数配置分析-2" class="header-anchor">#</a> 常用参数配置分析</h2> <ol><li>-Xms设置堆的最小空间大小（默认为物理内存的1/64）。</li> <li>-Xmx设置堆的最大空间大小（默认为物理内存的1/4）。</li> <li>-XX:NewRatio 新生代和老年代的比值，值为4则表示新生代:比老年代1:4</li> <li>-XX:SurivorRatio 表示Survivor和eden的比值，值为8表示两个survivor:eden=2:8。</li> <li>-XX:MaxTenuringThreshold：设置新生代垃圾的最大年龄。</li> <li>-XX:+PrintFlagsInitial : 查看所有的参数的默认初始值。</li> <li>-XX:+PrintFlagsFinal ：查看所有的参数的最终值（可能会存在修改，不再是初始值）。</li> <li>-XX:+PrintGCDetails：输出详细的GC处理日志。</li> <li>-XX:+PrintGC: 打印gc简要信息。</li></ol> <h2 id="小节面试问题分析"><a href="#小节面试问题分析" class="header-anchor">#</a> 小节面试问题分析</h2> <p><strong>问题1：如何查看当前正在运行的进程中某个JVM参数的值？</strong>
+第一步：jps：查看当前运行中的进程
+第二步：jinfo -flag 参数名 进程id （例如 jinfo -flag SurvivorRatio 10091）</p> <p><strong>问题2：假如年轻代幸存区设置的比较小会有什么问题？</strong></p> <p>伊甸园区被回收时，对象要拷贝到幸存区，假如幸存区比较小，拷贝的对象比较大，对象就会直接存储到老年代，这样会增加老年代GC的频率。而分代回收的思想就会被弱化。</p> <p>问题3：假如年轻代伊甸园区设置的比例比较小会有什么问题？
+伊甸园设置的比较小，会增加GC的频率，可能会导致STW的时间边长，影响系统性能。</p> <p><strong>问题4：如何理解堆内存中的空间分配担保机制？</strong></p> <p>在发生Minor GC之前，虚拟机会检查老年代最大可用的连续空间是否大于新生代所有对象的总空间。
+如果大于，则此次Minor GC是安全的。
+如果小于，则虚拟机会查看-XX:HandlePromotionFailure参数设置值是否允担保失败。</p> <p>如果HandlePromotionFailure=true，那么会继续检查老年代最大可用连续空间是否大于历次晋升到老年代的对象的平均大小。
+如果大于，则尝试进行一次Minor GC，但这次Minor GC依然是有风险的；
+如果小于，则进行一次Full GC。</p> <p>如果HandlePromotionFailure=false，则进行一次Full GC。</p> <p><strong>问题五：jvm内存分区，为什么要有新生代和老年代？</strong></p> <p>为了更好的实现垃圾回收。</p> <h1 id="方法区分析"><a href="#方法区分析" class="header-anchor">#</a> 方法区分析</h1> <h2 id="概述-4"><a href="#概述-4" class="header-anchor">#</a> 概述</h2> <p>方法区（Methed Area）是一种规范，用于存储已被虚拟机加载的类信息、常 量、静态变量、即时编译后的代码等数据。不同jdk，方法区的实现不同，HotSpot 虚拟机在 JDK 8 中使 用 Native Memory 来实现方法区。</p> <p>在JDK8的HostSpot虚拟机中方法区的落地实现是元数据区（Metaspace），但是Metaspace并不在虚拟机中，而是使用本地内存。因此，默认情况下，元空间(Metaspace)的大小仅受本地内存限制，但可以通过一些参数来指定元空间的大小。</p> <h2 id="特点分析-4"><a href="#特点分析-4" class="header-anchor">#</a> 特点分析</h2> <p>1.方法区（Method Area）与Java堆一样，是各个线程共享的内存区域。多个线程同时加载统一个类时，只能有一个线程能加载该类，其他线程只能等等待该线程加载完毕，然后直接使用该类，即类只能加载一次。
+2.方法区在JVM启动的时候被创建，并且它的实际的物理内存空间中和Java堆区一样都可以是不连续的。
+3.方法区的大小，跟堆空间一样，可以选择固定大小或者可扩展。
+4.方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类，导致方法区溢出，虚拟机同样会抛出内存溢出错误：java.lang.OutOfMemoryError:Metaspace</p> <h2 id="方法区构成分析"><a href="#方法区构成分析" class="header-anchor">#</a> 方法区构成分析</h2> <p>方法区（Methed Area）是一种规范，用于存储已被虚拟机加载的类信息、常 量、静态变量、即时编译后的代码等数据。
+1)类信息包括对每个加载的类型（类class、接口interface、枚举enum、注解annotation）以及属性和方法信息。
+2)常量信息可以看做是一张表，虚拟机指令根据这张常量表找到要执行的类名、方法名、参数类型、字面量等类型。</p> <p>编写如下代码，然后使用javap查看类的字节码信息，例如：</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>java<span class="token punctuation">.</span>jvm</span><span class="token punctuation">;</span>
+<span class="token comment">//javap -p -v MethodAreaStructureTests.class &gt; class.txt</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MethodAreaStructureTests</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> size<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> count<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doChangeSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        size<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">doChangeCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        count<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token number">123456789101112131415</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>类编译后，在类当前路径查看类信息，例如：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>javap -p -v MethodAreaStructureTests.class &gt; class.txt
+1
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>此时打开class.txt文件，查看类的字节码信息，例如：</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token class-name">Classfile</span> <span class="token operator">/</span><span class="token class-name">E</span><span class="token operator">:</span><span class="token operator">/</span>TCGBIV<span class="token operator">/</span>DEVCODES<span class="token operator">/</span>CGB2112CODES<span class="token operator">/</span><span class="token number">01</span><span class="token operator">-</span>java<span class="token operator">/</span>target<span class="token operator">/</span>classes<span class="token operator">/</span>com<span class="token operator">/</span>java<span class="token operator">/</span>jvm<span class="token operator">/</span><span class="token class-name">MethodAreaStructureTests</span><span class="token punctuation">.</span><span class="token keyword">class</span>
+  <span class="token class-name">Last</span> modified <span class="token number">2022</span><span class="token operator">-</span><span class="token number">5</span><span class="token operator">-</span><span class="token number">8</span><span class="token punctuation">;</span> size <span class="token number">831</span> bytes
+  MD5 checksum ffe8357e90f1ccc9cb28ef1142c68863
+  <span class="token class-name">Compiled</span> from <span class="token string">&quot;MethodAreaStructureTests.java&quot;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>java<span class="token punctuation">.</span>jvm<span class="token punctuation">.</span></span>MethodAreaStructureTests</span>
+  minor version<span class="token operator">:</span> <span class="token number">0</span>
+  major version<span class="token operator">:</span> <span class="token number">52</span>
+  flags<span class="token operator">:</span> ACC_PUBLIC<span class="token punctuation">,</span> ACC_SUPER
+<span class="token class-name">Constant</span> pool<span class="token operator">:</span>
+   #<span class="token number">1</span> <span class="token operator">=</span> <span class="token class-name">Methodref</span>          #<span class="token number">7.</span>#<span class="token number">27</span>         <span class="token comment">// java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span>
+   #<span class="token number">2</span> <span class="token operator">=</span> <span class="token class-name">Fieldref</span>           #<span class="token number">6.</span>#<span class="token number">28</span>         <span class="token comment">// com/java/jvm/MethodAreaStructureTests.size:I</span>
+   #<span class="token number">3</span> <span class="token operator">=</span> <span class="token class-name">Fieldref</span>           #<span class="token number">6.</span>#<span class="token number">29</span>         <span class="token comment">// com/java/jvm/MethodAreaStructureTests.count:I</span>
+   #<span class="token number">4</span> <span class="token operator">=</span> <span class="token class-name">Fieldref</span>           #<span class="token number">30.</span>#<span class="token number">31</span>        <span class="token comment">// java/lang/System.out:Ljava/io/PrintStream;</span>
+   #<span class="token number">5</span> <span class="token operator">=</span> <span class="token class-name">Methodref</span>          #<span class="token number">32.</span>#<span class="token number">33</span>        <span class="token comment">// java/io/PrintStream.println:(I)V</span>
+   #<span class="token number">6</span> <span class="token operator">=</span> <span class="token class-name">Class</span>              #<span class="token number">34</span>            <span class="token comment">// com/java/jvm/MethodAreaStructureTests</span>
+   #<span class="token number">7</span> <span class="token operator">=</span> <span class="token class-name">Class</span>              #<span class="token number">35</span>            <span class="token comment">// java/lang/Object</span>
+   #<span class="token number">8</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               size
+   #<span class="token number">9</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">I</span>
+  #<span class="token number">10</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               count
+  #<span class="token number">11</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token generics"><span class="token punctuation">&lt;</span>init<span class="token punctuation">&gt;</span></span>
+  #<span class="token number">12</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+  #<span class="token number">13</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">Code</span>
+  #<span class="token number">14</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">LineNumberTable</span>
+  #<span class="token number">15</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">LocalVariableTable</span>
+  #<span class="token number">16</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token keyword">this</span>
+  #<span class="token number">17</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">Lcom</span><span class="token operator">/</span>java<span class="token operator">/</span>jvm<span class="token operator">/</span><span class="token class-name">MethodAreaStructureTests</span><span class="token punctuation">;</span>
+  #<span class="token number">18</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               doChangeSize
+  #<span class="token number">19</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               doChangeCount
+  #<span class="token number">20</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               main
+  #<span class="token number">21</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token class-name">Ljava</span><span class="token operator">/</span>lang<span class="token operator">/</span><span class="token class-name">String</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+  #<span class="token number">22</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               args
+  #<span class="token number">23</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token punctuation">[</span><span class="token class-name">Ljava</span><span class="token operator">/</span>lang<span class="token operator">/</span><span class="token class-name">String</span><span class="token punctuation">;</span>
+  #<span class="token number">24</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token generics"><span class="token punctuation">&lt;</span>clinit<span class="token punctuation">&gt;</span></span>
+  #<span class="token number">25</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">SourceFile</span>
+  #<span class="token number">26</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">MethodAreaStructureTests</span><span class="token punctuation">.</span>java
+  #<span class="token number">27</span> <span class="token operator">=</span> <span class="token class-name">NameAndType</span>        #<span class="token number">11</span><span class="token operator">:</span>#<span class="token number">12</span>        <span class="token comment">// &quot;&lt;init&gt;&quot;:()V</span>
+  #<span class="token number">28</span> <span class="token operator">=</span> <span class="token class-name">NameAndType</span>        #<span class="token number">8</span><span class="token operator">:</span>#<span class="token number">9</span>          <span class="token comment">// size:I</span>
+  #<span class="token number">29</span> <span class="token operator">=</span> <span class="token class-name">NameAndType</span>        #<span class="token number">10</span><span class="token operator">:</span>#<span class="token number">9</span>         <span class="token comment">// count:I</span>
+  #<span class="token number">30</span> <span class="token operator">=</span> <span class="token class-name">Class</span>              #<span class="token number">36</span>            <span class="token comment">// java/lang/System</span>
+  #<span class="token number">31</span> <span class="token operator">=</span> <span class="token class-name">NameAndType</span>        #<span class="token number">37</span><span class="token operator">:</span>#<span class="token number">38</span>        <span class="token comment">// out:Ljava/io/PrintStream;</span>
+  #<span class="token number">32</span> <span class="token operator">=</span> <span class="token class-name">Class</span>              #<span class="token number">39</span>            <span class="token comment">// java/io/PrintStream</span>
+  #<span class="token number">33</span> <span class="token operator">=</span> <span class="token class-name">NameAndType</span>        #<span class="token number">40</span><span class="token operator">:</span>#<span class="token number">41</span>        <span class="token comment">// println:(I)V</span>
+  #<span class="token number">34</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               com<span class="token operator">/</span>java<span class="token operator">/</span>jvm<span class="token operator">/</span><span class="token class-name">MethodAreaStructureTests</span>
+  #<span class="token number">35</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               java<span class="token operator">/</span>lang<span class="token operator">/</span><span class="token class-name">Object</span>
+  #<span class="token number">36</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               java<span class="token operator">/</span>lang<span class="token operator">/</span><span class="token class-name">System</span>
+  #<span class="token number">37</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               out
+  #<span class="token number">38</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token class-name">Ljava</span><span class="token operator">/</span>io<span class="token operator">/</span><span class="token class-name">PrintStream</span><span class="token punctuation">;</span>
+  #<span class="token number">39</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               java<span class="token operator">/</span>io<span class="token operator">/</span><span class="token class-name">PrintStream</span>
+  #<span class="token number">40</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               println
+  #<span class="token number">41</span> <span class="token operator">=</span> <span class="token class-name">Utf8</span>               <span class="token punctuation">(</span><span class="token class-name">I</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">private</span> <span class="token keyword">int</span> size<span class="token punctuation">;</span>
+    descriptor<span class="token operator">:</span> <span class="token class-name">I</span>
+    flags<span class="token operator">:</span> ACC_PRIVATE
+
+  <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> count<span class="token punctuation">;</span>
+    descriptor<span class="token operator">:</span> <span class="token class-name">I</span>
+    flags<span class="token operator">:</span> ACC_PRIVATE<span class="token punctuation">,</span> ACC_STATIC
+
+  <span class="token keyword">public</span> <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>java<span class="token punctuation">.</span>jvm<span class="token punctuation">.</span></span>MethodAreaStructureTests</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    descriptor<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+    flags<span class="token operator">:</span> ACC_PUBLIC
+    <span class="token class-name">Code</span><span class="token operator">:</span>
+      stack<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> locals<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> args_size<span class="token operator">=</span><span class="token number">1</span>
+         <span class="token number">0</span><span class="token operator">:</span> aload_0
+         <span class="token number">1</span><span class="token operator">:</span> invokespecial #<span class="token number">1</span>                  <span class="token comment">// Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span>
+         <span class="token number">4</span><span class="token operator">:</span> <span class="token keyword">return</span>
+      <span class="token class-name">LineNumberTable</span><span class="token operator">:</span>
+        line <span class="token number">3</span><span class="token operator">:</span> <span class="token number">0</span>
+      <span class="token class-name">LocalVariableTable</span><span class="token operator">:</span>
+        <span class="token class-name">Start</span>  <span class="token class-name">Length</span>  <span class="token class-name">Slot</span>  <span class="token class-name">Name</span>   <span class="token class-name">Signature</span>
+            <span class="token number">0</span>       <span class="token number">5</span>     <span class="token number">0</span>  <span class="token keyword">this</span>   <span class="token class-name">Lcom</span><span class="token operator">/</span>java<span class="token operator">/</span>jvm<span class="token operator">/</span><span class="token class-name">MethodAreaStructureTests</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doChangeSize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    descriptor<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+    flags<span class="token operator">:</span> ACC_PUBLIC
+    <span class="token class-name">Code</span><span class="token operator">:</span>
+      stack<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> locals<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> args_size<span class="token operator">=</span><span class="token number">1</span>
+         <span class="token number">0</span><span class="token operator">:</span> aload_0
+         <span class="token number">1</span><span class="token operator">:</span> dup
+         <span class="token number">2</span><span class="token operator">:</span> getfield      #<span class="token number">2</span>                  <span class="token comment">// Field size:I</span>
+         <span class="token number">5</span><span class="token operator">:</span> iconst_1
+         <span class="token number">6</span><span class="token operator">:</span> iadd
+         <span class="token number">7</span><span class="token operator">:</span> putfield      #<span class="token number">2</span>                  <span class="token comment">// Field size:I</span>
+        <span class="token number">10</span><span class="token operator">:</span> <span class="token keyword">return</span>
+      <span class="token class-name">LineNumberTable</span><span class="token operator">:</span>
+        line <span class="token number">7</span><span class="token operator">:</span> <span class="token number">0</span>
+        line <span class="token number">8</span><span class="token operator">:</span> <span class="token number">10</span>
+      <span class="token class-name">LocalVariableTable</span><span class="token operator">:</span>
+        <span class="token class-name">Start</span>  <span class="token class-name">Length</span>  <span class="token class-name">Slot</span>  <span class="token class-name">Name</span>   <span class="token class-name">Signature</span>
+            <span class="token number">0</span>      <span class="token number">11</span>     <span class="token number">0</span>  <span class="token keyword">this</span>   <span class="token class-name">Lcom</span><span class="token operator">/</span>java<span class="token operator">/</span>jvm<span class="token operator">/</span><span class="token class-name">MethodAreaStructureTests</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">doChangeCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    descriptor<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+    flags<span class="token operator">:</span> ACC_PUBLIC<span class="token punctuation">,</span> ACC_STATIC
+    <span class="token class-name">Code</span><span class="token operator">:</span>
+      stack<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> locals<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> args_size<span class="token operator">=</span><span class="token number">0</span>
+         <span class="token number">0</span><span class="token operator">:</span> getstatic     #<span class="token number">3</span>                  <span class="token comment">// Field count:I</span>
+         <span class="token number">3</span><span class="token operator">:</span> iconst_1
+         <span class="token number">4</span><span class="token operator">:</span> iadd
+         <span class="token number">5</span><span class="token operator">:</span> putstatic     #<span class="token number">3</span>                  <span class="token comment">// Field count:I</span>
+         <span class="token number">8</span><span class="token operator">:</span> <span class="token keyword">return</span>
+      <span class="token class-name">LineNumberTable</span><span class="token operator">:</span>
+        line <span class="token number">10</span><span class="token operator">:</span> <span class="token number">0</span>
+        line <span class="token number">11</span><span class="token operator">:</span> <span class="token number">8</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name"><span class="token namespace">java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span></span>String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    descriptor<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token class-name">Ljava</span><span class="token operator">/</span>lang<span class="token operator">/</span><span class="token class-name">String</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+    flags<span class="token operator">:</span> ACC_PUBLIC<span class="token punctuation">,</span> ACC_STATIC
+    <span class="token class-name">Code</span><span class="token operator">:</span>
+      stack<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> locals<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> args_size<span class="token operator">=</span><span class="token number">1</span>
+         <span class="token number">0</span><span class="token operator">:</span> getstatic     #<span class="token number">4</span>                  <span class="token comment">// Field java/lang/System.out:Ljava/io/PrintStream;</span>
+         <span class="token number">3</span><span class="token operator">:</span> getstatic     #<span class="token number">3</span>                  <span class="token comment">// Field count:I</span>
+         <span class="token number">6</span><span class="token operator">:</span> invokevirtual #<span class="token number">5</span>                  <span class="token comment">// Method java/io/PrintStream.println:(I)V</span>
+         <span class="token number">9</span><span class="token operator">:</span> <span class="token keyword">return</span>
+      <span class="token class-name">LineNumberTable</span><span class="token operator">:</span>
+        line <span class="token number">13</span><span class="token operator">:</span> <span class="token number">0</span>
+        line <span class="token number">14</span><span class="token operator">:</span> <span class="token number">9</span>
+      <span class="token class-name">LocalVariableTable</span><span class="token operator">:</span>
+        <span class="token class-name">Start</span>  <span class="token class-name">Length</span>  <span class="token class-name">Slot</span>  <span class="token class-name">Name</span>   <span class="token class-name">Signature</span>
+            <span class="token number">0</span>      <span class="token number">10</span>     <span class="token number">0</span>  args   <span class="token punctuation">[</span><span class="token class-name">Ljava</span><span class="token operator">/</span>lang<span class="token operator">/</span><span class="token class-name">String</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">static</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    descriptor<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+    flags<span class="token operator">:</span> ACC_STATIC
+    <span class="token class-name">Code</span><span class="token operator">:</span>
+      stack<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> locals<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> args_size<span class="token operator">=</span><span class="token number">0</span>
+         <span class="token number">0</span><span class="token operator">:</span> bipush        <span class="token number">10</span>
+         <span class="token number">2</span><span class="token operator">:</span> putstatic     #<span class="token number">3</span>                  <span class="token comment">// Field count:I</span>
+         <span class="token number">5</span><span class="token operator">:</span> <span class="token keyword">return</span>
+      <span class="token class-name">LineNumberTable</span><span class="token operator">:</span>
+        line <span class="token number">5</span><span class="token operator">:</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+<span class="token class-name">SourceFile</span><span class="token operator">:</span> <span class="token string">&quot;MethodAreaStructureTests.java&quot;</span>
+<span class="token number">123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br></div></div><h2 id="常用参数配置分析-3"><a href="#常用参数配置分析-3" class="header-anchor">#</a> 常用参数配置分析</h2> <p>JDK8中的元空间大小的参数分析及配置如下：
+1)元数据区大小可以使用参数 -XX:MetaspaceSize 和 -XX:MaxMetaspaceSize 指定。例如-XX:MetaspaceSize=100M -XX:MaxMetaspaceSize=100m
+2)Windows下，-XX:MetaspaceSize 默认值约为21M，-XX:MaxMetaspaceSize的默认值是-1，即没有限制。（可通过 jps获取进程号，然后通过jinfo -flag MetaspaceSize 进程id 的方式进行查看）</p> <p>3)如果不指定大小，默认情况下，虚拟机会耗尽所有的可用系统内存。如果元数据区发生溢出，虚拟机一样会抛出异常OutOfMemoryError:Metaspace</p> <p>4)-XX:MetaspaceSize：设置初始的元空间大小。对于一个 64位 的服务器端 JVM 来说，其默认的 -XX:MetaspaceSize值为21MB。这就是初始的高水位线，一旦触及这个水位线，Full GC将会被触发并卸载没用的类（即这些类对应的类加载器不再存活），然后这个高水位线将会重置。新的高水位线的值取决于GC后释放了多少元空间。如果释放的空间不足，那么在不超过MaxMetaspaceSize时，适当提高该值。如果释放空间过多，则适当降低该值。</p> <p>5)如果初始化的高水位线设置过低，上述高水位线调整情况会发生很多次。通过垃圾回收器的日志可以观察到Full GC多次调用。为了避免频繁地GC，建议将-XX:MetaspaceSize设置为一个相对较高的值。</p> <h2 id="小节面试分析-3"><a href="#小节面试分析-3" class="header-anchor">#</a> 小节面试分析</h2> <p><strong>问题1：方法区主要存储哪些内容？</strong></p> <p>类型信息、运行时常量池、静态变量、JIT代码缓存、属性信息、方法信息等。</p> <p><strong>问题2：如何理解直接内存？</strong>
+直接内存是在Java堆外的、直接向系统申请的内存区间。访问直接内存的速度会优于Java堆。因此读写频繁的场合可能会考虑使用直接内存。</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">//直接分配本地内存空间</span>
+  <span class="token class-name">ByteBuffer</span> byteBuffer <span class="token operator">=</span> <span class="token class-name">ByteBuffer</span><span class="token punctuation">.</span><span class="token function">allocateDirect</span><span class="token punctuation">(</span>BUFFER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;直接内存分配完毕，请求指示！&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token number">123</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h1 id="总结-summary"><a href="#总结-summary" class="header-anchor">#</a> 总结(summary)</h1></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matheusblog/md/java/jvm/05JVM常用工具应用.html" class="prev">
+        Jconsole 应用
+      </a></span> <span class="next"><a href="/matheusblog/md/java/jvm/07JVM内存逃逸分析与实践.html">
+        简介
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.ca6f1787.js" defer></script><script src="/matheusblog/assets/js/2.3ab44821.js" defer></script><script src="/matheusblog/assets/js/179.47ec8f47.js" defer></script>
+  </body>
+</html>

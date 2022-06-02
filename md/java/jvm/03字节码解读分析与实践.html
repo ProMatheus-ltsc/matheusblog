@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>字节码简介 | Java 全栈知识体系</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="包含: Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, MySQL, ElasticSearch, MongoDB, Docker, k8s, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 大数据, 机器学习...">
+    
+    <link rel="preload" href="/matheusblog/assets/css/0.styles.633991d7.css" as="style"><link rel="preload" href="/matheusblog/assets/js/app.ca6f1787.js" as="script"><link rel="preload" href="/matheusblog/assets/js/2.3ab44821.js" as="script"><link rel="preload" href="/matheusblog/assets/js/176.1fcd5c57.js" as="script"><link rel="prefetch" href="/matheusblog/assets/js/10.d5ff9241.js"><link rel="prefetch" href="/matheusblog/assets/js/100.2a4b443b.js"><link rel="prefetch" href="/matheusblog/assets/js/101.e7f6a456.js"><link rel="prefetch" href="/matheusblog/assets/js/102.d28d5139.js"><link rel="prefetch" href="/matheusblog/assets/js/103.c68ccf8a.js"><link rel="prefetch" href="/matheusblog/assets/js/104.2cf98bfc.js"><link rel="prefetch" href="/matheusblog/assets/js/105.c00f2ea5.js"><link rel="prefetch" href="/matheusblog/assets/js/106.3c431d25.js"><link rel="prefetch" href="/matheusblog/assets/js/107.743db453.js"><link rel="prefetch" href="/matheusblog/assets/js/108.1bb98844.js"><link rel="prefetch" href="/matheusblog/assets/js/109.0ffeb335.js"><link rel="prefetch" href="/matheusblog/assets/js/11.e91cd461.js"><link rel="prefetch" href="/matheusblog/assets/js/110.2fefdecd.js"><link rel="prefetch" href="/matheusblog/assets/js/111.7444f6f1.js"><link rel="prefetch" href="/matheusblog/assets/js/112.97882824.js"><link rel="prefetch" href="/matheusblog/assets/js/113.51f8a6ab.js"><link rel="prefetch" href="/matheusblog/assets/js/114.90c9dc6a.js"><link rel="prefetch" href="/matheusblog/assets/js/115.8b8ab4a8.js"><link rel="prefetch" href="/matheusblog/assets/js/116.9c11c72f.js"><link rel="prefetch" href="/matheusblog/assets/js/117.a81e1184.js"><link rel="prefetch" href="/matheusblog/assets/js/118.d7006eda.js"><link rel="prefetch" href="/matheusblog/assets/js/119.ba753928.js"><link rel="prefetch" href="/matheusblog/assets/js/12.b6af2673.js"><link rel="prefetch" href="/matheusblog/assets/js/120.bcbfed56.js"><link rel="prefetch" href="/matheusblog/assets/js/121.9774d590.js"><link rel="prefetch" href="/matheusblog/assets/js/122.c8fc2df8.js"><link rel="prefetch" href="/matheusblog/assets/js/123.94a64eb8.js"><link rel="prefetch" href="/matheusblog/assets/js/124.fcefa01d.js"><link rel="prefetch" href="/matheusblog/assets/js/125.65ff9987.js"><link rel="prefetch" href="/matheusblog/assets/js/126.50818a84.js"><link rel="prefetch" href="/matheusblog/assets/js/127.6527425b.js"><link rel="prefetch" href="/matheusblog/assets/js/128.dc5a8481.js"><link rel="prefetch" href="/matheusblog/assets/js/129.9c871e11.js"><link rel="prefetch" href="/matheusblog/assets/js/13.890636a0.js"><link rel="prefetch" href="/matheusblog/assets/js/130.e6c0f9ef.js"><link rel="prefetch" href="/matheusblog/assets/js/131.5b0eb015.js"><link rel="prefetch" href="/matheusblog/assets/js/132.5c76a362.js"><link rel="prefetch" href="/matheusblog/assets/js/133.eb9a3ecf.js"><link rel="prefetch" href="/matheusblog/assets/js/134.8cd94c08.js"><link rel="prefetch" href="/matheusblog/assets/js/135.1998da0a.js"><link rel="prefetch" href="/matheusblog/assets/js/136.1f0f2c2d.js"><link rel="prefetch" href="/matheusblog/assets/js/137.70cb69e2.js"><link rel="prefetch" href="/matheusblog/assets/js/138.f843a6ff.js"><link rel="prefetch" href="/matheusblog/assets/js/139.3b636ee1.js"><link rel="prefetch" href="/matheusblog/assets/js/14.b04a52b5.js"><link rel="prefetch" href="/matheusblog/assets/js/140.5cf7a295.js"><link rel="prefetch" href="/matheusblog/assets/js/141.462355da.js"><link rel="prefetch" href="/matheusblog/assets/js/142.39d3c868.js"><link rel="prefetch" href="/matheusblog/assets/js/143.5accfcdd.js"><link rel="prefetch" href="/matheusblog/assets/js/144.a88ca16e.js"><link rel="prefetch" href="/matheusblog/assets/js/145.f335b555.js"><link rel="prefetch" href="/matheusblog/assets/js/146.5fe91445.js"><link rel="prefetch" href="/matheusblog/assets/js/147.f7628213.js"><link rel="prefetch" href="/matheusblog/assets/js/148.efde8379.js"><link rel="prefetch" href="/matheusblog/assets/js/149.46581093.js"><link rel="prefetch" href="/matheusblog/assets/js/15.5132a6c0.js"><link rel="prefetch" href="/matheusblog/assets/js/150.0e22711d.js"><link rel="prefetch" href="/matheusblog/assets/js/151.2f985c3a.js"><link rel="prefetch" href="/matheusblog/assets/js/152.f2be924b.js"><link rel="prefetch" href="/matheusblog/assets/js/153.eeab863b.js"><link rel="prefetch" href="/matheusblog/assets/js/154.66c17576.js"><link rel="prefetch" href="/matheusblog/assets/js/155.55f16c8c.js"><link rel="prefetch" href="/matheusblog/assets/js/156.6ca4591d.js"><link rel="prefetch" href="/matheusblog/assets/js/157.a6d4084e.js"><link rel="prefetch" href="/matheusblog/assets/js/158.03a2a55a.js"><link rel="prefetch" href="/matheusblog/assets/js/159.51cd5a82.js"><link rel="prefetch" href="/matheusblog/assets/js/16.52846c06.js"><link rel="prefetch" href="/matheusblog/assets/js/160.c3581f33.js"><link rel="prefetch" href="/matheusblog/assets/js/161.c9811054.js"><link rel="prefetch" href="/matheusblog/assets/js/162.f10439b6.js"><link rel="prefetch" href="/matheusblog/assets/js/163.6250e603.js"><link rel="prefetch" href="/matheusblog/assets/js/164.2ce765aa.js"><link rel="prefetch" href="/matheusblog/assets/js/165.d25a9e48.js"><link rel="prefetch" href="/matheusblog/assets/js/166.9400e44c.js"><link rel="prefetch" href="/matheusblog/assets/js/167.6809f804.js"><link rel="prefetch" href="/matheusblog/assets/js/168.f8098b99.js"><link rel="prefetch" href="/matheusblog/assets/js/169.a47701c0.js"><link rel="prefetch" href="/matheusblog/assets/js/17.5a4fd4a1.js"><link rel="prefetch" href="/matheusblog/assets/js/170.fa834b61.js"><link rel="prefetch" href="/matheusblog/assets/js/171.c835f9e1.js"><link rel="prefetch" href="/matheusblog/assets/js/172.0bd8b338.js"><link rel="prefetch" href="/matheusblog/assets/js/173.d7d8a74d.js"><link rel="prefetch" href="/matheusblog/assets/js/174.7db9a340.js"><link rel="prefetch" href="/matheusblog/assets/js/175.4ccb791e.js"><link rel="prefetch" href="/matheusblog/assets/js/177.719ae8f1.js"><link rel="prefetch" href="/matheusblog/assets/js/178.bf9d9b91.js"><link rel="prefetch" href="/matheusblog/assets/js/179.47ec8f47.js"><link rel="prefetch" href="/matheusblog/assets/js/18.9635c6a6.js"><link rel="prefetch" href="/matheusblog/assets/js/180.1eab303f.js"><link rel="prefetch" href="/matheusblog/assets/js/181.3b496761.js"><link rel="prefetch" href="/matheusblog/assets/js/182.b9311257.js"><link rel="prefetch" href="/matheusblog/assets/js/183.3f867970.js"><link rel="prefetch" href="/matheusblog/assets/js/184.463e1268.js"><link rel="prefetch" href="/matheusblog/assets/js/185.89b2a65a.js"><link rel="prefetch" href="/matheusblog/assets/js/186.1ff2a8a7.js"><link rel="prefetch" href="/matheusblog/assets/js/187.76f8b786.js"><link rel="prefetch" href="/matheusblog/assets/js/188.1a78f204.js"><link rel="prefetch" href="/matheusblog/assets/js/189.7cde9ac2.js"><link rel="prefetch" href="/matheusblog/assets/js/19.78a0836c.js"><link rel="prefetch" href="/matheusblog/assets/js/190.6540500a.js"><link rel="prefetch" href="/matheusblog/assets/js/191.2361e362.js"><link rel="prefetch" href="/matheusblog/assets/js/192.96e6c7dc.js"><link rel="prefetch" href="/matheusblog/assets/js/193.896cbab5.js"><link rel="prefetch" href="/matheusblog/assets/js/194.2ef289f9.js"><link rel="prefetch" href="/matheusblog/assets/js/195.269b7e19.js"><link rel="prefetch" href="/matheusblog/assets/js/196.a2a5c180.js"><link rel="prefetch" href="/matheusblog/assets/js/197.fd328828.js"><link rel="prefetch" href="/matheusblog/assets/js/198.7c8abb29.js"><link rel="prefetch" href="/matheusblog/assets/js/199.dcea7293.js"><link rel="prefetch" href="/matheusblog/assets/js/20.82e51fb7.js"><link rel="prefetch" href="/matheusblog/assets/js/200.91668771.js"><link rel="prefetch" href="/matheusblog/assets/js/201.3ddbd4d3.js"><link rel="prefetch" href="/matheusblog/assets/js/202.cb420bf9.js"><link rel="prefetch" href="/matheusblog/assets/js/203.42defa17.js"><link rel="prefetch" href="/matheusblog/assets/js/204.5a3227c2.js"><link rel="prefetch" href="/matheusblog/assets/js/205.b99fce14.js"><link rel="prefetch" href="/matheusblog/assets/js/206.18c37c29.js"><link rel="prefetch" href="/matheusblog/assets/js/207.8794f4be.js"><link rel="prefetch" href="/matheusblog/assets/js/208.db822d7d.js"><link rel="prefetch" href="/matheusblog/assets/js/209.a4b1b0b2.js"><link rel="prefetch" href="/matheusblog/assets/js/21.85fb779a.js"><link rel="prefetch" href="/matheusblog/assets/js/210.df67d73a.js"><link rel="prefetch" href="/matheusblog/assets/js/211.91b4c4bc.js"><link rel="prefetch" href="/matheusblog/assets/js/212.7c11a1a3.js"><link rel="prefetch" href="/matheusblog/assets/js/213.03380282.js"><link rel="prefetch" href="/matheusblog/assets/js/214.51f61ece.js"><link rel="prefetch" href="/matheusblog/assets/js/215.f5415af0.js"><link rel="prefetch" href="/matheusblog/assets/js/216.27a973e7.js"><link rel="prefetch" href="/matheusblog/assets/js/217.c8b62c1e.js"><link rel="prefetch" href="/matheusblog/assets/js/218.c7c9e771.js"><link rel="prefetch" href="/matheusblog/assets/js/219.38cb12fe.js"><link rel="prefetch" href="/matheusblog/assets/js/22.a434f24b.js"><link rel="prefetch" href="/matheusblog/assets/js/220.d610f7cc.js"><link rel="prefetch" href="/matheusblog/assets/js/221.39bbbf2d.js"><link rel="prefetch" href="/matheusblog/assets/js/222.c34162f3.js"><link rel="prefetch" href="/matheusblog/assets/js/223.15745df9.js"><link rel="prefetch" href="/matheusblog/assets/js/224.0e286803.js"><link rel="prefetch" href="/matheusblog/assets/js/225.e02617b3.js"><link rel="prefetch" href="/matheusblog/assets/js/226.13e87e8e.js"><link rel="prefetch" href="/matheusblog/assets/js/227.428fdd14.js"><link rel="prefetch" href="/matheusblog/assets/js/228.5b02ad24.js"><link rel="prefetch" href="/matheusblog/assets/js/229.113a8ae4.js"><link rel="prefetch" href="/matheusblog/assets/js/23.bfcc3c8e.js"><link rel="prefetch" href="/matheusblog/assets/js/230.83062d6d.js"><link rel="prefetch" href="/matheusblog/assets/js/231.5e5739bc.js"><link rel="prefetch" href="/matheusblog/assets/js/232.6e6b8889.js"><link rel="prefetch" href="/matheusblog/assets/js/233.812903ac.js"><link rel="prefetch" href="/matheusblog/assets/js/234.0d0cc16b.js"><link rel="prefetch" href="/matheusblog/assets/js/235.36f62ebb.js"><link rel="prefetch" href="/matheusblog/assets/js/236.c61a5e32.js"><link rel="prefetch" href="/matheusblog/assets/js/237.e828a447.js"><link rel="prefetch" href="/matheusblog/assets/js/238.833139dc.js"><link rel="prefetch" href="/matheusblog/assets/js/239.fb2ac8ee.js"><link rel="prefetch" href="/matheusblog/assets/js/24.ce9bb440.js"><link rel="prefetch" href="/matheusblog/assets/js/240.e6ca2a27.js"><link rel="prefetch" href="/matheusblog/assets/js/241.8cb294e4.js"><link rel="prefetch" href="/matheusblog/assets/js/242.345fe0a0.js"><link rel="prefetch" href="/matheusblog/assets/js/243.36dc5f24.js"><link rel="prefetch" href="/matheusblog/assets/js/244.72ce567d.js"><link rel="prefetch" href="/matheusblog/assets/js/245.4d9c55f8.js"><link rel="prefetch" href="/matheusblog/assets/js/246.3a672382.js"><link rel="prefetch" href="/matheusblog/assets/js/247.f385370f.js"><link rel="prefetch" href="/matheusblog/assets/js/248.8be8d698.js"><link rel="prefetch" href="/matheusblog/assets/js/249.1073726a.js"><link rel="prefetch" href="/matheusblog/assets/js/25.f8a33640.js"><link rel="prefetch" href="/matheusblog/assets/js/250.ed5c1277.js"><link rel="prefetch" href="/matheusblog/assets/js/251.61ed7842.js"><link rel="prefetch" href="/matheusblog/assets/js/252.35de18bc.js"><link rel="prefetch" href="/matheusblog/assets/js/253.bcdcf6ad.js"><link rel="prefetch" href="/matheusblog/assets/js/254.f401b547.js"><link rel="prefetch" href="/matheusblog/assets/js/255.70ae7d59.js"><link rel="prefetch" href="/matheusblog/assets/js/26.a06ff6ff.js"><link rel="prefetch" href="/matheusblog/assets/js/27.5d2958b1.js"><link rel="prefetch" href="/matheusblog/assets/js/28.8d5af880.js"><link rel="prefetch" href="/matheusblog/assets/js/29.708761e2.js"><link rel="prefetch" href="/matheusblog/assets/js/3.e8627096.js"><link rel="prefetch" href="/matheusblog/assets/js/30.de113b6a.js"><link rel="prefetch" href="/matheusblog/assets/js/31.bc0c45cc.js"><link rel="prefetch" href="/matheusblog/assets/js/32.429f7d0e.js"><link rel="prefetch" href="/matheusblog/assets/js/33.4dbbbee8.js"><link rel="prefetch" href="/matheusblog/assets/js/34.0ce6e2ff.js"><link rel="prefetch" href="/matheusblog/assets/js/35.83c0ce66.js"><link rel="prefetch" href="/matheusblog/assets/js/36.d6b0293d.js"><link rel="prefetch" href="/matheusblog/assets/js/37.3548af85.js"><link rel="prefetch" href="/matheusblog/assets/js/38.96c5e50a.js"><link rel="prefetch" href="/matheusblog/assets/js/39.4c0dd85f.js"><link rel="prefetch" href="/matheusblog/assets/js/4.bd8b439e.js"><link rel="prefetch" href="/matheusblog/assets/js/40.0a90896f.js"><link rel="prefetch" href="/matheusblog/assets/js/41.bcddfdff.js"><link rel="prefetch" href="/matheusblog/assets/js/42.27cdba94.js"><link rel="prefetch" href="/matheusblog/assets/js/43.5866dfba.js"><link rel="prefetch" href="/matheusblog/assets/js/44.ffed47dd.js"><link rel="prefetch" href="/matheusblog/assets/js/45.28bcbfd6.js"><link rel="prefetch" href="/matheusblog/assets/js/46.a620ca35.js"><link rel="prefetch" href="/matheusblog/assets/js/47.b5a2ed7a.js"><link rel="prefetch" href="/matheusblog/assets/js/48.0a4de8df.js"><link rel="prefetch" href="/matheusblog/assets/js/49.f5e824fa.js"><link rel="prefetch" href="/matheusblog/assets/js/5.416279c2.js"><link rel="prefetch" href="/matheusblog/assets/js/50.c287e152.js"><link rel="prefetch" href="/matheusblog/assets/js/51.91823f03.js"><link rel="prefetch" href="/matheusblog/assets/js/52.9cffb31d.js"><link rel="prefetch" href="/matheusblog/assets/js/53.58bbf890.js"><link rel="prefetch" href="/matheusblog/assets/js/54.f1642448.js"><link rel="prefetch" href="/matheusblog/assets/js/55.0035bcc5.js"><link rel="prefetch" href="/matheusblog/assets/js/56.fea6d6bf.js"><link rel="prefetch" href="/matheusblog/assets/js/57.9f0ad6e1.js"><link rel="prefetch" href="/matheusblog/assets/js/58.541388c1.js"><link rel="prefetch" href="/matheusblog/assets/js/59.b0fc7250.js"><link rel="prefetch" href="/matheusblog/assets/js/6.fb06d160.js"><link rel="prefetch" href="/matheusblog/assets/js/60.cb3ba656.js"><link rel="prefetch" href="/matheusblog/assets/js/61.bcfbf5a9.js"><link rel="prefetch" href="/matheusblog/assets/js/62.105b07a2.js"><link rel="prefetch" href="/matheusblog/assets/js/63.327b2406.js"><link rel="prefetch" href="/matheusblog/assets/js/64.d5ba8113.js"><link rel="prefetch" href="/matheusblog/assets/js/65.ec0a2650.js"><link rel="prefetch" href="/matheusblog/assets/js/66.04b36e40.js"><link rel="prefetch" href="/matheusblog/assets/js/67.b2889221.js"><link rel="prefetch" href="/matheusblog/assets/js/68.99bcabf0.js"><link rel="prefetch" href="/matheusblog/assets/js/69.7fdd978d.js"><link rel="prefetch" href="/matheusblog/assets/js/7.09370985.js"><link rel="prefetch" href="/matheusblog/assets/js/70.f517da0e.js"><link rel="prefetch" href="/matheusblog/assets/js/71.435f2963.js"><link rel="prefetch" href="/matheusblog/assets/js/72.b91d62d7.js"><link rel="prefetch" href="/matheusblog/assets/js/73.85f484b2.js"><link rel="prefetch" href="/matheusblog/assets/js/74.a2d2e4ed.js"><link rel="prefetch" href="/matheusblog/assets/js/75.99a4801b.js"><link rel="prefetch" href="/matheusblog/assets/js/76.72a6e57a.js"><link rel="prefetch" href="/matheusblog/assets/js/77.afa11c98.js"><link rel="prefetch" href="/matheusblog/assets/js/78.078be77b.js"><link rel="prefetch" href="/matheusblog/assets/js/79.f9fd7ea4.js"><link rel="prefetch" href="/matheusblog/assets/js/8.e1d4fa67.js"><link rel="prefetch" href="/matheusblog/assets/js/80.907ae465.js"><link rel="prefetch" href="/matheusblog/assets/js/81.b90754cd.js"><link rel="prefetch" href="/matheusblog/assets/js/82.9deab36a.js"><link rel="prefetch" href="/matheusblog/assets/js/83.7e948584.js"><link rel="prefetch" href="/matheusblog/assets/js/84.ea3cec8f.js"><link rel="prefetch" href="/matheusblog/assets/js/85.855a9970.js"><link rel="prefetch" href="/matheusblog/assets/js/86.de9792db.js"><link rel="prefetch" href="/matheusblog/assets/js/87.88e29d00.js"><link rel="prefetch" href="/matheusblog/assets/js/88.8f12f613.js"><link rel="prefetch" href="/matheusblog/assets/js/89.960f3d00.js"><link rel="prefetch" href="/matheusblog/assets/js/9.3a58cfd5.js"><link rel="prefetch" href="/matheusblog/assets/js/90.8a6e7cba.js"><link rel="prefetch" href="/matheusblog/assets/js/91.df21ddcc.js"><link rel="prefetch" href="/matheusblog/assets/js/92.c0f9fb2e.js"><link rel="prefetch" href="/matheusblog/assets/js/93.81b88134.js"><link rel="prefetch" href="/matheusblog/assets/js/94.4d45f302.js"><link rel="prefetch" href="/matheusblog/assets/js/95.ec66033f.js"><link rel="prefetch" href="/matheusblog/assets/js/96.b9bef806.js"><link rel="prefetch" href="/matheusblog/assets/js/97.ec98bf74.js"><link rel="prefetch" href="/matheusblog/assets/js/98.fdf445b3.js"><link rel="prefetch" href="/matheusblog/assets/js/99.fa45dac2.js">
+    <link rel="stylesheet" href="/matheusblog/assets/css/0.styles.633991d7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/matheusblog/" class="home-link router-link-active"><!----> <span class="site-name">Java 全栈知识体系</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/01JVM简介.html" class="nav-link">
+  JVM简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Java Menu" class="dropdown-title"><span class="title">Java</span> <span class="arrow down"></span></button> <button type="button" aria-label="Java Menu" class="mobile-dropdown-title"><span class="title">Java</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          集合
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/collection/泛型和集合.html" class="nav-link">
+  泛型和集合
+</a></li></ul></li><li class="dropdown-item"><h4>
+          IO
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/io/IO.html" class="nav-link">
+  IO
+</a></li></ul></li><li class="dropdown-item"><h4>
+          并发编程
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/thread/多线程.html" class="nav-link">
+  多线程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JVM
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/jvm/01JVM简介.html" class="nav-link">
+  JVM简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java新特性
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/java/basic/helloworld.html" class="nav-link">
+  认识编程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Web Menu" class="dropdown-title"><span class="title">Web基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="Web Menu" class="mobile-dropdown-title"><span class="title">Web基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          HTML5
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/html5/01HTML概述.html" class="nav-link">
+  HTML概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          CSS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/css/01基础选择器+字体文本样式.html" class="nav-link">
+  基础选择器+字体文本样式
+</a></li></ul></li><li class="dropdown-item"><h4>
+          JS
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/js/01JavaScript基础.html" class="nav-link">
+  JavaScript基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          VUE
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/web/vue/01Vue简介与安装使用.html" class="nav-link">
+  Vue简介与安装使用
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="database Menu" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="database Menu" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mysql/01数据库软件的安装与使用.html" class="nav-link">
+  数据库软件的安装与使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Redis
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MongoDB
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/mongodb/01数据库和集合基本操作.html" class="nav-link">
+  数据库和集合基本操作
+</a></li></ul></li><li class="dropdown-item"><h4>
+          ElasticSearch
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/db/elasticsearch/02Elasticsearch-Docker搭建ES.html" class="nav-link">
+  Docker搭建ES
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="SpringFramework Menu" class="dropdown-title"><span class="title">SpringFramework</span> <span class="arrow down"></span></button> <button type="button" aria-label="SpringFramework Menu" class="mobile-dropdown-title"><span class="title">SpringFramework</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Maven
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spring
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/spring/Spring概述.html" class="nav-link">
+  Spring概述
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringMVC
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springmvc/springMVC框架.html" class="nav-link">
+  SpringMVC框架
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MyBatis-plus
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/mybatis/01MyBatis简介.html" class="nav-link">
+  MyBatis简介
+</a></li></ul></li><li class="dropdown-item"><h4>
+          SpringBoot
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/springboot/SpringBoot简介.html" class="nav-link">
+  SpringBoot简介
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/project/jt-project/problem.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Devops Menu" class="dropdown-title"><span class="title">DevOps</span> <span class="arrow down"></span></button> <button type="button" aria-label="Devops Menu" class="mobile-dropdown-title"><span class="title">DevOps</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          linux
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/linux/00 Centos.html" class="nav-link">
+  CentOS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          tools
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/tools/VS Code使用.html" class="nav-link">
+  VS Code使用
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Docker
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/devops/docker/01Docker入门.html" class="nav-link">
+  Docker入门
+</a></li></ul></li><li class="dropdown-item"><h4>
+          k8s
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Hadoop
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/springcloud/note.html" class="nav-link">
+  SpringCloud
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="develop Menu" class="dropdown-title"><span class="title">开发</span> <span class="arrow down"></span></button> <button type="button" aria-label="develop Menu" class="mobile-dropdown-title"><span class="title">开发</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          代码规范
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          开发环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/JUnit/01什么是单元测试.html" class="nav-link">
+  开发部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          部署环境
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  部署部署
+</a></li></ul></li><li class="dropdown-item"><h4>
+          设计模式
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/develop/pattern/设计模式.html" class="nav-link">
+  设计模式
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/matheusblog/md/arch/计算机软件架构发展历史.html" class="nav-link">
+  架构
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="other-languages Menu" class="dropdown-title"><span class="title">其他语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="other-languages Menu" class="mobile-dropdown-title"><span class="title">其他语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/other-languages/go/01Go语言介绍.html" class="nav-link">
+  Go语言介绍
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Scala
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Python
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm Menu" class="dropdown-title"><span class="title">算法</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm Menu" class="mobile-dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Spark基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li><li class="dropdown-item"><h4>
+          机器学习
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/matheusblog/md/spring/maven/02Maven入门基础.html" class="nav-link">
+  Maven入门基础
+</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Java基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/java/basic/helloworld.html" class="sidebar-link">认识编程</a></li><li><a href="/matheusblog/md/java/basic/1Java开发环境配置.html" class="sidebar-link">Java开发环境配置</a></li><li><a href="/matheusblog/md/java/basic/2变量,常量与运算符.html" class="sidebar-link">变量与常量</a></li><li><a href="/matheusblog/md/java/basic/3Java流程控制.html" class="sidebar-link">Java流程控制</a></li><li><a href="/matheusblog/md/java/basic/4数组.html" class="sidebar-link">数组</a></li><li><a href="/matheusblog/md/java/basic/5输入输出.html" class="sidebar-link">输入输出</a></li><li><a href="/matheusblog/md/java/basic/6面向对象编程.html" class="sidebar-link">面向对象编程</a></li><li><a href="/matheusblog/md/java/basic/7接口与继承.html" class="sidebar-link">接口与继承</a></li><li><a href="/matheusblog/md/java/basic/8API基础.html" class="sidebar-link">API基础</a></li><li><a href="/matheusblog/md/java/basic/9Lambda.html" class="sidebar-link">函数式编程</a></li><li><a href="/matheusblog/md/java/basic/10异常.html" class="sidebar-link">异常</a></li><li><a href="/matheusblog/md/java/basic/11网络编程.html" class="sidebar-link">网络编程</a></li><li><a href="/matheusblog/md/java/basic/12JDBC.html" class="sidebar-link">JDBC</a></li><li><a href="/matheusblog/md/java/basic/13反射.html" class="sidebar-link">反射</a></li><li><a href="/matheusblog/md/java/basic/14正则表达式.html" class="sidebar-link">正则表达式</a></li><li><a href="/matheusblog/md/java/basic/15二进制.html" class="sidebar-link">二进制</a></li><li><a href="/matheusblog/md/java/basic/16QRCode.html" class="sidebar-link">QRCode</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>集合</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/java/collection/泛型和集合.html" class="sidebar-link">泛型和集合</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>IO</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/java/io/IO.html" class="sidebar-link">IO</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>并发编程</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/java/thread/多线程.html" class="sidebar-link">多线程</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>JVM</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matheusblog/md/java/jvm/01JVM简介.html" class="sidebar-link">JVM 简介</a></li><li><a href="/matheusblog/md/java/jvm/02类加载子系统分析与实践.html" class="sidebar-link">简介</a></li><li><a href="/matheusblog/md/java/jvm/03字节码解读分析与实践.html" class="active sidebar-link">字节码简介</a></li><li><a href="/matheusblog/md/java/jvm/04字节码增强技术分析与实践.html" class="sidebar-link">简介</a></li><li><a href="/matheusblog/md/java/jvm/05JVM常用工具应用.html" class="sidebar-link">Jconsole 应用</a></li><li><a href="/matheusblog/md/java/jvm/06JVM运行时内存分析.html" class="sidebar-link">程序计数器</a></li><li><a href="/matheusblog/md/java/jvm/07JVM内存逃逸分析与实践.html" class="sidebar-link">简介</a></li><li><a href="/matheusblog/md/java/jvm/08JVM中的内存溢出.html" class="sidebar-link">简介</a></li><li><a href="/matheusblog/md/java/jvm/09JVM内存泄漏分析与实践.html" class="sidebar-link">简介</a></li><li><a href="/matheusblog/md/java/jvm/10JVM中的GC初识.html" class="sidebar-link">GC简介</a></li><li><a href="/matheusblog/md/java/jvm/11JVM中常用垃圾回收器分析与实践.html" class="sidebar-link">概述</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="字节码简介"><a href="#字节码简介" class="header-anchor">#</a> 字节码简介</h1> <h2 id="什么是字节码"><a href="#什么是字节码" class="header-anchor">#</a> 什么是字节码</h2> <p>Java的源代码中编译后会生成一个class文件，文件内容为一些JAVA虚拟机指令，这些指令的内容，由多个十六进制值组成，两个十六进制值为一组，例如：
+<img src="https://img-blog.csdnimg.cn/b925704cba7c44c0b843dfde13a9e072.png" alt="在这里插入图片描述">
+Java虚拟机的指令由一个字节长度、代表某种特定操作含义的操作码(opcode)以及跟随其后的零个或多个的操作数（operand）构成。
+Java之所以可以“一次编译，到处运行”，一是因为JVM针对各种操作系统、平台都进行了定制。二是因为无论在什么平台，都可以编译生成固定格式的字节码（.class文件）供JVM使用。因此，也可以看出字节码对于Java生态的重要性。</p> <h2 id="为什么要学习字节码"><a href="#为什么要学习字节码" class="header-anchor">#</a> 为什么要学习字节码</h2> <p>对于开发人员，了解字节码可以更准确、直观地理解Java语言中更深层次的东西，比如通过字节码，可以很直观地看到Volatile关键字如何在字节码上生效。另外，字节码增强技术在Spring AOP、各种ORM框架、热部署中的应用屡见不鲜，深入理解其原理对于我们来说大有裨益。除此之外，由于JVM规范的存在，只要最终可以生成符合规范的字节码就可以在JVM上运行，因此这就给了各种运行在JVM上的语言（如Scala、Groovy、Kotlin）一种契机，可以扩展Java所没有的特性或者实现各种语法糖。理解字节码后再学习这些语言，可以“逆流而上”，从字节码视角看它的设计思路，学习起来也“易如反掌”。</p> <h1 id="如何解读字节码"><a href="#如何解读字节码" class="header-anchor">#</a> 如何解读字节码？</h1> <h2 id="准备工作"><a href="#准备工作" class="header-anchor">#</a> 准备工作</h2> <p>编写如下代码，例如：</p> <p>package com.java.jvm.bytecode;</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>public class IntTests {
+    public static void main(String[] args) {
+        int a=10;
+        int b=20;
+        int c=a+b;
+        System.out.println(c);
+    }
+}
+12345678
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h2 id="直接解读"><a href="#直接解读" class="header-anchor">#</a> 直接解读</h2> <p>IntTests.java的源代码编译后，可以通过notepad++(需要安装一下HEX-Editor插件)打开IntTests.class文件，文件内容默认是一种16进制的格式，例如：
+<img src="https://img-blog.csdnimg.cn/1a0f8fc6d8c349bf999ac225b290f293.png" alt="在这里插入图片描述">
+JVM对于字节码是有规范要求的，看似杂乱的十六进制是符合一定结构规范的。JVM规范要求每一个字节码文件都要按照固定的顺序组成。</p> <h2 id="javap指令应用"><a href="#javap指令应用" class="header-anchor">#</a> javap指令应用</h2> <p>在IntTests.class目录使用如下代码对类进行反编译，例如：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>javap -verbose IntTests.class  //可以使用javap –help查看帮助
+1
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>编译后的内容如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>Classfile /E:/TCGBIV/DEVCODES/JAVACODES/01-java/target/classes/com/java/jvm/bytecode/IntT
+ests.class
+  Last modified 2022-4-30; size 604 bytes
+  MD5 checksum fa079575306a9cf10a1a61cfc4722e88
+  Compiled from &quot;IntTests.java&quot;
+public class com.java.jvm.bytecode.IntTests
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #5.#23         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+   #2 = Fieldref           #24.#25        // java/lang/System.out:Ljava/io/PrintStream;
+   #3 = Methodref          #26.#27        // java/io/PrintStream.println:(I)V
+   #4 = Class              #28            // com/java/jvm/bytecode/IntTests
+   #5 = Class              #29            // java/lang/Object
+   #6 = Utf8               &lt;init&gt;
+   #7 = Utf8               ()V
+   #8 = Utf8               Code
+   #9 = Utf8               LineNumberTable
+  #10 = Utf8               LocalVariableTable
+  #11 = Utf8               this
+  #12 = Utf8               Lcom/java/jvm/bytecode/IntTests;
+  #13 = Utf8               main
+  #14 = Utf8               ([Ljava/lang/String;)V
+  #15 = Utf8               args
+  #16 = Utf8               [Ljava/lang/String;
+  #17 = Utf8               a
+  #18 = Utf8               I
+  #19 = Utf8               b
+  #20 = Utf8               c
+  #21 = Utf8               SourceFile
+  #22 = Utf8               IntTests.java
+  #23 = NameAndType        #6:#7          // &quot;&lt;init&gt;&quot;:()V
+  #24 = Class              #30            // java/lang/System
+  #25 = NameAndType        #31:#32       // out:Ljava/io/PrintStream;
+  #26 = Class              #33            // java/io/PrintStream
+  #27 = NameAndType        #34:#35        // println:(I)V
+  #28 = Utf8               com/java/jvm/bytecode/IntTests
+  #29 = Utf8               java/lang/Object
+  #30 = Utf8               java/lang/System
+  #31 = Utf8               out
+  #32 = Utf8               Ljava/io/PrintStream;
+  #33 = Utf8               java/io/PrintStream
+  #34 = Utf8               println
+  #35 = Utf8               (I)V
+{
+  public com.java.jvm.bytecode.IntTests();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+         4: return
+      LineNumberTable:
+        line 3: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/java/jvm/bytecode/IntTests;
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=4, args_size=1
+         0: bipush        10
+         2: istore_1
+         3: bipush        20
+         5: istore_2
+         6: iload_1
+         7: iload_2
+         8: iadd
+         9: istore_3
+        10: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintSt
+ream;
+        13: iload_3
+        14: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V
+        17: return
+      LineNumberTable:
+        line 5: 0
+        line 6: 3
+        line 7: 6
+        line 8: 10
+        line 9: 17
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      18     0  args   [Ljava/lang/String;
+            3      15     1     a   I
+            6      12     2     b   I
+           10       8     3     c   I
+}
+SourceFile: &quot;IntTests.java&quot;
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br></div></div><p>为了帮助人们理解，反编译后看到的是十六进制操作码所对应的助记符，十六进制值操作码与助记符的对应关系，以及每一个操作码的用处可以查看Oracle官方文档进行了解，在需要用到时进行查阅即可。</p> <h2 id="jclasslib插件应用"><a href="#jclasslib插件应用" class="header-anchor">#</a> jclasslib插件应用</h2> <p>如果每次查看反编译后的字节码都使用javap命令的话，会非常繁琐。这里推荐一个Idea插件，这个插件的名字为jclasslib。代码在编译后，我们可以在菜单栏”View”中选择”Show Bytecode With jclasslib”，可以很直观地看到当前字节码文件的类信息、常量池、方法区等信息。
+<img src="https://img-blog.csdnimg.cn/953ea09706ca4a41bccde9ef0aac80d6.png" alt="在这里插入图片描述"> <img src="https://img-blog.csdnimg.cn/9b2fa235ae44490ca26eaaba7880658a.png" alt="在这里插入图片描述"></p> <h2 id="字节码解读课堂练习"><a href="#字节码解读课堂练习" class="header-anchor">#</a> 字节码解读课堂练习</h2> <p>课堂练习：编写如下代码，并查看分析其字节码指令。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>package com.java.jvm.bytecode;
+
+public class IntCompareTests {
+    public static void main(String[] args) {
+        Integer a=20;
+        int b=20;
+        System.out.println(a==b);
+    }
+}
+123456789
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>基于idea的jclasslib插件对IntCompareTests类的自己码进行查看，如图所示：
+<img src="https://img-blog.csdnimg.cn/2cff313af5e94b1b8590161f1a946fea.png" alt="在这里插入图片描述"></p> <p>课堂练习：编写如下代码，基于jclasslib查看字节码，并进行分析字符串是否相等。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>package com.java.jvm.bytecode;
+
+public class StringCompareTests {
+    public static void main(String[] args) {
+        String s1=&quot;hello&quot;+&quot;world&quot;;
+        String s2=&quot;helloworld&quot;;
+        String s3=&quot;hello&quot;;
+        String s4=&quot;world&quot;;
+        String s5=s3+s4;
+        System.out.println(s1==s2);
+        System.out.println(s1==s5);
+    }
+}
+12345678910111213
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>课堂练习：编写如下代码，分析输出结果</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>package com.java.jvm.bytecode;
+
+class Rectangle{//矩形
+    int x=10;
+    public Rectangle(){
+        doPrint();
+        this.x=20;
+    }
+    public void doPrint(){
+        System.out.println(&quot;Rectangle.x=&quot;+this.x);
+    }
+}
+class Square extends Rectangle{//正方形
+    int x=30;
+    public Square(){
+        doPrint();
+        this.x=40;
+    }
+    @Override
+    public void doPrint() {
+        System.out.println(&quot;Square.x=&quot;+this.x);
+    }
+}
+
+public class ExtendsTests {
+    public static void main(String[] args) {
+        Rectangle r=new Square();
+        System.out.println(r.x);
+    }
+}
+123456789101112131415161718192021222324252627282930
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><h1 id="字节码结构分析-了解"><a href="#字节码结构分析-了解" class="header-anchor">#</a> 字节码结构分析(了解）</h1> <h2 id="整体结构"><a href="#整体结构" class="header-anchor">#</a> 整体结构</h2> <p>一个class类文件的结构组成如下（u代表一个字节无符号int，其余info类型是复合结构）：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>ClassFile {
+    u4             magic;
+    u2             minor_version;
+    u2             major_version;
+    u2             constant_pool_count;
+    cp_info        constant_pool[constant_pool_count-1];
+    u2             access_flags;
+    u2             this_class;
+    u2             super_class;
+    u2             interfaces_count;
+    u2             interfaces[interfaces_count];
+    u2             fields_count;
+    field_info     fields[fields_count];
+    u2             methods_count;
+    method_info    methods[methods_count];
+    u2              attributes_count;
+    attribute_info attributes[attributes_count];
+}
+123456789101112131415161718
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p>其中：
+ magic（魔数）
+ minor_version（次版本号）
+ major_version（主版本号）
+ constant_pool_count（常量池计数器）
+ constant_pool[constant_pool_count-1]（常量池）
+ access_flags（类的访问标志）
+ this_class（当前类名索引值）
+ super_class（父类名索引值）
+ interfaces_count（接口计数）
+ interfaces[interfaces_count]（接口数组）
+ fields_count（成员变量计数）
+ fields[fields_count]（成员变量数组）
+ methods_count（方法计数）
+ methods[methods_count]（方法数组）
+ attributes_count（属性计数）
+ attributes[attributes_count]（属性数组）</p> <h2 id="魔数"><a href="#魔数" class="header-anchor">#</a> 魔数</h2> <p> 所有.class文件的前四个字节都是魔数(Magic Number)，是class文件的标识。
+ 魔数的固定值为：0xCAFEBABE。
+ 魔数放在文件开头，JVM可以根据文件魔数判断.class文件的合法性。</p> <h2 id="版本号"><a href="#版本号" class="header-anchor">#</a> 版本号</h2> <p> 版本号为魔数之后的4个字节。例如，版本号“00 00 00 34”。
+ 前两个字节表示次版本号（Minor Version），后两个字节表示主版本号（Major Version）。例如，版本号“00 00 00 34”的次版本号转化为十进制为0，主版本号转化为十进制为52，在Oracle官网中查询序号52对应的主版本号为1.8，所以编译该文件的Java版本号为1.8.0。
+ 版本号和JAVA编译器的对应关系如图所示：</p> <p><img src="https://img-blog.csdnimg.cn/385f17f5d99047d1bcae12504b229cd3.png" alt="在这里插入图片描述"></p> <p>说明，不同版本的Java编译器编译的class文件版本是不一样的。目前，高版本的Java虚拟机可以执行由低版本编译器编译生成的class文件，但是低版本的Java虚拟机不能执行由高版本编译器生成的class文件。否则JVM可能会抛出如下异常：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>java.lang.UnsupportedClassVersionError
+1
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="常量池"><a href="#常量池" class="header-anchor">#</a> 常量池</h2> <p>常量池(Constant Pool)整体上分为两部分，常量池计数器以及常量池数据区。</p> <p><strong>常量池计数器</strong></p> <p> 版本号后面是常量池数量，用两个字节表示。如图所示：
+<img src="https://img-blog.csdnimg.cn/5a465b0ee8c5469e8af48b5957d38788.png" alt="在这里插入图片描述"></p> <p> 常量池容量计数值从1开始，表示常量池有多少个常量，假如constant_pool_count=1表示有0个常量。这里的0024的值为36，其实常量数为35个。
+ 索引值0用于表达不引用任何常量池。</p> <p><strong>常量池数据区</strong></p> <p> 数据区是由constant_pool_count-1个cp_info结构组成，一个cp_info结构对应一个常量。在字节码中共有14种类型的cp_info，每种类型的结构都是固定的。
+ 常量池中存储两类常量：字面量(Literal)与符号引用(Symbolic References)。字面量为代码中声明为Final的常量值，符号引用如类和接口的全局限定名、字段的名称和描述符、方法的名称和描述符。
+ 常量池中的每个常量都是一个表，用于描述不同结构数据，例如：</p> <p><img src="https://img-blog.csdnimg.cn/1d3c1911abba4fb48ee605ce83408d46.png" alt="在这里插入图片描述">
+其中，cp_info整体结构大同小异，都是先通过Tag来标识类型，然后后续n个字节来描述长度和（或）数据。先知其所以然，以后可以通过javap -verbose 类名命令，查看JVM反编译后的完整常量池，就可以看到反编译结果，将每一个cp_info结构的类型和值都很明确地呈现了出来。</p> <h2 id="访问标识"><a href="#访问标识" class="header-anchor">#</a> 访问标识</h2> <p> 常量池结束之后的两个字节，描述该Class是类还是接口，以及是否被Public、Abstract、Final等修饰符修饰。
+ JVM规范规定了多个访问标志（Access_Flag）。需要注意的是，JVM并没有穷举所有的访问标志，而是使用按位或操作来进行描述的，比如某个类的修饰符为Public Final，则对应的访问修饰符的值为ACC_PUBLIC | ACC_FINAL，即0x0001 | 0x0010=0x0011。</p> <h2 id="类型引用"><a href="#类型引用" class="header-anchor">#</a> 类型引用</h2> <p>在访问标记后，会指定该类的类别、父类类别以及实现的接口。
+ 类索引：访问标志后的两个字节，描述的是当前类的全限定名。这两个字节保存的值为常量池中的索引值，根据索引值就能在常量池中找到这个类的全限定名。
+ 父类索引：当前类名后的两个字节，描述父类的全限定名，同上，保存的也是常量池中的索引值。
+ 接口索引：父类名称后的两字节，描述了该类或父类实现了哪些接口，接口的数量以及所有接口名称的字符串常量的索引值。</p> <h2 id="字段表集合"><a href="#字段表集合" class="header-anchor">#</a> 字段表集合</h2> <p> 字段表用于描述类和接口中声明的变量，包含类级别的变量以及实例变量，但是不包含方法内部声明的局部变量。
+ 字段表也分为两部分，第一部分为两个字节，描述字段个数；第二部分是每个字段的详细信息fields_in。</p> <h2 id="方法表集合"><a href="#方法表集合" class="header-anchor">#</a> 方法表集合</h2> <p> 字段表结束后为方法表，用于描述每个方法的信息。
+ 方法表也是由两部分组成，第一部分为两个字节描述方法的个数；第二部分为每个方法的详细信息。方法的详细信息较为复杂，包括方法的访问标志、方法名、方法的描述符以及方法的属性。</p> <h2 id="属性表集合"><a href="#属性表集合" class="header-anchor">#</a> 属性表集合</h2> <p>方法表集合之后是属性表集合，用于描述的是class文件所携带的辅助信息，比如class文件对应的源文件信息。了解即可。</p> <h1 id="总结-summary"><a href="#总结-summary" class="header-anchor">#</a> 总结(Summary)</h1> <p>本章节主要描述了字节码是什么，如何解读字节码以及字节码主要由哪及部分构成。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matheusblog/md/java/jvm/02类加载子系统分析与实践.html" class="prev">
+        简介
+      </a></span> <span class="next"><a href="/matheusblog/md/java/jvm/04字节码增强技术分析与实践.html">
+        简介
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/matheusblog/assets/js/app.ca6f1787.js" defer></script><script src="/matheusblog/assets/js/2.3ab44821.js" defer></script><script src="/matheusblog/assets/js/176.1fcd5c57.js" defer></script>
+  </body>
+</html>
